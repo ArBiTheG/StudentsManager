@@ -15,11 +15,11 @@ namespace StudentsManagerApp.ViewModel.Pages
     {
         StudentsContext studentsContext;
         public ObservableCollection<Person> Persons { get; set; }
-        public PersonPageModel(StudentsContext context)
+        public PersonPageModel(StudentsContext studentsContext)
         {
-            studentsContext = context;
-            studentsContext.Persons.Load();
-            Persons = studentsContext.Persons.Local.ToObservableCollection();
+            this.studentsContext = studentsContext;
+            this.studentsContext.Persons.Load();
+            Persons = this.studentsContext.Persons.Local.ToObservableCollection();
         }
         public override void Add(object? obj)
         {
