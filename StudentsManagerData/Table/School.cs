@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace StudentsManagerData.Table
 {
-    public class Email
+    public class School
     {
         int id;
-        int person_id;
-        Person person;
-        string? name;
+        string? full_name;
+        string? short_name;
+        string? address;
         string? description;
 
         /// <summary>
@@ -20,22 +21,22 @@ namespace StudentsManagerData.Table
         public int Id { get { return id; } }
 
         /// <summary>
-        /// Код человека
+        /// Полное наименование школы
         /// </summary>
-        public int PersonId { get { return person_id; } set { person_id = value; } }
+        public string? FullName { get { return full_name; } set { full_name = value; } }
 
         /// <summary>
-        /// Объект человека
+        /// Короткое наименование школы
         /// </summary>
-        public Person Person { get { return person; } private set { person = value; } }
+        public string? ShortName { get { return short_name; } set { short_name = value; } }
 
         /// <summary>
-        /// Электронная почта
+        /// Адрес школы
         /// </summary>
-        public string? Name { get { return name; } set { name = value; } }
+        public string? Address { get { return address; } set { address = value; } }
 
         /// <summary>
-        /// Описание
+        /// Описание школы
         /// </summary>
         public string? Description { get { return description; } set { description = value; } }
     }
