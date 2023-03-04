@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace StudentsManagerData.Table
 {
-    public class School: ICloneable, IEquatable<School?>
+    public class School: ICloneable, IEquatable<School?>, INotifyPropertyChanged
     {
         int id;
         string? full_name;
@@ -15,6 +17,9 @@ namespace StudentsManagerData.Table
         string? address;
         string? description;
 
+        public School()
+        {
+        }
         //Используется для клонирования
         private School(int id, string? full_name, string? short_name, string? address, string? description)
         {
@@ -28,27 +33,75 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Код
         /// </summary>
-        public int Id { get { return id; } }
+        public int Id { 
+            get 
+            { 
+                return id;
+            } 
+        }
 
         /// <summary>
         /// Полное наименование школы
         /// </summary>
-        public string? FullName { get { return full_name; } set { full_name = value; } }
+        public string? FullName { 
+            get 
+            { 
+                return full_name;
+            } 
+            set 
+            { 
+                full_name = value;
+                OnPropertyChanged("FullName");
+            } 
+        }
 
         /// <summary>
         /// Короткое наименование школы
         /// </summary>
-        public string? ShortName { get { return short_name; } set { short_name = value; } }
+        public string? ShortName {
+            get
+            { 
+                return short_name;
+            } 
+            set 
+            { 
+                short_name = value;
+                OnPropertyChanged("ShortName");
+            }
+        }
 
         /// <summary>
         /// Адрес школы
         /// </summary>
-        public string? Address { get { return address; } set { address = value; } }
+        public string? Address { 
+            get
+            {
+                return address; 
+            }
+            set
+            { 
+                address = value;
+                OnPropertyChanged("Address");
+            }
+        }
 
         /// <summary>
         /// Описание школы
         /// </summary>
-        public string? Description { get { return description; } set { description = value; } }
+        public string? Description {
+            get
+            { 
+                return description; 
+            } 
+            set
+            { description = value;
+                OnPropertyChanged("Description");
+            }
+        }
+        /// <summary>
+        /// Дипломы
+        /// </summary>
+        public List<Diploma> Diplomas { get; set; }
 
         public object Clone() => new School(id,full_name,short_name,address,description);
 
@@ -80,6 +133,13 @@ namespace StudentsManagerData.Table
         public static bool operator !=(School? left, School? right)
         {
             return !(left == right);
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

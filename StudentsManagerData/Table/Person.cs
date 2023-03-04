@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace StudentsManagerData.Table
 {
-    public class Person: ICloneable, IEquatable<Person?>
+    public class Person: ICloneable, IEquatable<Person?>, INotifyPropertyChanged
     {
         int id;
         string first_name;
@@ -17,6 +19,9 @@ namespace StudentsManagerData.Table
         DateTime date_passport;
         string? about;
 
+        public Person()
+        {
+        }
         //Используется для клонирования
         private Person(int id, string first_name, string middle_name, string last_name, DateTime birthday, byte sex, string? series_passport, string? number_passport, string? given_passport, DateTime date_passport, string? about)
         {
@@ -36,47 +41,181 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Код
         /// </summary>
-        public int Id { get { return id; } }
+        public int Id { 
+            get 
+            { 
+                return id;
+            } 
+        }
         /// <summary>
         /// Имя
         /// </summary>
-        public string FirstName { get { return first_name; } set { first_name = value; } }
+        public string FirstName {
+            get
+            { 
+                return first_name; 
+            }
+            set
+            {
+                first_name = value;
+                OnPropertyChanged("FirstName");
+            }
+        }
         /// <summary>
         /// Отчество
         /// </summary>
-        public string MiddleName { get { return middle_name; } set { middle_name = value; } }
+        public string MiddleName { 
+            get
+            {
+                return middle_name; 
+            } 
+            set
+            {
+                middle_name = value;
+                OnPropertyChanged("MiddleName");
+            } 
+        }
         /// <summary>
         /// Фамилия
         /// </summary>
-        public string LastName { get { return last_name; } set { last_name = value; } }
+        public string LastName {
+            get 
+            { 
+                return last_name;
+            }
+            set
+            { 
+                last_name = value;
+                OnPropertyChanged("LastName");
+            }
+        }
         /// <summary>
         /// День рождения
         /// </summary>
-        public DateTime Birthday { get { return birthday; } set { birthday = value; } }
+        public DateTime Birthday { 
+            get
+            { 
+                return birthday;
+            } 
+            set
+            { 
+                birthday = value;
+                OnPropertyChanged("Birthday");
+            } 
+        }
         /// <summary>
         /// Пол
         /// </summary>
-        public byte Sex { get { return sex; } set { sex = value; } }
+        public byte Sex { 
+            get 
+            {
+                return sex; 
+            } 
+            set
+            { 
+                sex = value;
+                OnPropertyChanged("Sex");
+            }
+        }
         /// <summary>
         /// Серия паспорта
         /// </summary>
-        public string? SeriesPassport { get { return series_passport; } set { series_passport = value; } }
+        public string? SeriesPassport {
+            get 
+            { 
+                return series_passport; 
+            }
+            set
+            { 
+                series_passport = value;
+                OnPropertyChanged("SeriesPassport");
+            } 
+        }
         /// <summary>
         /// Номер паспорта
         /// </summary>
-        public string? NumberPassport { get { return number_passport; } set { number_passport = value; } }
+        public string? NumberPassport { 
+            get 
+            {
+                return number_passport; 
+            } 
+            set 
+            { 
+                number_passport = value;
+                OnPropertyChanged("NumberPassport");
+            }
+        }
         /// <summary>
         /// Кем выдан паспорт
         /// </summary>
-        public string? GivenPassword { get { return given_passport; } set { given_passport = value; } }
+        public string? GivenPassword { 
+            get 
+            { 
+                return given_passport; 
+            } 
+            set 
+            { 
+                given_passport = value;
+                OnPropertyChanged("GivenPassword");
+            } 
+        }
         /// <summary>
         /// Дата вручения паспорта
         /// </summary>
-        public DateTime DatePassport { get { return date_passport; } set { date_passport = value; } }
+        public DateTime DatePassport { 
+            get 
+            { 
+                return date_passport; 
+            } 
+            set 
+            { 
+                date_passport = value;
+                OnPropertyChanged("DatePassport");
+            } 
+        }
         /// <summary>
         /// Подробности
         /// </summary>
-        public string? About { get { return about; } set { about = value; } }
+        public string? About { 
+            get 
+            { 
+                return about; 
+            } 
+            set 
+            { 
+                about = value;
+                OnPropertyChanged("About");
+            }
+        }
+
+        /// <summary>
+        /// Студенты
+        /// </summary>
+        public List<Student> Students { get; set; }
+        /// <summary>
+        /// Атестаты/Дипломы
+        /// </summary>
+        public List<Diploma> Diplomas { get; set; }
+        /// <summary>
+        /// Хобби
+        /// </summary>
+        public List<Hobby> Hobbies { get; set; }
+        /// <summary>
+        /// Номера телефонов
+        /// </summary>
+        public List<Hobby> Phones { get; set; }
+        /// <summary>
+        /// Адреса элетронных почт
+        /// </summary>
+        public List<Email> Emails { get; set; }
+        /// <summary>
+        /// Детей
+        /// </summary>
+        public List<Person> Childs { get; set; }
+        /// <summary>
+        /// Родителей
+        /// </summary>
+        public List<Person> Parents { get; set; }
 
         public object Clone() => new Person(id, first_name, middle_name, last_name, birthday, sex, series_passport, number_passport, given_passport, date_passport, about);
 
@@ -126,6 +265,13 @@ namespace StudentsManagerData.Table
         public static bool operator !=(Person? left, Person? right)
         {
             return !(left == right);
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

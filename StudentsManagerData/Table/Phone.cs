@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace StudentsManagerData.Table
 {
-    public class Phone: ICloneable, IEquatable<Phone?>
+    public class Phone: ICloneable, IEquatable<Phone?>, INotifyPropertyChanged
     {
         int id;
         int person_id;
@@ -14,6 +16,9 @@ namespace StudentsManagerData.Table
         string? name;
         string? description;
 
+        public Phone()
+        {
+        }
         //Используется для клонирования
         private Phone(int id, int person_id, Person person, string? name, string? description)
         {
@@ -27,27 +32,71 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Код
         /// </summary>
-        public int Id { get { return id; } }
+        public int Id { 
+            get
+            {
+                return id; 
+            } 
+        }
 
         /// <summary>
         /// Код человека
         /// </summary>
-        public int PersonId { get { return person_id; } set { person_id = value; } }
+        public int PersonId { 
+            get 
+            { 
+                return person_id;
+            } 
+            set 
+            { 
+                person_id = value;
+            } 
+        }
 
         /// <summary>
         /// Объект человека
         /// </summary>
-        public Person Person { get { return person; } private set { person = value; } }
+        public Person Person { 
+            get 
+            {
+                return person;
+            } 
+            private set 
+            { 
+                person = value;
+                OnPropertyChanged("Person");
+            }
+        }
 
         /// <summary>
         /// Номер телефона
         /// </summary>
-        public string? Name { get { return name; } set { name = value; } }
+        public string? Name { 
+            get 
+            {
+                return name; 
+            } 
+            set 
+            { 
+                name = value;
+                OnPropertyChanged("Name");
+            } 
+        }
 
         /// <summary>
         /// Описание
         /// </summary>
-        public string? Description { get { return description; } set { description = value; } }
+        public string? Description {
+            get 
+            { 
+                return description; 
+            } 
+            set
+            { 
+                description = value;
+                OnPropertyChanged("Description");
+            }
+        }
 
         public object Clone() => new Phone(id, person_id, person, name, description);
 
@@ -79,6 +128,13 @@ namespace StudentsManagerData.Table
         public static bool operator !=(Phone? left, Phone? right)
         {
             return !(left == right);
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

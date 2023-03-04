@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace StudentsManagerData.Table
 {
-    public class Relation:ICloneable, IEquatable<Relation?>
+    public class Relation:ICloneable, IEquatable<Relation?>, INotifyPropertyChanged
     {
         int id;
         int parent_id;
@@ -15,6 +17,9 @@ namespace StudentsManagerData.Table
         Person child;
         string? who;
 
+        public Relation()
+        {
+        }
         //Используется для клонирования
         private Relation(int id, int parent_id, Person parent, int child_id, Person child, string? who)
         {
@@ -29,31 +34,84 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Код
         /// </summary>
-        public int Id { get { return id; } }
+        public int Id { 
+            get 
+            { 
+                return id;
+            }
+        }
 
         /// <summary>
         /// Код родителя
         /// </summary>
-        public int ParentId { get { return parent_id; } set { parent_id = value; } }
+        public int ParentId { 
+            get 
+            { 
+                return parent_id; 
+            } 
+            set 
+            {
+                parent_id = value; 
+            }
+        }
 
         /// <summary>
         /// Объект родителя
         /// </summary>
-        public Person Parent { get { return parent; } private set { parent = value; } }
+        public Person Parent {
+            get 
+            {
+                return parent; 
+            }
+            private set
+            {
+                parent = value;
+                OnPropertyChanged("Parent");
+            }
+        }
 
         /// <summary>
         /// Код ребёнка
         /// </summary>
-        public int ChildId { get { return child_id; } set { child_id = value; } }
+        public int ChildId { 
+            get 
+            { 
+                return child_id;
+            } 
+            set
+            {
+                child_id = value;
+            } 
+        }
 
         /// <summary>
         /// Объект ребёнка
         /// </summary>
-        public Person Child { get { return child; } private set { child = value; } }
+        public Person Child { 
+            get 
+            {
+                return child;
+            } 
+            private set
+            {
+                child = value;
+                OnPropertyChanged("Child");
+            } 
+        }
         /// <summary>
         /// Кем является родитель ребёнку
         /// </summary>
-        public string? Who { get { return who; } set { who = value; } }
+        public string? Who { 
+            get
+            { 
+                return who;
+            } 
+            set 
+            { 
+                who = value;
+                OnPropertyChanged("Who");
+            } 
+        }
 
         public object Clone() => new Relation(id, parent_id, parent, child_id, child, who);
 
@@ -86,6 +144,13 @@ namespace StudentsManagerData.Table
         public static bool operator !=(Relation? left, Relation? right)
         {
             return !(left == right);
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

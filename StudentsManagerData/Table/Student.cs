@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace StudentsManagerData.Table
 {
-    public class Student: ICloneable, IEquatable<Student?>
+    public class Student: ICloneable, IEquatable<Student?>, INotifyPropertyChanged
     {
         int id;
         int person_id;
@@ -18,6 +20,9 @@ namespace StudentsManagerData.Table
         bool is_escaped;
         string? reason;
 
+        public Student()
+        {
+        }
         //Используется для клонирования
         private Student(int id, int person_id, Person person, int group_id, Group group, DateTime date_entry, DateTime date_escape, bool is_escaped, string? reason)
         {
@@ -35,43 +40,126 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Код
         /// </summary>
-        public int Id { get { return id; } }
+        public int Id { 
+            get 
+            { 
+                return id; 
+            } 
+        }
 
         /// <summary>
         /// Код человека
         /// </summary>
-        public int PersonId { get { return person_id; } set { person_id = value; } }
+        public int PersonId { 
+            get 
+            { 
+                return person_id; 
+            } 
+            set 
+            { 
+                person_id = value;
+            } 
+        }
 
         /// <summary>
         /// Объект человека
         /// </summary>
-        public Person Person { get { return person; } private set { person = value; } }
+        public Person Person { 
+            get 
+            { 
+                return person; 
+            } 
+            private set 
+            { 
+                person = value;
+                OnPropertyChanged("Person");
+            } 
+        }
 
         /// <summary>
         /// Код группы
         /// </summary>
-        public int GroupId { get { return group_id; } set { group_id = value; } }
+        public int GroupId { 
+            get 
+            { 
+                return group_id; 
+            } 
+            set 
+            { 
+                group_id = value; 
+            } 
+        }
 
         /// <summary>
         /// Объект группы
         /// </summary>
-        public Group Group { get { return group; } private set { group = value; } }
+        public Group Group { 
+            get 
+            { 
+                return group; 
+            } 
+            private set 
+            { 
+                group = value;
+                OnPropertyChanged("Group");
+            } 
+        }
         /// <summary>
         /// Дата поступления
         /// </summary>
-        public DateTime DateEntry { get { return date_entry; } set { date_entry = value; } }
+        public DateTime DateEntry { 
+            get 
+            { 
+                return date_entry; 
+            } 
+            set 
+            { 
+                date_entry = value;
+                OnPropertyChanged("DateEntry");
+            } 
+        }
         /// <summary>
         /// Дата отчисления
         /// </summary>
-        public DateTime DateEscape { get { return date_escape; } set { date_escape = value; } }
+        public DateTime DateEscape { 
+            get 
+            { 
+                return date_escape; 
+            } 
+            set 
+            { 
+                date_escape = value;
+                OnPropertyChanged("DateEscape");
+            } 
+        }
         /// <summary>
         /// Отчислен?
         /// </summary>
-        public bool IsEscaped { get { return is_escaped; } set { is_escaped = value; } }
+        public bool IsEscaped { 
+            get 
+            { 
+                return is_escaped; 
+            } 
+            set 
+            { 
+                is_escaped = value;
+                OnPropertyChanged("IsEscaped");
+            } 
+        }
         /// <summary>
         /// Причина отчисления
         /// </summary>
-        public string? Reason { get { return reason; } set { reason = value; } }
+        public string? Reason { 
+            get 
+            { 
+                return reason; 
+            } 
+            set 
+            { 
+                reason = value;
+                OnPropertyChanged("Reason");
+            } 
+        }
 
         public object Clone() => new Student(id,person_id,person,group_id,group,date_entry,date_escape,is_escaped,reason);
 
@@ -117,6 +205,13 @@ namespace StudentsManagerData.Table
         public static bool operator !=(Student? left, Student? right)
         {
             return !(left == right);
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
