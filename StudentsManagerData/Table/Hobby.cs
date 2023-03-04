@@ -95,9 +95,20 @@ namespace StudentsManagerData.Table
             {
                 description = value;
                 OnPropertyChanged("Description");
-            } 
+            }
         }
 
+        /// <summary>
+        /// Записать новые значения в поля
+        /// </summary>
+        /// <param name="hobby">Откуда будут взяты значения полей</param>
+        public void Write(Hobby hobby)
+        {
+            PersonId = hobby.person_id;
+            Person = hobby.person;
+            Name = hobby.name;
+            Description = hobby.description;
+        }
         public object Clone() => new Hobby(id,person_id,person,name,description);
 
         public override bool Equals(object? obj)

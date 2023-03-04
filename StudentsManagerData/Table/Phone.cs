@@ -98,6 +98,17 @@ namespace StudentsManagerData.Table
             }
         }
 
+        /// <summary>
+        /// Записать новые значения в поля
+        /// </summary>
+        /// <param name="phone">Откуда будут взяты значения полей</param>
+        public void Write(Phone phone)
+        {
+            PersonId = phone.person_id;
+            Person = phone.person;
+            Name = phone.name;
+            Description = phone.description;
+        }
         public object Clone() => new Phone(id, person_id, person, name, description);
 
         public override bool Equals(object? obj)

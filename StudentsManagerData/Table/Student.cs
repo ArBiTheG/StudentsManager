@@ -158,9 +158,25 @@ namespace StudentsManagerData.Table
             { 
                 reason = value;
                 OnPropertyChanged("Reason");
-            } 
+            }
         }
 
+        /// <summary>
+        /// Записать новые значения в поля
+        /// </summary>
+        /// <param name="student">Откуда будут взяты значения полей</param>
+        public void Write(Student student)
+        {
+            PersonId = student.person_id;
+            Person = student.person;
+            Person = student.person;
+            GroupId = student.group_id;
+            Group = student.group;
+            DateEntry = student.date_entry;
+            DateEscape = student.date_escape;
+            IsEscaped = student.is_escaped;
+            Reason = student.reason;
+        }
         public object Clone() => new Student(id,person_id,person,group_id,group,date_entry,date_escape,is_escaped,reason);
 
         public override bool Equals(object? obj)

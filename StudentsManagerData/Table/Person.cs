@@ -16,14 +16,14 @@ namespace StudentsManagerData.Table
         string? series_passport;
         string? number_passport;
         string? given_passport;
-        DateTime date_passport;
+        DateTime? date_passport;
         string? about;
 
         public Person()
         {
         }
         //Используется для клонирования
-        private Person(int id, string first_name, string middle_name, string last_name, DateTime birthday, byte sex, string? series_passport, string? number_passport, string? given_passport, DateTime date_passport, string? about)
+        private Person(int id, string first_name, string middle_name, string last_name, DateTime birthday, byte sex, string? series_passport, string? number_passport, string? given_passport, DateTime? date_passport, string? about)
         {
             this.id = id;
             this.first_name = first_name;
@@ -148,7 +148,8 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Кем выдан паспорт
         /// </summary>
-        public string? GivenPassword { 
+        public string? GivenPassport
+        { 
             get 
             { 
                 return given_passport; 
@@ -156,13 +157,13 @@ namespace StudentsManagerData.Table
             set 
             { 
                 given_passport = value;
-                OnPropertyChanged("GivenPassword");
+                OnPropertyChanged("GivenPassport");
             } 
         }
         /// <summary>
         /// Дата вручения паспорта
         /// </summary>
-        public DateTime DatePassport { 
+        public DateTime? DatePassport { 
             get 
             { 
                 return date_passport; 
@@ -203,7 +204,7 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Номера телефонов
         /// </summary>
-        public List<Hobby> Phones { get; set; }
+        public List<Phone> Phones { get; set; }
         /// <summary>
         /// Адреса элетронных почт
         /// </summary>
@@ -211,12 +212,29 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Детей
         /// </summary>
-        public List<Person> Childs { get; set; }
+        public List<Relation> Childs { get; set; }
         /// <summary>
         /// Родителей
         /// </summary>
-        public List<Person> Parents { get; set; }
+        public List<Relation> Parents { get; set; }
 
+        /// <summary>
+        /// Записать новые значения в поля
+        /// </summary>
+        /// <param name="person">Откуда будут взяты значения полей</param>
+        public void Write(Person person)
+        {
+            FirstName = person.first_name;
+            MiddleName = person.middle_name;
+            LastName = person.last_name;
+            Birthday = person.birthday;
+            Sex = person.sex;
+            SeriesPassport = person.series_passport;
+            NumberPassport = person.number_passport;
+            GivenPassport = person.given_passport;
+            DatePassport = person.date_passport;
+            About = person.about;
+        }
         public object Clone() => new Person(id, first_name, middle_name, last_name, birthday, sex, series_passport, number_passport, given_passport, date_passport, about);
 
         public override bool Equals(object? obj)

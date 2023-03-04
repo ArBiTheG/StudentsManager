@@ -186,6 +186,22 @@ namespace StudentsManagerData.Table
         /// </summary>
         public List<Group> Groups { get; set; }
 
+        /// <summary>
+        /// Записать новые значения в поля
+        /// </summary>
+        /// <param name="specialty">Откуда будут взяты значения полей</param>
+        public void Write(Specialty specialty)
+        {
+            Code = specialty.code;
+            Name = specialty.name;
+            Skill = specialty.skill;
+            Duration = specialty.duration;
+            Description = specialty.description;
+            DateCreated = specialty.date_created;
+            DateDeleted = specialty.date_deleted;
+            IsDeleted = specialty.is_deleted;
+            Reason = specialty.reason;
+        }
         public object Clone() => new Specialty(id,code,name,skill,duration,description,date_created,date_deleted, is_deleted,reason);
 
         public override bool Equals(object? obj)

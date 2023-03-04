@@ -103,6 +103,17 @@ namespace StudentsManagerData.Table
         /// </summary>
         public List<Diploma> Diplomas { get; set; }
 
+        /// <summary>
+        /// Записать новые значения в поля
+        /// </summary>
+        /// <param name="school">Откуда будут взяты значения полей</param>
+        public void Write(School school)
+        {
+            FullName = school.full_name;
+            ShortName = school.short_name;
+            Address = school.address;
+            Description = school.description;
+        }
         public object Clone() => new School(id,full_name,short_name,address,description);
 
         public override bool Equals(object? obj)

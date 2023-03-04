@@ -103,6 +103,17 @@ namespace StudentsManagerData.Table
             }
         }
 
+        /// <summary>
+        /// Записать новые значения в поля
+        /// </summary>
+        /// <param name="email">Откуда будут взяты значения полей</param>
+        public void Write(Email email)
+        {
+            PersonId = email.person_id;
+            Person = email.person;
+            Name = email.name;
+            Description = email.description;
+        }
         public object Clone() => new Email(id,person_id,person,name,description);
 
         public override bool Equals(object? obj)

@@ -110,9 +110,21 @@ namespace StudentsManagerData.Table
             { 
                 who = value;
                 OnPropertyChanged("Who");
-            } 
+            }
         }
 
+        /// <summary>
+        /// Записать новые значения в поля
+        /// </summary>
+        /// <param name="relation">Откуда будут взяты значения полей</param>
+        public void Write(Relation relation)
+        {
+            ParentId = relation.parent_id;
+            Parent = relation.parent;
+            ChildId = relation.child_id;
+            Child = relation.child;
+            Who = relation.who;
+        }
         public object Clone() => new Relation(id, parent_id, parent, child_id, child, who);
 
         public override bool Equals(object? obj)

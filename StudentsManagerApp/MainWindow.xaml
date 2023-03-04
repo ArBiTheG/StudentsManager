@@ -49,6 +49,7 @@
             <Border Grid.Column="0" Style="{StaticResource HeaderBorder}">
                 <StackPanel>
                     <Button Content="Главная" Style="{StaticResource PageButton}" Command="{Binding ChangePage}" CommandParameter="Main"/>
+                    <Button Content="Человек" Style="{StaticResource PageButton}" Command="{Binding ChangePage}" CommandParameter="Person"/>
                 </StackPanel>
             </Border>
             <ContentPresenter Grid.Column="1" Content="{Binding Content}"/>

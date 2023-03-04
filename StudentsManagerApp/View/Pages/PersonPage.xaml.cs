@@ -1,5 +1,4 @@
-﻿using StudentsManagerApp.ViewModel;
-using StudentsManagerApp.ViewModel.Pages;
+﻿using StudentsManagerApp.ViewModel.Pages;
 using StudentsManagerData;
 using System;
 using System.Collections.Generic;
@@ -19,19 +18,19 @@ using System.Windows.Shapes;
 namespace StudentsManagerApp.View.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainPage.xaml
+    /// Логика взаимодействия для PersonPage.xaml
     /// </summary>
-    public partial class MainPage : UserControl
+    public partial class PersonPage : UserControl
     {
-        MainWindowModel viewModel;
-        public MainPage()
+        PersonPageModel viewModel;
+        public PersonPage()
         {
             InitializeComponent();
         }
-        static public MainPage Create(MainWindowModel model)
+        static public PersonPage Create(StudentsContext studentsContext)
         {
-            MainPage page = new MainPage();
-            page.viewModel = model;
+            PersonPage page = new PersonPage();
+            page.viewModel = new PersonPageModel(studentsContext);
             page.DataContext = page.viewModel;
             return page;
         }

@@ -176,6 +176,21 @@ namespace StudentsManagerData.Table
             }
         }
 
+        /// <summary>
+        /// Записать новые значения в поля
+        /// </summary>
+        /// <param name="diploma">Откуда будут взяты значения полей</param>
+        public void Write(Diploma diploma)
+        {
+            PersonId = diploma.person_id;
+            Person = diploma.person;
+            Series = diploma.series;
+            Number = diploma.number;
+            Given = diploma.given;
+            SchoolId = diploma.school_id;
+            School = diploma.school;
+            Name = diploma.name;
+        }
         public object Clone() => new Diploma(id, person_id, person, series, number, given, school_id, school, name);
 
         public override bool Equals(object? obj)

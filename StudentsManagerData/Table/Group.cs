@@ -13,7 +13,7 @@ namespace StudentsManagerData.Table
         int id;
         string name;
         int spec_id;
-        Specialty specialy;
+        Specialty specialty;
         bool is_distant;
         string? about;
         DateTime date_created;
@@ -28,7 +28,7 @@ namespace StudentsManagerData.Table
             this.id = id;
             this.name = name;
             this.spec_id = spec_id;
-            this.specialy = specialy;
+            this.specialty = specialy;
             this.is_distant = is_distant;
             this.about = about;
             this.date_created = date_created;
@@ -63,7 +63,7 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Код специальности
         /// </summary>
-        public int SpecialyId { 
+        public int SpecialtyId { 
             get 
             { 
                 return spec_id;
@@ -77,14 +77,14 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Объект специальности
         /// </summary>
-        public Specialty Specialy { 
+        public Specialty Specialty { 
             get 
             { 
-                return specialy; 
+                return specialty; 
             } 
             private set 
             { 
-                specialy = value;
+                specialty = value;
                 OnPropertyChanged("Specialy");
             } 
         }
@@ -149,7 +149,21 @@ namespace StudentsManagerData.Table
         /// </summary>
         public List<Student> Students { get; set; }
 
-        public object Clone() => new Group(id, name, spec_id, specialy, is_distant, about, date_created, date_release);
+        /// <summary>
+        /// Записать новые значения в поля
+        /// </summary>
+        /// <param name="group">Откуда будут взяты значения полей</param>
+        public void Write(Group group)
+        {
+            Name = group.name;
+            SpecialtyId = group.spec_id;
+            Specialty = group.specialty;
+            IsDistant = group.is_distant;
+            About = group.about;
+            DateCreated = group.date_created;
+            DateRelease = group.date_release;
+        }
+        public object Clone() => new Group(id, name, spec_id, specialty, is_distant, about, date_created, date_release);
 
         public override bool Equals(object? obj)
         {
@@ -162,7 +176,7 @@ namespace StudentsManagerData.Table
                    id == other.id &&
                    name == other.name &&
                    spec_id == other.spec_id &&
-                   EqualityComparer<Specialty>.Default.Equals(specialy, other.specialy) &&
+                   EqualityComparer<Specialty>.Default.Equals(specialty, other.specialty) &&
                    is_distant == other.is_distant &&
                    about == other.about &&
                    date_created == other.date_created &&
@@ -171,7 +185,7 @@ namespace StudentsManagerData.Table
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(id, name, spec_id, specialy, is_distant, about, date_created, date_release);
+            return HashCode.Combine(id, name, spec_id, specialty, is_distant, about, date_created, date_release);
         }
 
         public static bool operator ==(Group? left, Group? right)

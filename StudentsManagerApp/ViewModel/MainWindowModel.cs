@@ -1,5 +1,7 @@
 ﻿using StudentsManager;
+using StudentsManagerApp.View.Pages;
 using StudentsManagerApp.ViewModel.Module;
+using StudentsManagerData;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +17,8 @@ namespace StudentsManagerApp.ViewModel
 {
     public class MainWindowModel : INotifyPropertyChanged
     {
+        StudentsContext studentsContext = new StudentsContext();
+
         ClockModule clockModule = new ClockModule();
 
         UserControl? content;
@@ -48,9 +52,12 @@ namespace StudentsManagerApp.ViewModel
                       if (content != null) content = null;
                       switch (pageName)
                       {
+                          case "Person":
+                              Content = PersonPage.Create(studentsContext);
+                              break;
                           case "Main":
                           default:
-                              Content = new View.Pages.MainPage();
+                              Content = MainPage.Create(this);
                               break;
                       }
                   }));
@@ -59,7 +66,6 @@ namespace StudentsManagerApp.ViewModel
 
         public MainWindowModel()
         {
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
