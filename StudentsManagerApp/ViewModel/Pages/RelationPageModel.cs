@@ -10,27 +10,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class RelationPageModel : BaseHandleModel
+    public class RelationPageModel : BasePageModel
     {
-        StudentsContext studentsContext;
         public ObservableCollection<Relation> Relations { get; set; }
         public RelationPageModel(StudentsContext studentsContext)
         {
-            this.studentsContext = studentsContext;
-            this.studentsContext.Relations.Load();
-            Relations = this.studentsContext.Relations.Local.ToObservableCollection();
+            StudentsContext = studentsContext;
+            StudentsContext.Relations.Load();
+            Relations = StudentsContext.Relations.Local.ToObservableCollection();
         }
-        public override void Add(object? obj)
+        public override void AddField(object? obj)
         {
             throw new NotImplementedException();
         }
 
-        public override void Delete(object? selected_obj)
+        public override void DeleteField(object? selected_obj)
         {
             throw new NotImplementedException();
         }
 
-        public override void Edit(object? selected_obj)
+        public override void EditField(object? selected_obj)
         {
             throw new NotImplementedException();
         }

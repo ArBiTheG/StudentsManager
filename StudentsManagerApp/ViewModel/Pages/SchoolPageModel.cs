@@ -11,18 +11,17 @@ using StudentsManagerApp.View.DialogWindows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class SchoolPageModel : BaseHandleModel
+    public class SchoolPageModel : BasePageModel
     {
-        StudentsContext studentsContext;
         public ObservableCollection<School> Schools { get; set; }
         public SchoolPageModel(StudentsContext studentsContext)
         {
-            this.studentsContext = studentsContext;
-            this.studentsContext.Schools.Load();
-            Schools = this.studentsContext.Schools.Local.ToObservableCollection();
+            StudentsContext = studentsContext;
+            StudentsContext.Schools.Load();
+            Schools = StudentsContext.Schools.Local.ToObservableCollection();
         }
 
-        public override void Add(object? obj)
+        public override void AddField(object? obj)
         {
             //SchoolWindow schoolWindow = new SchoolWindow(new School());
             //if (schoolWindow.ShowDialog() == true)
@@ -34,7 +33,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             throw new NotImplementedException();
         }
 
-        public override void Delete(object? selected_obj)
+        public override void DeleteField(object? selected_obj)
         {
             //School? school = selected_obj as School;
             //if (school == null) return;
@@ -43,7 +42,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             throw new NotImplementedException();
         }
 
-        public override void Edit(object? selected_obj)
+        public override void EditField(object? selected_obj)
         {
             //School? school = selected_obj as School;
             //if (school == null) return;

@@ -10,27 +10,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class HobbyPageModel : BaseHandleModel
+    public class HobbyPageModel : BasePageModel
     {
-        StudentsContext studentsContext;
         public ObservableCollection<Hobby> Hobbies { get; set; }
         public HobbyPageModel(StudentsContext studentsContext)
         {
-            this.studentsContext = studentsContext;
-            this.studentsContext.Hobbies.Load();
-            Hobbies = this.studentsContext.Hobbies.Local.ToObservableCollection();
+            StudentsContext = studentsContext;
+            StudentsContext.Hobbies.Load();
+            Hobbies = StudentsContext.Hobbies.Local.ToObservableCollection();
         }
-        public override void Add(object? obj)
+        public override void AddField(object? obj)
         {
             throw new NotImplementedException();
         }
 
-        public override void Delete(object? selected_obj)
+        public override void DeleteField(object? selected_obj)
         {
             throw new NotImplementedException();
         }
 
-        public override void Edit(object? selected_obj)
+        public override void EditField(object? selected_obj)
         {
             throw new NotImplementedException();
         }

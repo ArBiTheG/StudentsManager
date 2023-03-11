@@ -10,28 +10,27 @@ using System.Threading.Tasks;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class StudentPageModel:BaseHandleModel
+    public class StudentPageModel:BasePageModel
     {
-        StudentsContext studentsContext;
         public ObservableCollection<Student> Students { get; set; }
         public StudentPageModel(StudentsContext studentsContext)
         {
-            this.studentsContext = studentsContext;
-            this.studentsContext.Students.Load();
-            Students = this.studentsContext.Students.Local.ToObservableCollection();
+            StudentsContext = studentsContext;
+            StudentsContext.Students.Load();
+            Students = StudentsContext.Students.Local.ToObservableCollection();
         }
 
-        public override void Add(object? obj)
+        public override void AddField(object? obj)
         {
             throw new NotImplementedException();
         }
 
-        public override void Delete(object? selected_obj)
+        public override void DeleteField(object? selected_obj)
         {
             throw new NotImplementedException();
         }
 
-        public override void Edit(object? selected_obj)
+        public override void EditField(object? selected_obj)
         {
             throw new NotImplementedException();
         }

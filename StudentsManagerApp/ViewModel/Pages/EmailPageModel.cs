@@ -11,27 +11,26 @@ using System.Threading.Tasks;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class EmailPageModel : BaseHandleModel
+    public class EmailPageModel : BasePageModel
     {
-        StudentsContext studentsContext;
         public ObservableCollection<Email> Emails { get; set; }
         public EmailPageModel(StudentsContext studentsContext)
         {
-            this.studentsContext = studentsContext;
-            this.studentsContext.Emails.Load();
-            Emails = this.studentsContext.Emails.Local.ToObservableCollection();
+            StudentsContext = studentsContext;
+            StudentsContext.Emails.Load();
+            Emails = StudentsContext.Emails.Local.ToObservableCollection();
         }
-        public override void Add(object? obj)
+        public override void AddField(object? obj)
         {
             throw new NotImplementedException();
         }
 
-        public override void Delete(object? selected_obj)
+        public override void DeleteField(object? selected_obj)
         {
             throw new NotImplementedException();
         }
 
-        public override void Edit(object? selected_obj)
+        public override void EditField(object? selected_obj)
         {
             throw new NotImplementedException();
         }

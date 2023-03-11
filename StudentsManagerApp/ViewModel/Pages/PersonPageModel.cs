@@ -11,36 +11,35 @@ using System.Threading.Tasks;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class PersonPageModel : BaseHandleModel
+    public class PersonPageModel : BasePageModel
     {
-        StudentsContext studentsContext;
         public ObservableCollection<Person> Persons { get; set; }
         public PersonPageModel(StudentsContext studentsContext)
         {
-            this.studentsContext = studentsContext;
-            this.studentsContext.Persons.Load();
-            Persons = this.studentsContext.Persons.Local.ToObservableCollection();
+            StudentsContext = studentsContext;
+            StudentsContext.Persons.Load();
+            Persons = StudentsContext.Persons.Local.ToObservableCollection();
         }
-        public override void Add(object? obj)
+        public override void AddField(object? obj)
         {
             PersonWindow personWindow = new PersonWindow(new Person());
             if (personWindow.ShowDialog() == true)
             {
                 Person person = personWindow.Person;
-                studentsContext.Persons.Add(person);
-                studentsContext.SaveChanges();
+                StudentsContext.Persons.Add(person);
+                StudentsContext.SaveChanges();
             }
         }
 
-        public override void Delete(object? selected_obj)
+        public override void DeleteField(object? selected_obj)
         {
             Person? person = selected_obj as Person;
             if (person == null) return;
-            studentsContext.Persons.Remove(person);
-            studentsContext.SaveChanges();
+            StudentsContext.Persons.Remove(person);
+            StudentsContext.SaveChanges();
         }
 
-        public override void Edit(object? selected_obj)
+        public override void EditField(object? selected_obj)
         {
             Person? person = selected_obj as Person;
             if (person == null) return;
@@ -51,8 +50,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (personWindow.ShowDialog() == true)
             {
                 person.Write(personWindow.Person);
-                studentsContext.Entry(person).State = EntityState.Modified;
-                studentsContext.SaveChanges();
+                StudentsContext.Entry(person).State = EntityState.Modified;
+                StudentsContext.SaveChanges();
             }
         }
     }
