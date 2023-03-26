@@ -12,13 +12,29 @@ namespace StudentsManagerApp.ViewModel.Pages
 {
     public class RelationPageModel : BasePageModel
     {
-        public ObservableCollection<Relation> Relations { get; set; }
-        public RelationPageModel(StudentsContext studentsContext)
+        ObservableCollection<Relation> relations;
+        public ObservableCollection<Relation> Relations
         {
-            StudentsContext = studentsContext;
+            get { return relations; }
+            set
+            {
+                relations = value;
+                OnPropertyChanged(nameof(Relations));
+            }
+        }
+
+        public override void Load()
+        {
+            StudentsContext = new StudentsContext();
             StudentsContext.Relations.Load();
             Relations = StudentsContext.Relations.Local.ToObservableCollection();
         }
+
+        public override void Close()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void AddField(object? obj)
         {
             throw new NotImplementedException();
@@ -33,5 +49,6 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             throw new NotImplementedException();
         }
+
     }
 }

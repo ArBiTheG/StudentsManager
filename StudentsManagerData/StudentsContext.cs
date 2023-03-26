@@ -24,7 +24,7 @@ namespace StudentsManagerData
 
         public StudentsContext()
         {
-            Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

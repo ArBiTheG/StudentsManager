@@ -12,13 +12,29 @@ namespace StudentsManagerApp.ViewModel.Pages
 {
     public class PhonePageModel : BasePageModel
     {
-        public ObservableCollection<Phone> Phones { get; set; }
-        public PhonePageModel(StudentsContext studentsContext)
+        ObservableCollection<Phone> phones;
+        public ObservableCollection<Phone> Phones
         {
-            StudentsContext = studentsContext;
+            get { return phones; }
+            set
+            {
+                phones = value;
+                OnPropertyChanged(nameof(Phones));
+            }
+        }
+
+        public override void Load()
+        {
+            StudentsContext = new StudentsContext();
             StudentsContext.Phones.Load();
             Phones = StudentsContext.Phones.Local.ToObservableCollection();
         }
+
+        public override void Close()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void AddField(object? obj)
         {
             throw new NotImplementedException();
@@ -33,5 +49,6 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             throw new NotImplementedException();
         }
+
     }
 }

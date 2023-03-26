@@ -12,12 +12,25 @@ namespace StudentsManagerApp.ViewModel.Pages
 {
     public class GroupPageModel : BasePageModel
     {
-        public ObservableCollection<Group> Groups { get; set; }
-        public GroupPageModel(StudentsContext studentsContext)
+        ObservableCollection<Group> groups;
+        public ObservableCollection<Group> Groups
         {
-            StudentsContext = studentsContext;
+            get { return groups; }
+            set
+            {
+                groups = value;
+                OnPropertyChanged(nameof(Groups));
+            }
+        }
+        public override void Load()
+        {
+            StudentsContext = new StudentsContext();
             StudentsContext.Groups.Load();
             Groups = StudentsContext.Groups.Local.ToObservableCollection();
+        }
+        public override void Close()
+        {
+            throw new NotImplementedException();
         }
         public override void AddField(object? obj)
         {
@@ -33,5 +46,6 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             throw new NotImplementedException();
         }
+
     }
 }

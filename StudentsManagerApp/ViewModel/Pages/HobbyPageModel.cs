@@ -12,13 +12,29 @@ namespace StudentsManagerApp.ViewModel.Pages
 {
     public class HobbyPageModel : BasePageModel
     {
-        public ObservableCollection<Hobby> Hobbies { get; set; }
-        public HobbyPageModel(StudentsContext studentsContext)
+        ObservableCollection<Hobby> hobbies;
+        public ObservableCollection<Hobby> Hobbies
         {
-            StudentsContext = studentsContext;
+            get { return hobbies; }
+            set
+            {
+                hobbies = value;
+                OnPropertyChanged(nameof(Hobbies));
+            }
+        }
+
+        public override void Load()
+        {
+            StudentsContext = new StudentsContext();
             StudentsContext.Hobbies.Load();
             Hobbies = StudentsContext.Hobbies.Local.ToObservableCollection();
         }
+
+        public override void Close()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void AddField(object? obj)
         {
             throw new NotImplementedException();
@@ -33,5 +49,6 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             throw new NotImplementedException();
         }
+
     }
 }

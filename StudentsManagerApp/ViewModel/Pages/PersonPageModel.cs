@@ -5,21 +5,41 @@ using StudentsManagerData.Table;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Navigation;
+using System.Windows.Threading;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
     public class PersonPageModel : BasePageModel
     {
-        public ObservableCollection<Person> Persons { get; set; }
-        public PersonPageModel(StudentsContext studentsContext)
+        ObservableCollection<Person> person;
+        public ObservableCollection<Person> Persons 
         {
-            StudentsContext = studentsContext;
+            get { return person; }
+            set
+            {
+                person = value;
+                OnPropertyChanged(nameof(Persons));
+            }
+        }
+
+        public override void Load()
+        {
+            StudentsContext = new StudentsContext();
             StudentsContext.Persons.Load();
             Persons = StudentsContext.Persons.Local.ToObservableCollection();
         }
+
+        public override void Close()
+        {
+        }
+
         public override void AddField(object? obj)
         {
             PersonWindow personWindow = new PersonWindow(new Person());

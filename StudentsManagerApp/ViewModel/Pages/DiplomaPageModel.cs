@@ -12,13 +12,28 @@ namespace StudentsManagerApp.ViewModel.Pages
 {
     public class DiplomaPageModel : BasePageModel
     {
-        public ObservableCollection<Diploma> Diplomas { get; set; }
-        public DiplomaPageModel(StudentsContext studentsContext)
+        ObservableCollection<Diploma> diplomas;
+        public ObservableCollection<Diploma> Diplomas
         {
-            StudentsContext = studentsContext;
+            get { return diplomas; }
+            set
+            {
+                diplomas = value;
+                OnPropertyChanged(nameof(Diplomas));
+            }
+        }
+
+        public override void Load()
+        {
+            StudentsContext = new StudentsContext();
             StudentsContext.Diplomas.Load();
             Diplomas = StudentsContext.Diplomas.Local.ToObservableCollection();
         }
+        public override void Close()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void AddField(object? obj)
         {
             throw new NotImplementedException();
