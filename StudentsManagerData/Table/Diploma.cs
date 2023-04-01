@@ -169,7 +169,7 @@ namespace StudentsManagerData.Table
             {
                 return name;
             }
-            private set
+            set
             {
                 name = value;
                 OnPropertyChanged("Name");

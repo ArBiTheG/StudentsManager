@@ -12,21 +12,34 @@
         </Style>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="5" />
-            <Setter Property="Height" Value="24" />
+            <Setter Property="Height" Value="32" />
             <Setter Property="Width" Value="96" />
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="2" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="Height" Value="32" />
             <Setter Property="VerticalAlignment" Value="Top" />
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="2" />
+            <Setter Property="Height" Value="32" />
+        </Style>
+        <Style TargetType="TextBox" x:Key="Description">
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Height" Value="64" />
         </Style>
         <Style TargetType="ComboBox">
             <Setter Property="Margin" Value="2" />
+            <Setter Property="Height" Value="30" />
         </Style>
         <Style TargetType="DatePicker">
             <Setter Property="Margin" Value="2" />
+            <Setter Property="Height" Value="30" />
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </Window.Resources>
     <Grid>
@@ -65,11 +78,11 @@
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Name}"/>
                 <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Skill}"/>
                 <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Duration}"/>
-                <TextBox Grid.Row="4" Grid.Column="1" Height="64" Text="{Binding Description}"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Description}"/>
                 <DatePicker Grid.Row="5" Grid.Column="1" SelectedDate="{Binding DateCreated}"/>
                 <CheckBox x:Name="checkBox" Grid.Row="6" Grid.Column="1" IsChecked="{Binding IsDeleted}"/>
                 <DatePicker Grid.Row="7" Grid.Column="1" SelectedDate="{Binding DateDeleted}" Visibility="{Binding IsChecked, ElementName=checkBox}"/>
-                <TextBox Grid.Row="8" Grid.Column="1" Height="64" Text="{Binding Reason}" Visibility="{Binding IsChecked, ElementName=checkBox}"/>
+                <TextBox Grid.Row="8" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Reason}" Visibility="{Binding IsChecked, ElementName=checkBox}"/>
             </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal">

@@ -7,27 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using StudentsManagerApp.View.DialogWindows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class DiplomaPageModel : BasePageModel
+    public class DiplomaPageModel : PageModel<Diploma>
     {
-        ObservableCollection<Diploma> diplomas;
-        public ObservableCollection<Diploma> Diplomas
-        {
-            get { return diplomas; }
-            set
-            {
-                diplomas = value;
-                OnPropertyChanged(nameof(Diplomas));
-            }
-        }
-
         public override void Load()
         {
             StudentsContext = new StudentsContext();
             StudentsContext.Diplomas.Load();
-            Diplomas = StudentsContext.Diplomas.Local.ToObservableCollection();
+            PrimaryList = StudentsContext.Diplomas.Local.ToObservableCollection();
         }
         public override void Close()
         {
@@ -36,17 +26,37 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            throw new NotImplementedException();
+            DiplomaWindow diplomaWindow = new DiplomaWindow(new Diploma());
+            if (diplomaWindow.ShowDialog() == true)
+            {
+                Diploma diploma = diplomaWindow.Diploma;
+                StudentsContext.Diplomas.Add(diploma);
+                StudentsContext.SaveChanges();
+            }
         }
 
         public override void DeleteField(object? selected_obj)
         {
-            throw new NotImplementedException();
+            Diploma? diploma = selected_obj as Diploma;
+            if (diploma == null) return;
+            StudentsContext.Diplomas.Remove(diploma);
+            StudentsContext.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
         {
-            throw new NotImplementedException();
+            Diploma? diploma = selected_obj as Diploma;
+            if (diploma == null) return;
+            Diploma vm = diploma.Clone() as Diploma;
+
+            DiplomaWindow diplomaWindow = new DiplomaWindow(vm);
+
+            if (diplomaWindow.ShowDialog() == true)
+            {
+                diploma.Write(diplomaWindow.Diploma);
+                StudentsContext.Diplomas.Entry(diploma).State = EntityState.Modified;
+                StudentsContext.SaveChanges();
+            }
         }
     }
 }

@@ -16,24 +16,13 @@ using System.Windows.Threading;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class PersonPageModel : BasePageModel
+    public class PersonPageModel : PageModel<Person>
     {
-        ObservableCollection<Person> person;
-        public ObservableCollection<Person> Persons 
-        {
-            get { return person; }
-            set
-            {
-                person = value;
-                OnPropertyChanged(nameof(Persons));
-            }
-        }
-
         public override void Load()
         {
             StudentsContext = new StudentsContext();
             StudentsContext.Persons.Load();
-            Persons = StudentsContext.Persons.Local.ToObservableCollection();
+            PrimaryList = StudentsContext.Persons.Local.ToObservableCollection();
         }
 
         public override void Close()
@@ -70,7 +59,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (personWindow.ShowDialog() == true)
             {
                 person.Write(personWindow.Person);
-                StudentsContext.Entry(person).State = EntityState.Modified;
+                StudentsContext.Persons.Entry(person).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }
         }

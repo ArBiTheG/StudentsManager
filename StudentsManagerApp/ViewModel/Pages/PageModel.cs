@@ -1,18 +1,23 @@
 ﻿using StudentsManager;
+using StudentsManagerApp.View.DialogWindows;
 using StudentsManagerData;
+using StudentsManagerData.Table;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public abstract class BasePageModel: INotifyPropertyChanged
+    public abstract class PageModel<TEntity>: INotifyPropertyChanged
     {
         bool loaded;
+        ObservableCollection<TEntity> primary_list;
 
         RelayCommand? addCommand;
         RelayCommand? editCommand;
@@ -21,7 +26,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         protected StudentsContext StudentsContext;
 
-        protected BasePageModel()
+        protected PageModel()
         {
             Task.Run(()=> {
                 Loaded = false;
@@ -29,6 +34,16 @@ namespace StudentsManagerApp.ViewModel.Pages
                 Loaded = true;
             }
             );
+        }
+
+        public ObservableCollection<TEntity> PrimaryList
+        {
+            get { return primary_list; }
+            set
+            {
+                primary_list = value;
+                OnPropertyChanged(nameof(PrimaryList));
+            }
         }
 
         public bool Loaded

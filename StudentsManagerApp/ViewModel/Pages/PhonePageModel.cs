@@ -7,27 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using StudentsManagerApp.View.DialogWindows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class PhonePageModel : BasePageModel
+    public class PhonePageModel : PageModel<Phone>
     {
-        ObservableCollection<Phone> phones;
-        public ObservableCollection<Phone> Phones
-        {
-            get { return phones; }
-            set
-            {
-                phones = value;
-                OnPropertyChanged(nameof(Phones));
-            }
-        }
-
         public override void Load()
         {
             StudentsContext = new StudentsContext();
             StudentsContext.Phones.Load();
-            Phones = StudentsContext.Phones.Local.ToObservableCollection();
+            PrimaryList = StudentsContext.Phones.Local.ToObservableCollection();
         }
 
         public override void Close()
@@ -35,19 +25,40 @@ namespace StudentsManagerApp.ViewModel.Pages
             throw new NotImplementedException();
         }
 
+
         public override void AddField(object? obj)
         {
-            throw new NotImplementedException();
+            PhoneWindow phoneWindow = new PhoneWindow(new Phone());
+            if (phoneWindow.ShowDialog() == true)
+            {
+                Phone phone = phoneWindow.Phone;
+                StudentsContext.Phones.Add(phone);
+                StudentsContext.SaveChanges();
+            }
         }
 
         public override void DeleteField(object? selected_obj)
         {
-            throw new NotImplementedException();
+            Phone? phone = selected_obj as Phone;
+            if (phone == null) return;
+            StudentsContext.Phones.Remove(phone);
+            StudentsContext.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
         {
-            throw new NotImplementedException();
+            Phone? phone = selected_obj as Phone;
+            if (phone == null) return;
+            Phone vm = phone.Clone() as Phone;
+
+            PhoneWindow phoneWindow = new PhoneWindow(vm);
+
+            if (phoneWindow.ShowDialog() == true)
+            {
+                phone.Write(phoneWindow.Phone);
+                StudentsContext.Phones.Entry(phone).State = EntityState.Modified;
+                StudentsContext.SaveChanges();
+            }
         }
 
     }

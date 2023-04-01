@@ -36,7 +36,7 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListBox x:Name="personsList" ItemsSource="{Binding Persons}">
+        <ListBox x:Name="list" ItemsSource="{Binding PrimaryList}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -50,9 +50,9 @@
         <StackPanel IsEnabled="{Binding Loaded}" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="Добавить" Margin="10" Padding="3" Command="{Binding AddCommand}"  />
             <Button Content="Изменить" Margin="10" Command="{Binding EditCommand}"
-                    CommandParameter="{Binding ElementName=personsList, Path=SelectedItem}"  />
+                    CommandParameter="{Binding ElementName=list, Path=SelectedItem}"  />
             <Button Content="Удалить" Margin="10" Command="{Binding DeleteCommand}"
-                    CommandParameter="{Binding ElementName=personsList, Path=SelectedItem}"  />
+                    CommandParameter="{Binding ElementName=list, Path=SelectedItem}"  />
             <Button Content="Обновить" Margin="10" Command="{Binding UpdateCommand}"  />
         </StackPanel>
 

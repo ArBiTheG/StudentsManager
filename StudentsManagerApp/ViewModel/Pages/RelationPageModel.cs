@@ -7,27 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using StudentsManagerApp.View.DialogWindows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class RelationPageModel : BasePageModel
+    public class RelationPageModel : PageModel<Relation>
     {
-        ObservableCollection<Relation> relations;
-        public ObservableCollection<Relation> Relations
-        {
-            get { return relations; }
-            set
-            {
-                relations = value;
-                OnPropertyChanged(nameof(Relations));
-            }
-        }
-
         public override void Load()
         {
             StudentsContext = new StudentsContext();
             StudentsContext.Relations.Load();
-            Relations = StudentsContext.Relations.Local.ToObservableCollection();
+            PrimaryList = StudentsContext.Relations.Local.ToObservableCollection();
         }
 
         public override void Close()
@@ -37,17 +27,37 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            throw new NotImplementedException();
+            RelationWindow relationWindow = new RelationWindow(new Relation());
+            if (relationWindow.ShowDialog() == true)
+            {
+                Relation relation = relationWindow.Relation;
+                StudentsContext.Relations.Add(relation);
+                StudentsContext.SaveChanges();
+            }
         }
 
         public override void DeleteField(object? selected_obj)
         {
-            throw new NotImplementedException();
+            Relation? relation = selected_obj as Relation;
+            if (relation == null) return;
+            StudentsContext.Relations.Remove(relation);
+            StudentsContext.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
         {
-            throw new NotImplementedException();
+            Relation? relation = selected_obj as Relation;
+            if (relation == null) return;
+            Relation vm = relation.Clone() as Relation;
+
+            RelationWindow relationWindow = new RelationWindow(vm);
+
+            if (relationWindow.ShowDialog() == true)
+            {
+                relation.Write(relationWindow.Relation);
+                StudentsContext.Relations.Entry(relation).State = EntityState.Modified;
+                StudentsContext.SaveChanges();
+            }
         }
 
     }

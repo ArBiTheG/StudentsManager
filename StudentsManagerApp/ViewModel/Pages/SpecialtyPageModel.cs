@@ -11,24 +11,13 @@ using System.Threading.Tasks;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class SpecialtyPageModel : BasePageModel
+    public class SpecialtyPageModel : PageModel<Specialty>
     {
-        ObservableCollection<Specialty> specialties;
-        public ObservableCollection<Specialty> Specialties
-        {
-            get { return specialties; }
-            set
-            {
-                specialties = value;
-                OnPropertyChanged(nameof(Specialties));
-            }
-        }
-
         public override void Load()
         {
             StudentsContext = new StudentsContext();
             StudentsContext.Specialties.Load();
-            Specialties = StudentsContext.Specialties.Local.ToObservableCollection();
+            PrimaryList = StudentsContext.Specialties.Local.ToObservableCollection();
         }
 
         public override void Close()

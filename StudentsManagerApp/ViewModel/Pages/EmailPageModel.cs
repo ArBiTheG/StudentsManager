@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StudentsManagerApp.View.DialogWindows;
 using StudentsManagerData;
 using StudentsManagerData.Table;
 using System;
@@ -11,24 +12,13 @@ using System.Threading.Tasks;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class EmailPageModel : BasePageModel
+    public class EmailPageModel : PageModel<Email>
     {
-        ObservableCollection<Email> emails;
-        public ObservableCollection<Email> Emails
-        {
-            get { return emails; }
-            set
-            {
-                emails = value;
-                OnPropertyChanged(nameof(Emails));
-            }
-        }
-
         public override void Load()
         {
             StudentsContext = new StudentsContext();
             StudentsContext.Emails.Load();
-            Emails = StudentsContext.Emails.Local.ToObservableCollection();
+            PrimaryList = StudentsContext.Emails.Local.ToObservableCollection();
         }
 
         public override void Close()
@@ -36,19 +26,40 @@ namespace StudentsManagerApp.ViewModel.Pages
             throw new NotImplementedException();
         }
 
+
         public override void AddField(object? obj)
         {
-            throw new NotImplementedException();
+            EmailWindow emailWindow = new EmailWindow(new Email());
+            if (emailWindow.ShowDialog() == true)
+            {
+                Email email = emailWindow.Email;
+                StudentsContext.Emails.Add(email);
+                StudentsContext.SaveChanges();
+            }
         }
 
         public override void DeleteField(object? selected_obj)
         {
-            throw new NotImplementedException();
+            Email? email = selected_obj as Email;
+            if (email == null) return;
+            StudentsContext.Emails.Remove(email);
+            StudentsContext.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
         {
-            throw new NotImplementedException();
+            Email? email = selected_obj as Email;
+            if (email == null) return;
+            Email vm = email.Clone() as Email;
+
+            EmailWindow emailWindow = new EmailWindow(vm);
+
+            if (emailWindow.ShowDialog() == true)
+            {
+                email.Write(emailWindow.Email);
+                StudentsContext.Emails.Entry(email).State = EntityState.Modified;
+                StudentsContext.SaveChanges();
+            }
         }
     }
 }

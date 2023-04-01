@@ -1,6 +1,7 @@
 ﻿using StudentsManager;
 using StudentsManagerApp.View.Pages;
 using StudentsManagerApp.ViewModel.Module;
+using StudentsManagerApp.ViewModel.Pages;
 using StudentsManagerData;
 using StudentsManagerData.Table;
 using System;
@@ -27,14 +28,14 @@ namespace StudentsManagerApp.ViewModel
 
         RelayCommand? changePage;
 
-        PageInfo[] pageInfo =
+        static PageInfo[] pageInfo =
         {
             new PageInfo {DisplayName = "Главная", Name = "Main"},
             new PageInfo {DisplayName = "Основные данные", Name = "Person"},
             new PageInfo {DisplayName = "Данные студентов", Name = "Student"},
             new PageInfo {DisplayName = "Управление группами", Name = "Group"},
             new PageInfo {DisplayName = "Управление специальностями", Name = "Specialty"},
-            new PageInfo {DisplayName = "Список эл. почт", Name = "Email"},
+            new PageInfo {DisplayName = "Список электронных почт", Name = "Email"},
             new PageInfo {DisplayName = "Список номеров телефонов", Name = "Phone"},
             new PageInfo {DisplayName = "Список хобби", Name = "Hobby"},
             new PageInfo {DisplayName = "Список школ", Name = "School"},
@@ -43,7 +44,7 @@ namespace StudentsManagerApp.ViewModel
 
         public ClockModule Clock { get => clockModule; }
 
-        public PageInfo[] PageInfo { get => pageInfo; }
+        public static PageInfo[] PageInfo { get => pageInfo; }
 
         public UserControl Content
         {
@@ -79,8 +80,29 @@ namespace StudentsManagerApp.ViewModel
                           case "Person":
                               Content = new PersonPage();
                               break;
+                          case "Student":
+                              Content = new StudentPage();
+                              break;
+                          case "Group":
+                              Content = new GroupPage();
+                              break;
                           case "Specialty":
                               Content = new SpecialtyPage();
+                              break;
+                          case "Email":
+                              Content = new EmailPage();
+                              break;
+                          case "Phone":
+                              Content = new PhonePage();
+                              break;
+                          case "Hobby":
+                              Content = new HobbyPage();
+                              break;
+                          case "School":
+                              Content = new SchoolPage();
+                              break;
+                          case "Diploma":
+                              Content = new DiplomaPage();
                               break;
                           case "Main":
                           default:
