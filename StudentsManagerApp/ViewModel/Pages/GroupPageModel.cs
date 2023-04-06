@@ -52,7 +52,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             if (groupWindow.ShowDialog() == true)
             {
-                group.Write(groupWindow.Group);
+                group.Load(groupWindow.Group);
                 StudentsContext.Groups.Entry(group).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }

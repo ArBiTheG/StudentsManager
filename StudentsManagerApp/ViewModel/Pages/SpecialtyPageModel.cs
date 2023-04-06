@@ -54,7 +54,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             if (specialtyWindow.ShowDialog() == true)
             {
-                specialty.Write(specialtyWindow.Specialty);
+                specialty.Load(specialtyWindow.Specialty);
                 StudentsContext.Entry(specialty).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }

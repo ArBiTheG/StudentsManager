@@ -54,7 +54,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             if (studentWindow.ShowDialog() == true)
             {
-                student.Write(studentWindow.Student);
+                student.Load(studentWindow.Student);
                 StudentsContext.Students.Entry(student).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }

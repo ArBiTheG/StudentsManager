@@ -162,10 +162,10 @@ namespace StudentsManagerData.Table
         }
 
         /// <summary>
-        /// Записать новые значения в поля
+        /// Загрузить значения в поля
         /// </summary>
         /// <param name="student">Откуда будут взяты значения полей</param>
-        public void Write(Student student)
+        public void Load(Student student)
         {
             PersonId = student.person_id;
             Person = student.person;
@@ -196,21 +196,6 @@ namespace StudentsManagerData.Table
                    date_escape == other.date_escape &&
                    is_escaped == other.is_escaped &&
                    reason == other.reason;
-        }
-
-        public override int GetHashCode()
-        {
-            HashCode hash = new HashCode();
-            hash.Add(id);
-            hash.Add(person_id);
-            hash.Add(person);
-            hash.Add(group_id);
-            hash.Add(group);
-            hash.Add(date_entry);
-            hash.Add(date_escape);
-            hash.Add(is_escaped);
-            hash.Add(reason);
-            return hash.ToHashCode();
         }
 
         public static bool operator ==(Student? left, Student? right)

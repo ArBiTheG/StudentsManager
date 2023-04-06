@@ -114,10 +114,10 @@ namespace StudentsManagerData.Table
         }
 
         /// <summary>
-        /// Записать новые значения в поля
+        /// Загрузить значения в поля
         /// </summary>
         /// <param name="relation">Откуда будут взяты значения полей</param>
-        public void Write(Relation relation)
+        public void Load(Relation relation)
         {
             ParentId = relation.parent_id;
             Parent = relation.parent;
@@ -141,11 +141,6 @@ namespace StudentsManagerData.Table
                    child_id == other.child_id &&
                    EqualityComparer<Person>.Default.Equals(child, other.child) &&
                    who == other.who;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(id, parent_id, parent, child_id, child, who);
         }
 
         public static bool operator ==(Relation? left, Relation? right)

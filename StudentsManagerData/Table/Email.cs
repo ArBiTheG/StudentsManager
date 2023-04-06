@@ -104,10 +104,10 @@ namespace StudentsManagerData.Table
         }
 
         /// <summary>
-        /// Записать новые значения в поля
+        /// Загрузить значения в поля
         /// </summary>
         /// <param name="email">Откуда будут взяты значения полей</param>
-        public void Write(Email email)
+        public void Load(Email email)
         {
             PersonId = email.person_id;
             Person = email.person;
@@ -129,11 +129,6 @@ namespace StudentsManagerData.Table
                    EqualityComparer<Person>.Default.Equals(person, other.person) &&
                    name == other.name &&
                    description == other.description;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(id, person_id, person, name, description);
         }
 
         public static bool operator ==(Email? left, Email? right)

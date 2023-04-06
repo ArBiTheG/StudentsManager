@@ -219,10 +219,10 @@ namespace StudentsManagerData.Table
         public List<Relation> Parents { get; set; }
 
         /// <summary>
-        /// Записать новые значения в поля
+        /// Загрузить значения в поля
         /// </summary>
         /// <param name="person">Откуда будут взяты значения полей</param>
-        public void Write(Person person)
+        public void Load(Person person)
         {
             FirstName = person.first_name;
             MiddleName = person.middle_name;
@@ -256,23 +256,6 @@ namespace StudentsManagerData.Table
                    given_passport == other.given_passport &&
                    date_passport == other.date_passport &&
                    about == other.about;
-        }
-
-        public override int GetHashCode()
-        {
-            HashCode hash = new HashCode();
-            hash.Add(id);
-            hash.Add(first_name);
-            hash.Add(middle_name);
-            hash.Add(last_name);
-            hash.Add(birthday);
-            hash.Add(sex);
-            hash.Add(series_passport);
-            hash.Add(number_passport);
-            hash.Add(given_passport);
-            hash.Add(date_passport);
-            hash.Add(about);
-            return hash.ToHashCode();
         }
 
         public static bool operator ==(Person? left, Person? right)

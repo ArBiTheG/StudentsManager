@@ -53,7 +53,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             if (diplomaWindow.ShowDialog() == true)
             {
-                diploma.Write(diplomaWindow.Diploma);
+                diploma.Load(diplomaWindow.Diploma);
                 StudentsContext.Diplomas.Entry(diploma).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }

@@ -187,10 +187,10 @@ namespace StudentsManagerData.Table
         public List<Group> Groups { get; set; }
 
         /// <summary>
-        /// Записать новые значения в поля
+        /// Загрузить значения в поля
         /// </summary>
         /// <param name="specialty">Откуда будут взяты значения полей</param>
-        public void Write(Specialty specialty)
+        public void Load(Specialty specialty)
         {
             Code = specialty.code;
             Name = specialty.name;
@@ -222,22 +222,6 @@ namespace StudentsManagerData.Table
                    date_deleted == other.date_deleted &&
                    is_deleted == other.is_deleted &&
                    reason == other.reason;
-        }
-
-        public override int GetHashCode()
-        {
-            HashCode hash = new HashCode();
-            hash.Add(id);
-            hash.Add(code);
-            hash.Add(name);
-            hash.Add(skill);
-            hash.Add(duration);
-            hash.Add(description);
-            hash.Add(date_created);
-            hash.Add(date_deleted);
-            hash.Add(is_deleted);
-            hash.Add(reason);
-            return hash.ToHashCode();
         }
 
         public static bool operator ==(Specialty? left, Specialty? right)

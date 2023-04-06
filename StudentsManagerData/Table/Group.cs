@@ -150,10 +150,10 @@ namespace StudentsManagerData.Table
         public List<Student> Students { get; set; }
 
         /// <summary>
-        /// Записать новые значения в поля
+        /// Загрузить значения в поля
         /// </summary>
         /// <param name="group">Откуда будут взяты значения полей</param>
-        public void Write(Group group)
+        public void Load(Group group)
         {
             Name = group.name;
             SpecialtyId = group.spec_id;
@@ -181,11 +181,6 @@ namespace StudentsManagerData.Table
                    about == other.about &&
                    date_created == other.date_created &&
                    date_release == other.date_release;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(id, name, spec_id, specialty, is_distant, about, date_created, date_release);
         }
 
         public static bool operator ==(Group? left, Group? right)

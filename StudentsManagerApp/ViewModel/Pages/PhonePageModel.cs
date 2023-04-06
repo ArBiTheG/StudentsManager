@@ -55,7 +55,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             if (phoneWindow.ShowDialog() == true)
             {
-                phone.Write(phoneWindow.Phone);
+                phone.Load(phoneWindow.Phone);
                 StudentsContext.Phones.Entry(phone).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }

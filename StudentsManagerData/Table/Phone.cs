@@ -99,10 +99,10 @@ namespace StudentsManagerData.Table
         }
 
         /// <summary>
-        /// Записать новые значения в поля
+        /// Загрузить значения в поля
         /// </summary>
         /// <param name="phone">Откуда будут взяты значения полей</param>
-        public void Write(Phone phone)
+        public void Load(Phone phone)
         {
             PersonId = phone.person_id;
             Person = phone.person;
@@ -124,11 +124,6 @@ namespace StudentsManagerData.Table
                    EqualityComparer<Person>.Default.Equals(person, other.person) &&
                    name == other.name &&
                    description == other.description;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(id, person_id, person, name, description);
         }
 
         public static bool operator ==(Phone? left, Phone? right)

@@ -104,10 +104,10 @@ namespace StudentsManagerData.Table
         public List<Diploma> Diplomas { get; set; }
 
         /// <summary>
-        /// Записать новые значения в поля
+        /// Загрузить значения в поля
         /// </summary>
         /// <param name="school">Откуда будут взяты значения полей</param>
-        public void Write(School school)
+        public void Load(School school)
         {
             FullName = school.full_name;
             ShortName = school.short_name;
@@ -129,11 +129,6 @@ namespace StudentsManagerData.Table
                    short_name == other.short_name &&
                    address == other.address &&
                    description == other.description;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(id, full_name, short_name, address, description);
         }
 
         public static bool operator ==(School? left, School? right)

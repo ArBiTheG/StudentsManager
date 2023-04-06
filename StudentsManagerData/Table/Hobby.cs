@@ -99,10 +99,10 @@ namespace StudentsManagerData.Table
         }
 
         /// <summary>
-        /// Записать новые значения в поля
+        /// Загрузить значения в поля
         /// </summary>
         /// <param name="hobby">Откуда будут взяты значения полей</param>
-        public void Write(Hobby hobby)
+        public void Load(Hobby hobby)
         {
             PersonId = hobby.person_id;
             Person = hobby.person;
@@ -124,11 +124,6 @@ namespace StudentsManagerData.Table
                    EqualityComparer<Person>.Default.Equals(person, other.person) &&
                    name == other.name &&
                    description == other.description;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(id, person_id, person, name, description);
         }
 
         public static bool operator ==(Hobby? left, Hobby? right)

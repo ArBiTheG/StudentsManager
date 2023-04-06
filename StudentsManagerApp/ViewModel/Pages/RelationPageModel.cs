@@ -54,7 +54,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             if (relationWindow.ShowDialog() == true)
             {
-                relation.Write(relationWindow.Relation);
+                relation.Load(relationWindow.Relation);
                 StudentsContext.Relations.Entry(relation).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }

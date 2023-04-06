@@ -177,10 +177,10 @@ namespace StudentsManagerData.Table
         }
 
         /// <summary>
-        /// Записать новые значения в поля
+        /// Загрузить значения в поля
         /// </summary>
         /// <param name="diploma">Откуда будут взяты значения полей</param>
-        public void Write(Diploma diploma)
+        public void Load(Diploma diploma)
         {
             PersonId = diploma.person_id;
             Person = diploma.person;
@@ -210,21 +210,6 @@ namespace StudentsManagerData.Table
                    school_id == other.school_id &&
                    EqualityComparer<School>.Default.Equals(school, other.school) &&
                    name == other.name;
-        }
-
-        public override int GetHashCode()
-        {
-            HashCode hash = new HashCode();
-            hash.Add(id);
-            hash.Add(person_id);
-            hash.Add(person);
-            hash.Add(series);
-            hash.Add(number);
-            hash.Add(given);
-            hash.Add(school_id);
-            hash.Add(school);
-            hash.Add(name);
-            return hash.ToHashCode();
         }
 
         public static bool operator ==(Diploma? left, Diploma? right)

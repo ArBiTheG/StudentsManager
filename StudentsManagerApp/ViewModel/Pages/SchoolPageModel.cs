@@ -54,7 +54,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             if (schoolWindow.ShowDialog() == true)
             {
-                school.Write(schoolWindow.School);
+                school.Load(schoolWindow.School);
                 StudentsContext.Schools.Entry(school).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }

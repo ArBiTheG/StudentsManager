@@ -54,7 +54,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             if (hobbyWindow.ShowDialog() == true)
             {
-                hobby.Write(hobbyWindow.Hobby);
+                hobby.Load(hobbyWindow.Hobby);
                 StudentsContext.Hobbies.Entry(hobby).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }

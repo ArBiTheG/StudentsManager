@@ -56,7 +56,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             if (emailWindow.ShowDialog() == true)
             {
-                email.Write(emailWindow.Email);
+                email.Load(emailWindow.Email);
                 StudentsContext.Emails.Entry(email).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }
