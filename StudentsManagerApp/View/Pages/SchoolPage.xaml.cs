@@ -21,11 +21,11 @@ namespace StudentsManagerApp.View.Pages
     /// </summary>
     public partial class SchoolPage : UserControl
     {
-        SchoolPageModel viewModel;
+        SchoolPageViewModel viewModel;
         public SchoolPage()
         {
             InitializeComponent();
-            viewModel = new SchoolPageModel();
+            viewModel = new SchoolPageViewModel();
             DataContext = viewModel;
         }
     }

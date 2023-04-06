@@ -16,7 +16,7 @@ using System.Windows.Threading;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class PersonPageModel : PageModel<Person>
+    public class PersonPageViewModel : BasePageViewModel<Person>
     {
         public override void Load()
         {

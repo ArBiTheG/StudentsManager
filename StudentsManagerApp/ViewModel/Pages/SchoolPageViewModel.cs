@@ -11,13 +11,13 @@ using StudentsManagerApp.View.DialogWindows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class HobbyPageModel : PageModel<Hobby>
+    public class SchoolPageViewModel : BasePageViewModel<School>
     {
         public override void Load()
         {
             StudentsContext = new StudentsContext();
-            StudentsContext.Hobbies.Load();
-            PrimaryList = StudentsContext.Hobbies.Local.ToObservableCollection();
+            StudentsContext.Schools.Load();
+            PrimaryList = StudentsContext.Schools.Local.ToObservableCollection();
         }
 
         public override void Close()
@@ -27,35 +27,35 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            HobbyWindow hobbyWindow = new HobbyWindow(new Hobby());
-            if (hobbyWindow.ShowDialog() == true)
+            SchoolWindow schoolWindow = new SchoolWindow(new School());
+            if (schoolWindow.ShowDialog() == true)
             {
-                Hobby hobby = hobbyWindow.Hobby;
-                StudentsContext.Hobbies.Add(hobby);
+                School school = schoolWindow.School;
+                StudentsContext.Schools.Add(school);
                 StudentsContext.SaveChanges();
             }
         }
 
         public override void DeleteField(object? selected_obj)
         {
-            Hobby? hobby = selected_obj as Hobby;
-            if (hobby == null) return;
-            StudentsContext.Hobbies.Remove(hobby);
+            School? school = selected_obj as School;
+            if (school == null) return;
+            StudentsContext.Schools.Remove(school);
             StudentsContext.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
         {
-            Hobby? hobby = selected_obj as Hobby;
-            if (hobby == null) return;
-            Hobby vm = hobby.Clone() as Hobby;
+            School? school = selected_obj as School;
+            if (school == null) return;
+            School vm = school.Clone() as School;
 
-            HobbyWindow hobbyWindow = new HobbyWindow(vm);
+            SchoolWindow schoolWindow = new SchoolWindow(vm);
 
-            if (hobbyWindow.ShowDialog() == true)
+            if (schoolWindow.ShowDialog() == true)
             {
-                hobby.Load(hobbyWindow.Hobby);
-                StudentsContext.Hobbies.Entry(hobby).State = EntityState.Modified;
+                school.Load(schoolWindow.School);
+                StudentsContext.Schools.Entry(school).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }
         }

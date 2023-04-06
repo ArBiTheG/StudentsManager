@@ -21,11 +21,11 @@ namespace StudentsManagerApp.View.Pages
     /// </summary>
     public partial class GroupPage : UserControl
     {
-        GroupPageModel viewModel;
+        GroupPageViewModel viewModel;
         public GroupPage()
         {
             InitializeComponent();
-            viewModel = new GroupPageModel();
+            viewModel = new GroupPageViewModel();
             DataContext = viewModel;
         }
     }

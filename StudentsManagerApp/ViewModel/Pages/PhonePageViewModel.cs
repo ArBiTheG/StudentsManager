@@ -11,52 +11,55 @@ using StudentsManagerApp.View.DialogWindows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class DiplomaPageModel : PageModel<Diploma>
+    public class PhonePageViewModel : BasePageViewModel<Phone>
     {
         public override void Load()
         {
             StudentsContext = new StudentsContext();
-            StudentsContext.Diplomas.Load();
-            PrimaryList = StudentsContext.Diplomas.Local.ToObservableCollection();
+            StudentsContext.Phones.Load();
+            PrimaryList = StudentsContext.Phones.Local.ToObservableCollection();
         }
+
         public override void Close()
         {
             throw new NotImplementedException();
         }
 
+
         public override void AddField(object? obj)
         {
-            DiplomaWindow diplomaWindow = new DiplomaWindow(new Diploma());
-            if (diplomaWindow.ShowDialog() == true)
+            PhoneWindow phoneWindow = new PhoneWindow(new Phone());
+            if (phoneWindow.ShowDialog() == true)
             {
-                Diploma diploma = diplomaWindow.Diploma;
-                StudentsContext.Diplomas.Add(diploma);
+                Phone phone = phoneWindow.Phone;
+                StudentsContext.Phones.Add(phone);
                 StudentsContext.SaveChanges();
             }
         }
 
         public override void DeleteField(object? selected_obj)
         {
-            Diploma? diploma = selected_obj as Diploma;
-            if (diploma == null) return;
-            StudentsContext.Diplomas.Remove(diploma);
+            Phone? phone = selected_obj as Phone;
+            if (phone == null) return;
+            StudentsContext.Phones.Remove(phone);
             StudentsContext.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
         {
-            Diploma? diploma = selected_obj as Diploma;
-            if (diploma == null) return;
-            Diploma vm = diploma.Clone() as Diploma;
+            Phone? phone = selected_obj as Phone;
+            if (phone == null) return;
+            Phone vm = phone.Clone() as Phone;
 
-            DiplomaWindow diplomaWindow = new DiplomaWindow(vm);
+            PhoneWindow phoneWindow = new PhoneWindow(vm);
 
-            if (diplomaWindow.ShowDialog() == true)
+            if (phoneWindow.ShowDialog() == true)
             {
-                diploma.Load(diplomaWindow.Diploma);
-                StudentsContext.Diplomas.Entry(diploma).State = EntityState.Modified;
+                phone.Load(phoneWindow.Phone);
+                StudentsContext.Phones.Entry(phone).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }
         }
+
     }
 }

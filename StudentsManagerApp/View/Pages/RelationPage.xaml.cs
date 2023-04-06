@@ -21,11 +21,11 @@ namespace StudentsManagerApp.View.Pages
     /// </summary>
     public partial class RelationPage : UserControl
     {
-        RelationPageModel viewModel;
+        RelationPageViewModel viewModel;
         public RelationPage()
         {
             InitializeComponent();
-            viewModel = new RelationPageModel();
+            viewModel = new RelationPageViewModel();
             DataContext = viewModel;
         }
     }

@@ -21,11 +21,11 @@ namespace StudentsManagerApp.View.Pages
     /// </summary>
     public partial class PhonePage : UserControl
     {
-        PhonePageModel viewModel;
+        PhonePageViewModel viewModel;
         public PhonePage()
         {
             InitializeComponent();
-            viewModel = new PhonePageModel();
+            viewModel = new PhonePageViewModel();
             DataContext = viewModel;
         }
 

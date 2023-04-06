@@ -11,7 +11,7 @@ using StudentsManagerApp.View.DialogWindows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class RelationPageModel : PageModel<Relation>
+    public class RelationPageViewModel : BasePageViewModel<Relation>
     {
         public override void Load()
         {

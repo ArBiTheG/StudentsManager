@@ -21,11 +21,11 @@ namespace StudentsManagerApp.View.Pages
     /// </summary>
     public partial class EmailPage : UserControl
     {
-        EmailPageModel viewModel;
+        EmailPageViewModel viewModel;
         public EmailPage()
         {
             InitializeComponent();
-            viewModel = new EmailPageModel();
+            viewModel = new EmailPageViewModel();
             DataContext = viewModel;
         }
     }

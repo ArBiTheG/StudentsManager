@@ -11,49 +11,51 @@ using StudentsManagerApp.View.DialogWindows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class GroupPageModel : PageModel<Group>
+    public class HobbyPageViewModel : BasePageViewModel<Hobby>
     {
         public override void Load()
         {
             StudentsContext = new StudentsContext();
-            StudentsContext.Groups.Load();
-            PrimaryList = StudentsContext.Groups.Local.ToObservableCollection();
+            StudentsContext.Hobbies.Load();
+            PrimaryList = StudentsContext.Hobbies.Local.ToObservableCollection();
         }
+
         public override void Close()
         {
             throw new NotImplementedException();
         }
+
         public override void AddField(object? obj)
         {
-            GroupWindow groupWindow = new GroupWindow(new Group());
-            if (groupWindow.ShowDialog() == true)
+            HobbyWindow hobbyWindow = new HobbyWindow(new Hobby());
+            if (hobbyWindow.ShowDialog() == true)
             {
-                Group group = groupWindow.Group;
-                StudentsContext.Groups.Add(group);
+                Hobby hobby = hobbyWindow.Hobby;
+                StudentsContext.Hobbies.Add(hobby);
                 StudentsContext.SaveChanges();
             }
         }
 
         public override void DeleteField(object? selected_obj)
         {
-            Group? group = selected_obj as Group;
-            if (group == null) return;
-            StudentsContext.Groups.Remove(group);
+            Hobby? hobby = selected_obj as Hobby;
+            if (hobby == null) return;
+            StudentsContext.Hobbies.Remove(hobby);
             StudentsContext.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
         {
-            Group? group = selected_obj as Group;
-            if (group == null) return;
-            Group vm = group.Clone() as Group;
+            Hobby? hobby = selected_obj as Hobby;
+            if (hobby == null) return;
+            Hobby vm = hobby.Clone() as Hobby;
 
-            GroupWindow groupWindow = new GroupWindow(vm);
+            HobbyWindow hobbyWindow = new HobbyWindow(vm);
 
-            if (groupWindow.ShowDialog() == true)
+            if (hobbyWindow.ShowDialog() == true)
             {
-                group.Load(groupWindow.Group);
-                StudentsContext.Groups.Entry(group).State = EntityState.Modified;
+                hobby.Load(hobbyWindow.Hobby);
+                StudentsContext.Hobbies.Entry(hobby).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }
         }

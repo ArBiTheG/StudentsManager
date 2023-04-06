@@ -21,11 +21,11 @@ namespace StudentsManagerApp.View.Pages
     /// </summary>
     public partial class SpecialtyPage : UserControl
     {
-        SpecialtyPageModel viewModel;
+        SpecialtyPageViewModel viewModel;
         public SpecialtyPage()
         {
             InitializeComponent();
-            viewModel = new SpecialtyPageModel();
+            viewModel = new SpecialtyPageViewModel();
             DataContext = viewModel;
         }
 

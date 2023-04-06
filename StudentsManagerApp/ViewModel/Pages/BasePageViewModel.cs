@@ -14,7 +14,7 @@ using System.Windows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public abstract class PageModel<TEntity>: INotifyPropertyChanged
+    public abstract class BasePageViewModel<TEntity>: INotifyPropertyChanged
     {
         bool loaded;
         ObservableCollection<TEntity> primary_list;
@@ -26,7 +26,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         protected StudentsContext StudentsContext;
 
-        protected PageModel()
+        protected BasePageViewModel()
         {
             Task.Run(()=> {
                 Loaded = false;

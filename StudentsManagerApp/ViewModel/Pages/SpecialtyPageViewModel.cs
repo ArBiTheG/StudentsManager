@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class SpecialtyPageModel : PageModel<Specialty>
+    public class SpecialtyPageViewModel : BasePageViewModel<Specialty>
     {
         public override void Load()
         {

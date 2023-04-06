@@ -21,11 +21,11 @@ namespace StudentsManagerApp.View.Pages
     /// </summary>
     public partial class HobbyPage : UserControl
     {
-        HobbyPageModel viewModel;
+        HobbyPageViewModel viewModel;
         public HobbyPage()
         {
             InitializeComponent();
-            viewModel = new HobbyPageModel();
+            viewModel = new HobbyPageViewModel();
             DataContext = viewModel;
         }
     }

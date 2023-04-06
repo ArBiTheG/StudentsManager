@@ -7,17 +7,18 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class StudentPageModel: PageModel<Student>
+    public class EmailPageViewModel : BasePageViewModel<Email>
     {
         public override void Load()
         {
             StudentsContext = new StudentsContext();
-            StudentsContext.Students.Load();
-            PrimaryList = StudentsContext.Students.Local.ToObservableCollection();
+            StudentsContext.Emails.Load();
+            PrimaryList = StudentsContext.Emails.Local.ToObservableCollection();
         }
 
         public override void Close()
@@ -25,40 +26,40 @@ namespace StudentsManagerApp.ViewModel.Pages
             throw new NotImplementedException();
         }
 
+
         public override void AddField(object? obj)
         {
-            StudentWindow studentWindow = new StudentWindow(new Student());
-            if (studentWindow.ShowDialog() == true)
+            EmailWindow emailWindow = new EmailWindow(new Email());
+            if (emailWindow.ShowDialog() == true)
             {
-                Student student = studentWindow.Student;
-                StudentsContext.Students.Add(student);
+                Email email = emailWindow.Email;
+                StudentsContext.Emails.Add(email);
                 StudentsContext.SaveChanges();
             }
         }
 
         public override void DeleteField(object? selected_obj)
         {
-            Student? student = selected_obj as Student;
-            if (student == null) return;
-            StudentsContext.Students.Remove(student);
+            Email? email = selected_obj as Email;
+            if (email == null) return;
+            StudentsContext.Emails.Remove(email);
             StudentsContext.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
         {
-            Student? student = selected_obj as Student;
-            if (student == null) return;
-            Student vm = student.Clone() as Student;
+            Email? email = selected_obj as Email;
+            if (email == null) return;
+            Email vm = email.Clone() as Email;
 
-            StudentWindow studentWindow = new StudentWindow(vm);
+            EmailWindow emailWindow = new EmailWindow(vm);
 
-            if (studentWindow.ShowDialog() == true)
+            if (emailWindow.ShowDialog() == true)
             {
-                student.Load(studentWindow.Student);
-                StudentsContext.Students.Entry(student).State = EntityState.Modified;
+                email.Load(emailWindow.Email);
+                StudentsContext.Emails.Entry(email).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }
         }
-
     }
 }
