@@ -1,6 +1,8 @@
-﻿using StudentsManagerData.Table;
+﻿using StudentsManagerApp.ViewModel.Dialogs;
+using StudentsManagerData.Table;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,12 +22,12 @@ namespace StudentsManagerApp.View.DialogWindows
     /// </summary>
     public partial class PhoneWindow : Window
     {
-        public Phone Phone { get; private set; }
-        public PhoneWindow(Phone phone)
+        public PhoneDialogViewModel ViewModel { get; private set; }
+        public PhoneWindow(Phone phone, ObservableCollection<Person> persons)
         {
             InitializeComponent();
-            Phone = phone;
-            DataContext = Phone;
+            ViewModel = new PhoneDialogViewModel(phone, persons);
+            DataContext = ViewModel;
         }
         void Accept_Click(object sender, RoutedEventArgs e)
         {

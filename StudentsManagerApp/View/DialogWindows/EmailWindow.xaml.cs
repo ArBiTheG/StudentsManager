@@ -1,6 +1,8 @@
-﻿using StudentsManagerData.Table;
+﻿using StudentsManagerApp.ViewModel.Dialogs;
+using StudentsManagerData.Table;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,12 +22,12 @@ namespace StudentsManagerApp.View.DialogWindows
     /// </summary>
     public partial class EmailWindow : Window
     {
-        public Email Email { get; private set; }
-        public EmailWindow(Email email)
+        public EmailDialogViewModel ViewModel { get; private set; }
+        public EmailWindow(Email email, ObservableCollection<Person> persons)
         {
             InitializeComponent();
-            Email = email;
-            DataContext = Email;
+            ViewModel = new EmailDialogViewModel(email, persons);
+            DataContext = ViewModel;
         }
 
         void Accept_Click(object sender, RoutedEventArgs e)

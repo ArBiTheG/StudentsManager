@@ -14,11 +14,14 @@ namespace StudentsManagerApp.ViewModel.Pages
 {
     public class EmailPageViewModel : BasePageViewModel<Email>
     {
+        private ObservableCollection<Person> persons;
         public override void Load()
         {
             StudentsContext = new StudentsContext();
             StudentsContext.Emails.Load();
+            StudentsContext.Persons.Load();
             PrimaryList = StudentsContext.Emails.Local.ToObservableCollection();
+            persons = StudentsContext.Persons.Local.ToObservableCollection();
         }
 
         public override void Close()
@@ -29,10 +32,10 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            EmailWindow emailWindow = new EmailWindow(new Email());
+            EmailWindow emailWindow = new EmailWindow(new Email(), persons);
             if (emailWindow.ShowDialog() == true)
             {
-                Email email = emailWindow.Email;
+                Email email = emailWindow.ViewModel.Email;
                 StudentsContext.Emails.Add(email);
                 StudentsContext.SaveChanges();
             }
@@ -52,11 +55,11 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (email == null) return;
             Email vm = email.Clone() as Email;
 
-            EmailWindow emailWindow = new EmailWindow(vm);
+            EmailWindow emailWindow = new EmailWindow(vm, persons);
 
             if (emailWindow.ShowDialog() == true)
             {
-                email.Load(emailWindow.Email);
+                email.Load(emailWindow.ViewModel.Email);
                 StudentsContext.Emails.Entry(email).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }

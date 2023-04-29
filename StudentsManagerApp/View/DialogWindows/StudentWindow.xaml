@@ -65,16 +65,16 @@
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Группа"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Дата поступления"/>
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Отчислен"/>
-                <TextBlock Grid.Row="4" Grid.Column="0" Text="Дата отчисления"/>
-                <TextBlock Grid.Row="5" Grid.Column="0" Text="Причина отчисления"/>
-                <!--ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding Person}">
-                </ComboBox-->
-                <!--ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding Person}">
-                </ComboBox-->
-                <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding DateEntry}"/>
-                <CheckBox x:Name="checkBox" Grid.Row="3" Grid.Column="1" IsChecked="{Binding IsEscaped}"/>
-                <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding DateEscape}" Visibility="{Binding IsChecked, ElementName=checkBox}"/>
-                <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Reason}" Visibility="{Binding IsChecked, ElementName=checkBox}"/>
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Дата отчисления" IsEnabled="{Binding IsChecked, ElementName=checkBox}"/>
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Причина отчисления" IsEnabled="{Binding IsChecked, ElementName=checkBox}"/>
+                <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding Student.Person}" ItemsSource="{Binding Persons}" DisplayMemberPath="FullName">
+                </ComboBox>
+                <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding Student.Group}" ItemsSource="{Binding Groups}" DisplayMemberPath="Name">
+                </ComboBox>
+                <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Student.DateEntry}"/>
+                <CheckBox x:Name="checkBox" Grid.Row="3" Grid.Column="1" IsChecked="{Binding Student.IsEscaped}"/>
+                <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Student.DateEscape}" IsEnabled="{Binding IsChecked, ElementName=checkBox}"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Student.Reason}" IsEnabled="{Binding IsChecked, ElementName=checkBox}"/>
             </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal">

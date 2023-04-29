@@ -1,6 +1,8 @@
-﻿using StudentsManagerData.Table;
+﻿using StudentsManagerApp.ViewModel.Dialogs;
+using StudentsManagerData.Table;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,12 +22,12 @@ namespace StudentsManagerApp.View.DialogWindows
     /// </summary>
     public partial class GroupWindow : Window
     {
-        public Group Group { get; private set; }
-        public GroupWindow(Group group)
+        public GroupDialogViewModel ViewModel { get; private set; }
+        public GroupWindow(Group group, ObservableCollection<Specialty> specialties)
         {
             InitializeComponent();
-            Group = group;
-            DataContext = Group;
+            ViewModel = new GroupDialogViewModel(group, specialties);
+            DataContext = ViewModel;
         }
 
         void Accept_Click(object sender, RoutedEventArgs e)

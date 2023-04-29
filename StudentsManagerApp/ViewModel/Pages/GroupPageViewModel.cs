@@ -13,11 +13,14 @@ namespace StudentsManagerApp.ViewModel.Pages
 {
     public class GroupPageViewModel : BasePageViewModel<Group>
     {
+        private ObservableCollection<Specialty> specialties;
         public override void Load()
         {
             StudentsContext = new StudentsContext();
             StudentsContext.Groups.Load();
+            StudentsContext.Specialties.Load();
             PrimaryList = StudentsContext.Groups.Local.ToObservableCollection();
+            specialties = StudentsContext.Specialties.Local.ToObservableCollection();
         }
         public override void Close()
         {
@@ -25,10 +28,10 @@ namespace StudentsManagerApp.ViewModel.Pages
         }
         public override void AddField(object? obj)
         {
-            GroupWindow groupWindow = new GroupWindow(new Group());
+            GroupWindow groupWindow = new GroupWindow(new Group(), specialties);
             if (groupWindow.ShowDialog() == true)
             {
-                Group group = groupWindow.Group;
+                Group group = groupWindow.ViewModel.Group;
                 StudentsContext.Groups.Add(group);
                 StudentsContext.SaveChanges();
             }
@@ -48,11 +51,11 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (group == null) return;
             Group vm = group.Clone() as Group;
 
-            GroupWindow groupWindow = new GroupWindow(vm);
+            GroupWindow groupWindow = new GroupWindow(vm, specialties);
 
             if (groupWindow.ShowDialog() == true)
             {
-                group.Load(groupWindow.Group);
+                group.Load(groupWindow.ViewModel.Group);
                 StudentsContext.Groups.Entry(group).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }

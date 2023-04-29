@@ -30,7 +30,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             SpecialtyWindow specialtyWindow = new SpecialtyWindow(new Specialty());
             if (specialtyWindow.ShowDialog() == true)
             {
-                Specialty specialty = specialtyWindow.Specialty;
+                Specialty specialty = specialtyWindow.ViewModel.Specialty;
                 StudentsContext.Specialties.Add(specialty);
                 StudentsContext.SaveChanges();
             }
@@ -54,7 +54,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             if (specialtyWindow.ShowDialog() == true)
             {
-                specialty.Load(specialtyWindow.Specialty);
+                specialty.Load(specialtyWindow.ViewModel.Specialty);
                 StudentsContext.Entry(specialty).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }

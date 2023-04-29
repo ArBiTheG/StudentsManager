@@ -34,7 +34,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             PersonWindow personWindow = new PersonWindow(new Person());
             if (personWindow.ShowDialog() == true)
             {
-                Person person = personWindow.Person;
+                Person person = personWindow.ViewModel.Person;
                 StudentsContext.Persons.Add(person);
                 StudentsContext.SaveChanges();
             }
@@ -58,7 +58,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             if (personWindow.ShowDialog() == true)
             {
-                person.Load(personWindow.Person);
+                person.Load(personWindow.ViewModel.Person);
                 StudentsContext.Persons.Entry(person).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }

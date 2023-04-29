@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
 namespace StudentsManagerData.Table
@@ -59,6 +60,7 @@ namespace StudentsManagerData.Table
             {
                 first_name = value;
                 OnPropertyChanged("FirstName");
+                OnPropertyChanged("FullName");
             }
         }
         /// <summary>
@@ -73,6 +75,7 @@ namespace StudentsManagerData.Table
             {
                 middle_name = value;
                 OnPropertyChanged("MiddleName");
+                OnPropertyChanged("FullName");
             } 
         }
         /// <summary>
@@ -87,6 +90,7 @@ namespace StudentsManagerData.Table
             { 
                 last_name = value;
                 OnPropertyChanged("LastName");
+                OnPropertyChanged("FullName");
             }
         }
         /// <summary>
@@ -186,6 +190,17 @@ namespace StudentsManagerData.Table
             { 
                 about = value;
                 OnPropertyChanged("About");
+            }
+        }
+        /// <summary>
+        /// Полное имя
+        /// </summary>
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                return $"{last_name} {first_name} {middle_name}";
             }
         }
 

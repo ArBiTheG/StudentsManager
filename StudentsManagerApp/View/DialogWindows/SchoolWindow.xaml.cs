@@ -1,4 +1,5 @@
-﻿using StudentsManagerData.Table;
+﻿using StudentsManagerApp.ViewModel.Dialogs;
+using StudentsManagerData.Table;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,12 @@ namespace StudentsManagerApp.View.DialogWindows
     /// </summary>
     public partial class SchoolWindow : Window
     {
-        public School School { get; private set; }
+        public SchoolDialogViewModel ViewModel { get; private set; }
         public SchoolWindow(School school)
         {
             InitializeComponent();
-            School = school;
-            DataContext = School;
+            ViewModel = new SchoolDialogViewModel(school);
+            DataContext = ViewModel;
         }
         void Accept_Click(object sender, RoutedEventArgs e)
         {

@@ -63,7 +63,7 @@ namespace StudentsManagerData.Table
             {
                 return parent; 
             }
-            private set
+            set
             {
                 parent = value;
                 OnPropertyChanged("Parent");
@@ -92,7 +92,7 @@ namespace StudentsManagerData.Table
             {
                 return child;
             } 
-            private set
+            set
             {
                 child = value;
                 OnPropertyChanged("Child");

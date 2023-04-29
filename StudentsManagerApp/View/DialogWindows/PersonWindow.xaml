@@ -76,19 +76,19 @@
                 <TextBlock Grid.Row="7" Grid.Column="0" Text="Номер паспорта"/>
                 <TextBlock Grid.Row="8" Grid.Column="0" Text="Дата выдачи"/>
                 <TextBlock Grid.Row="9" Grid.Column="0" Text="Кем выдан"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding LastName}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding FirstName}"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding MiddleName}"/>
-                <ComboBox Grid.Row="3" Grid.Column="1" SelectedIndex="{Binding Sex}">
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Person.LastName}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Person.FirstName}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Person.MiddleName}"/>
+                <ComboBox Grid.Row="3" Grid.Column="1" SelectedIndex="{Binding Person.Sex}">
                     <ComboBoxItem Content="Мужской"/>
                     <ComboBoxItem Content="Женский"/>
                 </ComboBox>
-                <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Birthday}"/>
-                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding About}"/>
-                <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding SeriesPassport}"/>
-                <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding NumberPassport}"/>
-                <DatePicker Grid.Row="8" Grid.Column="1" SelectedDate="{Binding DatePassport}"/>
-                <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding GivenPassport}"/>
+                <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Person.Birthday}"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Person.About}"/>
+                <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Person.SeriesPassport}"/>
+                <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Person.NumberPassport}"/>
+                <DatePicker Grid.Row="8" Grid.Column="1" SelectedDate="{Binding Person.DatePassport}"/>
+                <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Person.GivenPassport}"/>
             </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal">

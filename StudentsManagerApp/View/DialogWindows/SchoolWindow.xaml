@@ -63,10 +63,10 @@
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Сокращённое наименование"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Адрес школы"/>
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Описание"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding FullName}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ShortName}"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Address}"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Description}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding School.FullName}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding School.ShortName}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding School.Address}"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding School.Description}"/>
             </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal">

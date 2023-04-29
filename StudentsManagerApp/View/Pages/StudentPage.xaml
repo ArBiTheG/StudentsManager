@@ -40,8 +40,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding Code}" FontSize="16" />
-                        <TextBlock Text="{Binding Name}" FontSize="16" />
+                        <TextBlock Text="{Binding FullName}" FontSize="16" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

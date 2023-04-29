@@ -13,11 +13,18 @@ namespace StudentsManagerApp.ViewModel.Pages
 {
     public class DiplomaPageViewModel : BasePageViewModel<Diploma>
     {
+        private ObservableCollection<Person> persons;
+        private ObservableCollection<School> schools;
         public override void Load()
         {
             StudentsContext = new StudentsContext();
             StudentsContext.Diplomas.Load();
+            StudentsContext.Persons.Load();
+            StudentsContext.Schools.Load();
             PrimaryList = StudentsContext.Diplomas.Local.ToObservableCollection();
+            persons = StudentsContext.Persons.Local.ToObservableCollection();
+            schools = StudentsContext.Schools.Local.ToObservableCollection();
+
         }
         public override void Close()
         {
@@ -26,10 +33,10 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            DiplomaWindow diplomaWindow = new DiplomaWindow(new Diploma());
+            DiplomaWindow diplomaWindow = new DiplomaWindow(new Diploma(), persons, schools);
             if (diplomaWindow.ShowDialog() == true)
             {
-                Diploma diploma = diplomaWindow.Diploma;
+                Diploma diploma = diplomaWindow.ViewModel.Diploma;
                 StudentsContext.Diplomas.Add(diploma);
                 StudentsContext.SaveChanges();
             }
@@ -49,11 +56,11 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (diploma == null) return;
             Diploma vm = diploma.Clone() as Diploma;
 
-            DiplomaWindow diplomaWindow = new DiplomaWindow(vm);
+            DiplomaWindow diplomaWindow = new DiplomaWindow(vm, persons, schools);
 
             if (diplomaWindow.ShowDialog() == true)
             {
-                diploma.Load(diplomaWindow.Diploma);
+                diploma.Load(diplomaWindow.ViewModel.Diploma);
                 StudentsContext.Diplomas.Entry(diploma).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }

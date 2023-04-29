@@ -61,11 +61,11 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Обучающийся"/>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Ответственный за обучающегося"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Кем является для обучающегося"/>
-                <!--ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding Child}">
-                </ComboBox-->
-                <!--ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding Parent}">
-                </ComboBox-->
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Who}"/>
+                <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding Relation.Child}" ItemsSource="{Binding Childs}" DisplayMemberPath="FullName">
+                </ComboBox>
+                <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding Relation.Parent}" ItemsSource="{Binding Parents}" DisplayMemberPath="FullName">
+                </ComboBox>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Relation.Who}"/>
             </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal">

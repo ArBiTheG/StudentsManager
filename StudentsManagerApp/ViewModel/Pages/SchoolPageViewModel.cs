@@ -30,7 +30,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             SchoolWindow schoolWindow = new SchoolWindow(new School());
             if (schoolWindow.ShowDialog() == true)
             {
-                School school = schoolWindow.School;
+                School school = schoolWindow.ViewModel.School;
                 StudentsContext.Schools.Add(school);
                 StudentsContext.SaveChanges();
             }
@@ -54,7 +54,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             if (schoolWindow.ShowDialog() == true)
             {
-                school.Load(schoolWindow.School);
+                school.Load(schoolWindow.ViewModel.School);
                 StudentsContext.Schools.Entry(school).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }

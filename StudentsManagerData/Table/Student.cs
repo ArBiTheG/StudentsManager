@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -69,10 +70,11 @@ namespace StudentsManagerData.Table
             { 
                 return person; 
             } 
-            private set 
+            set 
             { 
                 person = value;
                 OnPropertyChanged("Person");
+                OnPropertyChanged("FullName");
             } 
         }
 
@@ -98,10 +100,11 @@ namespace StudentsManagerData.Table
             { 
                 return group; 
             } 
-            private set 
+            set 
             { 
                 group = value;
                 OnPropertyChanged("Group");
+                OnPropertyChanged("FullName");
             } 
         }
         /// <summary>
@@ -158,6 +161,18 @@ namespace StudentsManagerData.Table
             { 
                 reason = value;
                 OnPropertyChanged("Reason");
+            }
+        }
+
+        /// <summary>
+        /// Полное имя
+        /// </summary>
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                return $"{Person.FullName} - {Group.Name}";
             }
         }
 

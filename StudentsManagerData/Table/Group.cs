@@ -82,7 +82,7 @@ namespace StudentsManagerData.Table
             { 
                 return specialty; 
             } 
-            private set 
+            set 
             { 
                 specialty = value;
                 OnPropertyChanged("Specialy");

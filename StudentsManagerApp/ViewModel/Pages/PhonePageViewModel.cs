@@ -13,11 +13,14 @@ namespace StudentsManagerApp.ViewModel.Pages
 {
     public class PhonePageViewModel : BasePageViewModel<Phone>
     {
+        private ObservableCollection<Person> persons;
         public override void Load()
         {
             StudentsContext = new StudentsContext();
             StudentsContext.Phones.Load();
+            StudentsContext.Persons.Load();
             PrimaryList = StudentsContext.Phones.Local.ToObservableCollection();
+            persons = StudentsContext.Persons.Local.ToObservableCollection();
         }
 
         public override void Close()
@@ -28,10 +31,10 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            PhoneWindow phoneWindow = new PhoneWindow(new Phone());
+            PhoneWindow phoneWindow = new PhoneWindow(new Phone(), persons);
             if (phoneWindow.ShowDialog() == true)
             {
-                Phone phone = phoneWindow.Phone;
+                Phone phone = phoneWindow.ViewModel.Phone;
                 StudentsContext.Phones.Add(phone);
                 StudentsContext.SaveChanges();
             }
@@ -51,11 +54,11 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (phone == null) return;
             Phone vm = phone.Clone() as Phone;
 
-            PhoneWindow phoneWindow = new PhoneWindow(vm);
+            PhoneWindow phoneWindow = new PhoneWindow(vm, persons);
 
             if (phoneWindow.ShowDialog() == true)
             {
-                phone.Load(phoneWindow.Phone);
+                phone.Load(phoneWindow.ViewModel.Phone);
                 StudentsContext.Phones.Entry(phone).State = EntityState.Modified;
                 StudentsContext.SaveChanges();
             }

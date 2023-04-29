@@ -64,7 +64,7 @@ namespace StudentsManagerData.Table
             {
                 return person;
             }
-            private set
+            set
             {
                 person = value;
                 OnPropertyChanged("Person");

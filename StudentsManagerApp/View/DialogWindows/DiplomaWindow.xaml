@@ -67,14 +67,14 @@
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Дата вручения"/>
                 <TextBlock Grid.Row="4" Grid.Column="0" Text="Школа"/>
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Наименование документа"/>
-                <!--ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding Person}">
-                </ComboBox-->
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Series}"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Number}"/>
-                <DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding Given}"/>
-                <!--ComboBox Grid.Row="4" Grid.Column="1" SelectedItem="{Binding School}">
-                </ComboBox-->
-                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Name}"/>
+                <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding Diploma.Person}" ItemsSource="{Binding Persons}" DisplayMemberPath="FullName">
+                </ComboBox>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Diploma.Series}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Diploma.Number}"/>
+                <DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding Diploma.Given}"/>
+                <ComboBox Grid.Row="4" Grid.Column="1" SelectedItem="{Binding Diploma.School}" ItemsSource="{Binding Schools}" DisplayMemberPath="ShortName">
+                </ComboBox>
+                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Diploma.Name}"/>
             </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal">

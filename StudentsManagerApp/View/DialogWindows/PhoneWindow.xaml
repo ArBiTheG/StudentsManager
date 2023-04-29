@@ -62,10 +62,10 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Номер телефона"/>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Описание"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Владелец"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Description}"/>
-                <!--ComboBox Grid.Row="2" Grid.Column="1" SelectedItem="{Binding Person}">
-                </ComboBox-->
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Phone.Name}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Phone.Description}"/>
+                <ComboBox Grid.Row="2" Grid.Column="1" SelectedItem="{Binding Phone.Person}" ItemsSource="{Binding Persons}" DisplayMemberPath="FullName">
+                </ComboBox>
             </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
