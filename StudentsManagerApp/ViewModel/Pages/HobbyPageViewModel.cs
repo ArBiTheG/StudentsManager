@@ -11,16 +11,27 @@ using StudentsManagerApp.View.DialogWindows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class HobbyPageViewModel : BasePageViewModel<Hobby>
+    public class HobbyPageViewModel : BasePageViewModel
     {
+        private IStudentsData StudentsData;
+        private ObservableCollection<Hobby> hobbies;
         private ObservableCollection<Person> persons;
         public override void Load()
         {
-            StudentsContext = new StudentsContext();
-            StudentsContext.Hobbies.Load();
-            StudentsContext.Persons.Load();
-            PrimaryList = StudentsContext.Hobbies.Local.ToObservableCollection();
-            persons = StudentsContext.Persons.Local.ToObservableCollection();
+            StudentsData = new StudentsDataProxy();
+            // Подгружаем второстепенные данные
+            persons = StudentsData.GetPersons();
+            // Подгружаем основные данные
+            Hobbies = StudentsData.GetHobbies();
+        }
+        public ObservableCollection<Hobby> Hobbies
+        {
+            get { return hobbies; }
+            set
+            {
+                hobbies = value;
+                OnPropertyChanged(nameof(Hobbies));
+            }
         }
 
         public override void Close()
@@ -34,8 +45,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (hobbyWindow.ShowDialog() == true)
             {
                 Hobby hobby = hobbyWindow.ViewModel.Hobby;
-                StudentsContext.Hobbies.Add(hobby);
-                StudentsContext.SaveChanges();
+                StudentsData.Add(hobby);
+                StudentsData.SaveChanges();
             }
         }
 
@@ -43,8 +54,8 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             Hobby? hobby = selected_obj as Hobby;
             if (hobby == null) return;
-            StudentsContext.Hobbies.Remove(hobby);
-            StudentsContext.SaveChanges();
+            StudentsData.Remove(hobby);
+            StudentsData.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
@@ -58,8 +69,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (hobbyWindow.ShowDialog() == true)
             {
                 hobby.Load(hobbyWindow.ViewModel.Hobby);
-                StudentsContext.Hobbies.Entry(hobby).State = EntityState.Modified;
-                StudentsContext.SaveChanges();
+                StudentsData.Edit(hobby);
+                StudentsData.SaveChanges();
             }
         }
 

@@ -8,23 +8,34 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using StudentsManagerApp.View.DialogWindows;
+using System.Diagnostics;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class DiplomaPageViewModel : BasePageViewModel<Diploma>
+    public class DiplomaPageViewModel : BasePageViewModel
     {
+        private IStudentsData StudentsData;
+
+        private ObservableCollection<Diploma> diplomas;
         private ObservableCollection<Person> persons;
         private ObservableCollection<School> schools;
         public override void Load()
         {
-            StudentsContext = new StudentsContext();
-            StudentsContext.Diplomas.Load();
-            StudentsContext.Persons.Load();
-            StudentsContext.Schools.Load();
-            PrimaryList = StudentsContext.Diplomas.Local.ToObservableCollection();
-            persons = StudentsContext.Persons.Local.ToObservableCollection();
-            schools = StudentsContext.Schools.Local.ToObservableCollection();
-
+            StudentsData = new StudentsDataProxy();
+            // Подгружаем второстепенные данные
+            persons = StudentsData.GetPersons();
+            schools = StudentsData.GetSchools();
+            // Подгружаем основные
+            Diplomas = StudentsData.GetDiplomas();
+        }
+        public ObservableCollection<Diploma> Diplomas
+        {
+            get { return diplomas; }
+            set
+            {
+                diplomas = value;
+                OnPropertyChanged(nameof(Diplomas));
+            }
         }
         public override void Close()
         {
@@ -37,8 +48,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (diplomaWindow.ShowDialog() == true)
             {
                 Diploma diploma = diplomaWindow.ViewModel.Diploma;
-                StudentsContext.Diplomas.Add(diploma);
-                StudentsContext.SaveChanges();
+                StudentsData.Add(diploma);
+                StudentsData.SaveChanges();
             }
         }
 
@@ -46,8 +57,8 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             Diploma? diploma = selected_obj as Diploma;
             if (diploma == null) return;
-            StudentsContext.Diplomas.Remove(diploma);
-            StudentsContext.SaveChanges();
+            StudentsData.Remove(diploma);
+            StudentsData.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
@@ -61,8 +72,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (diplomaWindow.ShowDialog() == true)
             {
                 diploma.Load(diplomaWindow.ViewModel.Diploma);
-                StudentsContext.Diplomas.Entry(diploma).State = EntityState.Modified;
-                StudentsContext.SaveChanges();
+                StudentsData.Edit(diploma);
+                StudentsData.SaveChanges();
             }
         }
     }

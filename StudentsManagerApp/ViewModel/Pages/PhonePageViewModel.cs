@@ -11,16 +11,27 @@ using StudentsManagerApp.View.DialogWindows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class PhonePageViewModel : BasePageViewModel<Phone>
+    public class PhonePageViewModel : BasePageViewModel
     {
+        private IStudentsData StudentsData;
+        private ObservableCollection<Phone> phones;
         private ObservableCollection<Person> persons;
         public override void Load()
         {
-            StudentsContext = new StudentsContext();
-            StudentsContext.Phones.Load();
-            StudentsContext.Persons.Load();
-            PrimaryList = StudentsContext.Phones.Local.ToObservableCollection();
-            persons = StudentsContext.Persons.Local.ToObservableCollection();
+            StudentsData = new StudentsDataProxy();
+            // Подгружаем второстепенные данные
+            persons = StudentsData.GetPersons();
+            // Подгружаем основные данные
+            Phones = StudentsData.GetPhones();
+        }
+        public ObservableCollection<Phone> Phones
+        {
+            get { return phones; }
+            set
+            {
+                phones = value;
+                OnPropertyChanged(nameof(Phones));
+            }
         }
 
         public override void Close()
@@ -35,8 +46,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (phoneWindow.ShowDialog() == true)
             {
                 Phone phone = phoneWindow.ViewModel.Phone;
-                StudentsContext.Phones.Add(phone);
-                StudentsContext.SaveChanges();
+                StudentsData.Add(phone);
+                StudentsData.SaveChanges();
             }
         }
 
@@ -44,8 +55,8 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             Phone? phone = selected_obj as Phone;
             if (phone == null) return;
-            StudentsContext.Phones.Remove(phone);
-            StudentsContext.SaveChanges();
+            StudentsData.Remove(phone);
+            StudentsData.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
@@ -59,8 +70,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (phoneWindow.ShowDialog() == true)
             {
                 phone.Load(phoneWindow.ViewModel.Phone);
-                StudentsContext.Phones.Entry(phone).State = EntityState.Modified;
-                StudentsContext.SaveChanges();
+                StudentsData.Edit(phone);
+                StudentsData.SaveChanges();
             }
         }
 

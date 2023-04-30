@@ -9,21 +9,30 @@ using System.Linq;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class StudentPageViewModel: BasePageViewModel<Student>
+    public class StudentPageViewModel: BasePageViewModel
     {
+        private IStudentsData StudentsData;
+        private ObservableCollection<Student> students;
         private ObservableCollection<Person> persons;
         private ObservableCollection<Group> groups;
         public override void Load()
         {
-            StudentsContext = new StudentsContext();
-            StudentsContext.Students.Load();
-            StudentsContext.Persons.Load();
-            StudentsContext.Groups.Load();
-            PrimaryList = StudentsContext.Students.Local.ToObservableCollection();
-            persons = StudentsContext.Persons.Local.ToObservableCollection();
-            groups = StudentsContext.Groups.Local.ToObservableCollection();
+            StudentsData = new StudentsDataProxy();
+            // Подгружаем второстепенные данные
+            persons = StudentsData.GetPersons();
+            groups = StudentsData.GetGroups();
+            // Подгружаем основные данные
+            Students = StudentsData.GetStudents();
         }
-
+        public ObservableCollection<Student> Students
+        {
+            get { return students; }
+            set
+            {
+                students = value;
+                OnPropertyChanged(nameof(Students));
+            }
+        }
         public override void Close()
         {
             throw new NotImplementedException();
@@ -35,8 +44,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (studentWindow.ShowDialog() == true)
             {
                 Student student = studentWindow.ViewModel.Student;
-                StudentsContext.Students.Add(student);
-                StudentsContext.SaveChanges();
+                StudentsData.Add(student);
+                StudentsData.SaveChanges();
             }
         }
 
@@ -44,8 +53,8 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             Student? student = selected_obj as Student;
             if (student == null) return;
-            StudentsContext.Students.Remove(student);
-            StudentsContext.SaveChanges();
+            StudentsData.Remove(student);
+            StudentsData.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
@@ -59,8 +68,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (studentWindow.ShowDialog() == true)
             {
                 student.Load(studentWindow.ViewModel.Student);
-                StudentsContext.Students.Entry(student).State = EntityState.Modified;
-                StudentsContext.SaveChanges();
+                StudentsData.Edit(student);
+                StudentsData.SaveChanges();
             }
         }
 

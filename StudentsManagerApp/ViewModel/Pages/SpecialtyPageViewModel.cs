@@ -11,13 +11,24 @@ using System.Threading.Tasks;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class SpecialtyPageViewModel : BasePageViewModel<Specialty>
+    public class SpecialtyPageViewModel : BasePageViewModel
     {
+        private IStudentsData StudentsData;
+        private ObservableCollection<Specialty> specialties;
         public override void Load()
         {
-            StudentsContext = new StudentsContext();
-            StudentsContext.Specialties.Load();
-            PrimaryList = StudentsContext.Specialties.Local.ToObservableCollection();
+            StudentsData = new StudentsDataProxy();
+            // Подгружаем основные данные
+            Specialties = StudentsData.GetSpecialties();
+        }
+        public ObservableCollection<Specialty> Specialties
+        {
+            get { return specialties; }
+            set
+            {
+                specialties = value;
+                OnPropertyChanged(nameof(Specialties));
+            }
         }
 
         public override void Close()
@@ -31,8 +42,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (specialtyWindow.ShowDialog() == true)
             {
                 Specialty specialty = specialtyWindow.ViewModel.Specialty;
-                StudentsContext.Specialties.Add(specialty);
-                StudentsContext.SaveChanges();
+                StudentsData.Add(specialty);
+                StudentsData.SaveChanges();
             }
         }
 
@@ -40,8 +51,8 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             Specialty? specialty = selected_obj as Specialty;
             if (specialty == null) return;
-            StudentsContext.Specialties.Remove(specialty);
-            StudentsContext.SaveChanges();
+            StudentsData.Remove(specialty);
+            StudentsData.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
@@ -55,8 +66,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (specialtyWindow.ShowDialog() == true)
             {
                 specialty.Load(specialtyWindow.ViewModel.Specialty);
-                StudentsContext.Entry(specialty).State = EntityState.Modified;
-                StudentsContext.SaveChanges();
+                StudentsData.Edit(specialty);
+                StudentsData.SaveChanges();
             }
         }
 

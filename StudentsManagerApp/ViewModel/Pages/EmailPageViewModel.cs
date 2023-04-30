@@ -12,18 +12,28 @@ using System.Threading.Tasks;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class EmailPageViewModel : BasePageViewModel<Email>
+    public class EmailPageViewModel : BasePageViewModel
     {
+        private IStudentsData StudentsData;
+        private ObservableCollection<Email> emails;
         private ObservableCollection<Person> persons;
         public override void Load()
         {
-            StudentsContext = new StudentsContext();
-            StudentsContext.Emails.Load();
-            StudentsContext.Persons.Load();
-            PrimaryList = StudentsContext.Emails.Local.ToObservableCollection();
-            persons = StudentsContext.Persons.Local.ToObservableCollection();
+            StudentsData = new StudentsDataProxy();
+            // Подгружаем второстепенные данные
+            persons = StudentsData.GetPersons();
+            // Подгружаем основные данные
+            Emails = StudentsData.GetEmails();
         }
-
+        public ObservableCollection<Email> Emails
+        {
+            get { return emails; }
+            set
+            {
+                emails = value;
+                OnPropertyChanged(nameof(Emails));
+            }
+        }
         public override void Close()
         {
             throw new NotImplementedException();
@@ -36,8 +46,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (emailWindow.ShowDialog() == true)
             {
                 Email email = emailWindow.ViewModel.Email;
-                StudentsContext.Emails.Add(email);
-                StudentsContext.SaveChanges();
+                StudentsData.Add(email);
+                StudentsData.SaveChanges();
             }
         }
 
@@ -45,8 +55,8 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             Email? email = selected_obj as Email;
             if (email == null) return;
-            StudentsContext.Emails.Remove(email);
-            StudentsContext.SaveChanges();
+            StudentsData.Remove(email);
+            StudentsData.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
@@ -60,8 +70,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (emailWindow.ShowDialog() == true)
             {
                 email.Load(emailWindow.ViewModel.Email);
-                StudentsContext.Emails.Entry(email).State = EntityState.Modified;
-                StudentsContext.SaveChanges();
+                StudentsData.Edit(email);
+                StudentsData.SaveChanges();
             }
         }
     }

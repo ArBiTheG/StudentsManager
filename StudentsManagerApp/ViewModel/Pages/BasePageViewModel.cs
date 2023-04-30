@@ -14,17 +14,14 @@ using System.Windows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public abstract class BasePageViewModel<TEntity>: INotifyPropertyChanged
+    public abstract class BasePageViewModel: INotifyPropertyChanged
     {
         bool loaded;
-        ObservableCollection<TEntity> primary_list;
 
         RelayCommand? addCommand;
         RelayCommand? editCommand;
         RelayCommand? deleteCommand;
         RelayCommand? updateCommand;
-
-        protected StudentsContext StudentsContext;
 
         protected BasePageViewModel()
         {
@@ -34,16 +31,6 @@ namespace StudentsManagerApp.ViewModel.Pages
                 Loaded = true;
             }
             );
-        }
-
-        public ObservableCollection<TEntity> PrimaryList
-        {
-            get { return primary_list; }
-            set
-            {
-                primary_list = value;
-                OnPropertyChanged(nameof(PrimaryList));
-            }
         }
 
         public bool Loaded

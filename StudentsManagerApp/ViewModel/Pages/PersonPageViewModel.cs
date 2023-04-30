@@ -16,13 +16,24 @@ using System.Windows.Threading;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class PersonPageViewModel : BasePageViewModel<Person>
+    public class PersonPageViewModel : BasePageViewModel
     {
+        private IStudentsData StudentsData;
+        private ObservableCollection<Person> persons;
         public override void Load()
         {
-            StudentsContext = new StudentsContext();
-            StudentsContext.Persons.Load();
-            PrimaryList = StudentsContext.Persons.Local.ToObservableCollection();
+            StudentsData = new StudentsDataProxy();
+            // Подгружаем основные данные
+            Persons = StudentsData.GetPersons();
+        }
+        public ObservableCollection<Person> Persons
+        {
+            get { return persons; }
+            set
+            {
+                persons = value;
+                OnPropertyChanged(nameof(Persons));
+            }
         }
 
         public override void Close()
@@ -35,8 +46,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (personWindow.ShowDialog() == true)
             {
                 Person person = personWindow.ViewModel.Person;
-                StudentsContext.Persons.Add(person);
-                StudentsContext.SaveChanges();
+                StudentsData.Add(person);
+                StudentsData.SaveChanges();
             }
         }
 
@@ -44,8 +55,8 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             Person? person = selected_obj as Person;
             if (person == null) return;
-            StudentsContext.Persons.Remove(person);
-            StudentsContext.SaveChanges();
+            StudentsData.Remove(person);
+            StudentsData.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
@@ -59,8 +70,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (personWindow.ShowDialog() == true)
             {
                 person.Load(personWindow.ViewModel.Person);
-                StudentsContext.Persons.Entry(person).State = EntityState.Modified;
-                StudentsContext.SaveChanges();
+                StudentsData.Edit(person);
+                StudentsData.SaveChanges();
             }
         }
     }

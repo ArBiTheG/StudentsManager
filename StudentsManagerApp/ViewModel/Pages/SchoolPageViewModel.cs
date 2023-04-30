@@ -11,13 +11,24 @@ using StudentsManagerApp.View.DialogWindows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class SchoolPageViewModel : BasePageViewModel<School>
+    public class SchoolPageViewModel : BasePageViewModel
     {
+        private IStudentsData StudentsData;
+        private ObservableCollection<School> schools;
         public override void Load()
         {
-            StudentsContext = new StudentsContext();
-            StudentsContext.Schools.Load();
-            PrimaryList = StudentsContext.Schools.Local.ToObservableCollection();
+            StudentsData = new StudentsDataProxy();
+            // Подгружаем основные данные
+            Schools = StudentsData.GetSchools();
+        }
+        public ObservableCollection<School> Schools
+        {
+            get { return schools; }
+            set
+            {
+                schools = value;
+                OnPropertyChanged(nameof(Schools));
+            }
         }
 
         public override void Close()
@@ -31,8 +42,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (schoolWindow.ShowDialog() == true)
             {
                 School school = schoolWindow.ViewModel.School;
-                StudentsContext.Schools.Add(school);
-                StudentsContext.SaveChanges();
+                StudentsData.Add(school);
+                StudentsData.SaveChanges();
             }
         }
 
@@ -40,8 +51,8 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             School? school = selected_obj as School;
             if (school == null) return;
-            StudentsContext.Schools.Remove(school);
-            StudentsContext.SaveChanges();
+            StudentsData.Remove(school);
+            StudentsData.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
@@ -55,8 +66,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (schoolWindow.ShowDialog() == true)
             {
                 school.Load(schoolWindow.ViewModel.School);
-                StudentsContext.Schools.Entry(school).State = EntityState.Modified;
-                StudentsContext.SaveChanges();
+                StudentsData.Edit(school);
+                StudentsData.SaveChanges();
             }
         }
 

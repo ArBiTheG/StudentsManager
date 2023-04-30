@@ -11,16 +11,27 @@ using StudentsManagerApp.View.DialogWindows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class GroupPageViewModel : BasePageViewModel<Group>
+    public class GroupPageViewModel : BasePageViewModel
     {
+        private IStudentsData StudentsData;
+        private ObservableCollection<Group> groups;
         private ObservableCollection<Specialty> specialties;
         public override void Load()
         {
-            StudentsContext = new StudentsContext();
-            StudentsContext.Groups.Load();
-            StudentsContext.Specialties.Load();
-            PrimaryList = StudentsContext.Groups.Local.ToObservableCollection();
-            specialties = StudentsContext.Specialties.Local.ToObservableCollection();
+            StudentsData = new StudentsDataProxy();
+            // Подгружаем второстепенные данные
+            specialties = StudentsData.GetSpecialties();
+            // Подгружаем основные данные
+            Groups = StudentsData.GetGroups();
+        }
+        public ObservableCollection<Group> Groups
+        {
+            get { return groups; }
+            set
+            {
+                groups = value;
+                OnPropertyChanged(nameof(Groups));
+            }
         }
         public override void Close()
         {
@@ -32,8 +43,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (groupWindow.ShowDialog() == true)
             {
                 Group group = groupWindow.ViewModel.Group;
-                StudentsContext.Groups.Add(group);
-                StudentsContext.SaveChanges();
+                StudentsData.Add(group);
+                StudentsData.SaveChanges();
             }
         }
 
@@ -41,8 +52,8 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             Group? group = selected_obj as Group;
             if (group == null) return;
-            StudentsContext.Groups.Remove(group);
-            StudentsContext.SaveChanges();
+            StudentsData.Remove(group);
+            StudentsData.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
@@ -56,8 +67,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (groupWindow.ShowDialog() == true)
             {
                 group.Load(groupWindow.ViewModel.Group);
-                StudentsContext.Groups.Entry(group).State = EntityState.Modified;
-                StudentsContext.SaveChanges();
+                StudentsData.Edit(group);
+                StudentsData.SaveChanges();
             }
         }
 

@@ -11,18 +11,29 @@ using StudentsManagerApp.View.DialogWindows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
-    public class RelationPageViewModel : BasePageViewModel<Relation>
+    public class RelationPageViewModel : BasePageViewModel
     {
+        private IStudentsData StudentsData;
+        private ObservableCollection<Relation> relations;
         private ObservableCollection<Person> childs;
         private ObservableCollection<Person> parents;
         public override void Load()
         {
-            StudentsContext = new StudentsContext();
-            StudentsContext.Relations.Load();
-            StudentsContext.Persons.Load();
-            PrimaryList = StudentsContext.Relations.Local.ToObservableCollection();
-            childs = StudentsContext.Persons.Local.ToObservableCollection();
-            parents = StudentsContext.Persons.Local.ToObservableCollection();
+            StudentsData = new StudentsDataProxy();
+            // Подгружаем второстепенные данные
+            childs = StudentsData.GetPersons();
+            parents = StudentsData.GetPersons();
+            // Подгружаем основные данные
+            Relations = StudentsData.GetRelations();
+        }
+        public ObservableCollection<Relation> Relations
+        {
+            get { return relations; }
+            set
+            {
+                relations = value;
+                OnPropertyChanged(nameof(Relations));
+            }
         }
 
         public override void Close()
@@ -36,8 +47,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (relationWindow.ShowDialog() == true)
             {
                 Relation relation = relationWindow.ViewModel.Relation;
-                StudentsContext.Relations.Add(relation);
-                StudentsContext.SaveChanges();
+                StudentsData.Add(relation);
+                StudentsData.SaveChanges();
             }
         }
 
@@ -45,8 +56,8 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             Relation? relation = selected_obj as Relation;
             if (relation == null) return;
-            StudentsContext.Relations.Remove(relation);
-            StudentsContext.SaveChanges();
+            StudentsData.Remove(relation);
+            StudentsData.SaveChanges();
         }
 
         public override void EditField(object? selected_obj)
@@ -60,8 +71,8 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (relationWindow.ShowDialog() == true)
             {
                 relation.Load(relationWindow.ViewModel.Relation);
-                StudentsContext.Relations.Entry(relation).State = EntityState.Modified;
-                StudentsContext.SaveChanges();
+                StudentsData.Edit(relation);
+                StudentsData.SaveChanges();
             }
         }
 
