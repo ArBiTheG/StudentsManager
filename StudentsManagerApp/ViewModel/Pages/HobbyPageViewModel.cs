@@ -41,7 +41,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            HobbyWindow hobbyWindow = new HobbyWindow(new Hobby(), persons);
+            HobbyWindow hobbyWindow = new HobbyWindow(new Hobby(), StudentsData);
             if (hobbyWindow.ShowDialog() == true)
             {
                 Hobby hobby = hobbyWindow.ViewModel.Hobby;
@@ -64,7 +64,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (hobby == null) return;
             Hobby vm = hobby.Clone() as Hobby;
 
-            HobbyWindow hobbyWindow = new HobbyWindow(vm, persons);
+            HobbyWindow hobbyWindow = new HobbyWindow(vm, StudentsData);
 
             if (hobbyWindow.ShowDialog() == true)
             {

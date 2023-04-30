@@ -173,17 +173,17 @@ namespace StudentsManagerData
             return Students.Local.ToObservableCollection();
         }
 
-        public void Add<Entity>(Entity entity)
+        public new void Add<Entity>(Entity entity)
         {
-            Add(entity);
+            base.Add(entity);
         }
-        public void Remove<Entity>(Entity entity)
+        public new void Remove<Entity>(Entity entity)
         {
-            Add(entity);
+            base.Remove(entity);
         }
         public void Edit<Entity>(Entity entity)
         {
-            Entry(entity).State = EntityState.Modified;
+            this.Entry(entity).State = EntityState.Modified;
         }
     }
 }

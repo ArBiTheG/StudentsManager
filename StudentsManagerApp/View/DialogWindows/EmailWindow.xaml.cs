@@ -1,4 +1,5 @@
 ﻿using StudentsManagerApp.ViewModel.Dialogs;
+using StudentsManagerData;
 using StudentsManagerData.Table;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,10 @@ namespace StudentsManagerApp.View.DialogWindows
     public partial class EmailWindow : Window
     {
         public EmailDialogViewModel ViewModel { get; private set; }
-        public EmailWindow(Email email, ObservableCollection<Person> persons)
+        public EmailWindow(Email email, IStudentsData studentsData)
         {
             InitializeComponent();
-            ViewModel = new EmailDialogViewModel(email, persons);
+            ViewModel = new EmailDialogViewModel(email, studentsData);
             DataContext = ViewModel;
         }
 

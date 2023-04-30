@@ -42,7 +42,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            EmailWindow emailWindow = new EmailWindow(new Email(), persons);
+            EmailWindow emailWindow = new EmailWindow(new Email(), StudentsData);
             if (emailWindow.ShowDialog() == true)
             {
                 Email email = emailWindow.ViewModel.Email;
@@ -65,7 +65,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (email == null) return;
             Email vm = email.Clone() as Email;
 
-            EmailWindow emailWindow = new EmailWindow(vm, persons);
+            EmailWindow emailWindow = new EmailWindow(vm, StudentsData);
 
             if (emailWindow.ShowDialog() == true)
             {

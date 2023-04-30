@@ -39,7 +39,7 @@ namespace StudentsManagerApp.ViewModel.Pages
         }
         public override void AddField(object? obj)
         {
-            GroupWindow groupWindow = new GroupWindow(new Group(), specialties);
+            GroupWindow groupWindow = new GroupWindow(new Group(), StudentsData);
             if (groupWindow.ShowDialog() == true)
             {
                 Group group = groupWindow.ViewModel.Group;
@@ -62,7 +62,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (group == null) return;
             Group vm = group.Clone() as Group;
 
-            GroupWindow groupWindow = new GroupWindow(vm, specialties);
+            GroupWindow groupWindow = new GroupWindow(vm, StudentsData);
 
             if (groupWindow.ShowDialog() == true)
             {

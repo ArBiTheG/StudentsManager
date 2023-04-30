@@ -44,7 +44,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            DiplomaWindow diplomaWindow = new DiplomaWindow(new Diploma(), persons, schools);
+            DiplomaWindow diplomaWindow = new DiplomaWindow(new Diploma(), StudentsData);
             if (diplomaWindow.ShowDialog() == true)
             {
                 Diploma diploma = diplomaWindow.ViewModel.Diploma;
@@ -67,7 +67,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (diploma == null) return;
             Diploma vm = diploma.Clone() as Diploma;
 
-            DiplomaWindow diplomaWindow = new DiplomaWindow(vm, persons, schools);
+            DiplomaWindow diplomaWindow = new DiplomaWindow(vm, StudentsData);
 
             if (diplomaWindow.ShowDialog() == true)
             {

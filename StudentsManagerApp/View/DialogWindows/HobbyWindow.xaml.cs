@@ -1,4 +1,5 @@
 ﻿using StudentsManagerApp.ViewModel.Dialogs;
+using StudentsManagerData;
 using StudentsManagerData.Table;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,10 @@ namespace StudentsManagerApp.View.DialogWindows
     public partial class HobbyWindow : Window
     {
         public HobbyDialogViewModel ViewModel { get; private set; }
-        public HobbyWindow(Hobby hobby, ObservableCollection<Person> persons)
+        public HobbyWindow(Hobby hobby, IStudentsData studentsData)
         {
             InitializeComponent();
-            ViewModel = new HobbyDialogViewModel(hobby, persons);
+            ViewModel = new HobbyDialogViewModel(hobby, studentsData);
             DataContext = ViewModel;
         }
 

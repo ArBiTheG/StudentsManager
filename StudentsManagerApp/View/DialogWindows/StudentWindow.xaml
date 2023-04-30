@@ -58,8 +58,9 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="256"/>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="128"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Абитуриент"/>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Группа"/>
@@ -75,6 +76,8 @@
                 <CheckBox x:Name="checkBox" Grid.Row="3" Grid.Column="1" IsChecked="{Binding Student.IsEscaped}"/>
                 <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Student.DateEscape}" IsEnabled="{Binding IsChecked, ElementName=checkBox}"/>
                 <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Student.Reason}" IsEnabled="{Binding IsChecked, ElementName=checkBox}"/>
+                <Button Grid.Row="0" Grid.Column="2" Command="{Binding AddPersonCommand}">Создать</Button>
+                <Button Grid.Row="1" Grid.Column="2" Command="{Binding AddGroupCommand}">Создать</Button>
             </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal">

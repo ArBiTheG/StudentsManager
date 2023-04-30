@@ -1,4 +1,5 @@
 ﻿using StudentsManagerApp.ViewModel.Dialogs;
+using StudentsManagerData;
 using StudentsManagerData.Table;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,10 @@ namespace StudentsManagerApp.View.DialogWindows
     public partial class DiplomaWindow : Window
     {
         public DiplomaDialogViewModel ViewModel { get; private set; }
-        public DiplomaWindow(Diploma diploma, ObservableCollection<Person> persons, ObservableCollection<School> schools)
+        public DiplomaWindow(Diploma diploma, IStudentsData studentsData)
         {
             InitializeComponent();
-            ViewModel = new DiplomaDialogViewModel(diploma, persons, schools);
+            ViewModel = new DiplomaDialogViewModel(diploma, studentsData);
             DataContext = ViewModel;
         }
 

@@ -40,7 +40,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            StudentWindow studentWindow = new StudentWindow(new Student(), persons, groups);
+            StudentWindow studentWindow = new StudentWindow(new Student(), StudentsData);
             if (studentWindow.ShowDialog() == true)
             {
                 Student student = studentWindow.ViewModel.Student;
@@ -63,7 +63,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (student == null) return;
             Student vm = student.Clone() as Student;
 
-            StudentWindow studentWindow = new StudentWindow(vm, persons, groups);
+            StudentWindow studentWindow = new StudentWindow(vm, StudentsData);
 
             if (studentWindow.ShowDialog() == true)
             {

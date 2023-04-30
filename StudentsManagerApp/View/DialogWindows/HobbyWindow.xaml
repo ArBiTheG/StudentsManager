@@ -55,8 +55,9 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="256"/>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="128"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Наименование хобби"/>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Описание"/>
@@ -65,6 +66,7 @@
                 <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Hobby.Description}"/>
                 <ComboBox Grid.Row="2" Grid.Column="1" SelectedItem="{Binding Hobby.Person}" ItemsSource="{Binding Persons}" DisplayMemberPath="FullName">
                 </ComboBox>
+                <Button Grid.Row="2" Grid.Column="2" Command="{Binding AddPersonCommand}">Создать</Button>
             </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal">

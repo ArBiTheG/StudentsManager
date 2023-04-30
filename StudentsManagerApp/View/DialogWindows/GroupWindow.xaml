@@ -58,8 +58,9 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="256"/>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="128"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Наименование группы"/>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Специальность"/>
@@ -74,6 +75,7 @@
                 <DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding Group.DateCreated}"/>
                 <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Group.DateRelease}"/>
                 <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Group.About}"/>
+                <Button Grid.Row="1" Grid.Column="2" Command="{Binding AddSpecialtyCommand}">Создать</Button>
             </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal">

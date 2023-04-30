@@ -1,4 +1,5 @@
-﻿using StudentsManagerData.Table;
+﻿using StudentsManagerData;
+using StudentsManagerData.Table;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

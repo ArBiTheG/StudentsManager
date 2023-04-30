@@ -43,7 +43,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            RelationWindow relationWindow = new RelationWindow(new Relation(), childs, parents);
+            RelationWindow relationWindow = new RelationWindow(new Relation(), StudentsData);
             if (relationWindow.ShowDialog() == true)
             {
                 Relation relation = relationWindow.ViewModel.Relation;
@@ -66,7 +66,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (relation == null) return;
             Relation vm = relation.Clone() as Relation;
 
-            RelationWindow relationWindow = new RelationWindow(vm, childs, parents);
+            RelationWindow relationWindow = new RelationWindow(vm, StudentsData);
 
             if (relationWindow.ShowDialog() == true)
             {

@@ -58,8 +58,9 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="256"/>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="128"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Обучающийся"/>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Серия документа"/>
@@ -75,6 +76,8 @@
                 <ComboBox Grid.Row="4" Grid.Column="1" SelectedItem="{Binding Diploma.School}" ItemsSource="{Binding Schools}" DisplayMemberPath="ShortName">
                 </ComboBox>
                 <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Diploma.Name}"/>
+                <Button Grid.Row="0" Grid.Column="2" Command="{Binding AddPersonCommand}">Создать</Button>
+                <Button Grid.Row="4" Grid.Column="2" Command="{Binding AddSchoolCommand}">Создать</Button>
             </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
