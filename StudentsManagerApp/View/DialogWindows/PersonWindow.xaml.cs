@@ -1,4 +1,5 @@
 ﻿using StudentsManagerApp.ViewModel.Dialogs;
+using StudentsManagerData;
 using StudentsManagerData.Table;
 using System;
 using System.Collections.Generic;
@@ -22,10 +23,10 @@ namespace StudentsManagerApp.View.DialogWindows
     public partial class PersonWindow : Window
     {
         public PersonDialogViewModel ViewModel { get; private set; }
-        public PersonWindow(Person person)
+        public PersonWindow(Person person, IStudentsData studentsData)
         {
             InitializeComponent();
-            ViewModel = new PersonDialogViewModel(person);
+            ViewModel = new PersonDialogViewModel(person, studentsData);
             DataContext = ViewModel;
         }
 

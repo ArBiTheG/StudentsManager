@@ -38,7 +38,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            SchoolWindow schoolWindow = new SchoolWindow(new School());
+            SchoolWindow schoolWindow = new SchoolWindow(new School(), StudentsData);
             if (schoolWindow.ShowDialog() == true)
             {
                 School school = schoolWindow.ViewModel.School;
@@ -61,7 +61,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (school == null) return;
             School vm = school.Clone() as School;
 
-            SchoolWindow schoolWindow = new SchoolWindow(vm);
+            SchoolWindow schoolWindow = new SchoolWindow(vm, StudentsData);
 
             if (schoolWindow.ShowDialog() == true)
             {

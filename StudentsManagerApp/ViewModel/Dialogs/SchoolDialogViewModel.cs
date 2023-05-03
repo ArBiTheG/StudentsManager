@@ -12,10 +12,12 @@ namespace StudentsManagerApp.ViewModel.Dialogs
 {
     public class SchoolDialogViewModel
     {
-        public School School { get; set; }
-        public SchoolDialogViewModel(School school)
+        private IStudentsData StudentsData;
+        public School School { get; private set; }
+        public SchoolDialogViewModel(School school, IStudentsData studentsData)
         {
             School = school;
+            StudentsData = studentsData;
         }
     }
 }

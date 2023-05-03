@@ -17,8 +17,8 @@ namespace StudentsManagerApp.ViewModel.Dialogs
     {
         private IStudentsData StudentsData;
         public Student Student { get; set; }
-        public ObservableCollection<Person> Persons { get; set; }
-        public ObservableCollection<Group> Groups { get; set; }
+        public ObservableCollection<Person> Persons { get; private set; }
+        public ObservableCollection<Group> Groups { get; private set; }
         public StudentDialogViewModel(Student student, IStudentsData studentsData)
         {
             Student = student;
@@ -35,7 +35,7 @@ namespace StudentsManagerApp.ViewModel.Dialogs
             {
                 return addPersonCommand ?? (addPersonCommand = new RelayCommand((obj) =>
                 {
-                    PersonWindow personWindow = new PersonWindow(new Person());
+                    PersonWindow personWindow = new PersonWindow(new Person(), StudentsData);
                     if (personWindow.ShowDialog() == true)
                     {
                         Person person = personWindow.ViewModel.Person;

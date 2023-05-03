@@ -35,7 +35,7 @@ namespace StudentsManagerApp.ViewModel.Dialogs
             { 
                 return addPersonCommand ?? (addPersonCommand = new RelayCommand((obj) =>
                 {
-                    PersonWindow personWindow = new PersonWindow(new Person());
+                    PersonWindow personWindow = new PersonWindow(new Person(), StudentsData);
                     if (personWindow.ShowDialog() == true)
                     {
                         Person person = personWindow.ViewModel.Person;
@@ -52,7 +52,7 @@ namespace StudentsManagerApp.ViewModel.Dialogs
             {
                 return addSchoolCommand ?? (addSchoolCommand = new RelayCommand((obj) =>
                 {
-                    SchoolWindow schoolWindow = new SchoolWindow(new School());
+                    SchoolWindow schoolWindow = new SchoolWindow(new School(), StudentsData);
                     if (schoolWindow.ShowDialog() == true)
                     {
                         School school = schoolWindow.ViewModel.School;

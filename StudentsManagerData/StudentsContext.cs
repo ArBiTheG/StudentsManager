@@ -85,90 +85,60 @@ namespace StudentsManagerData
 
         public ObservableCollection<Diploma> GetDiplomas()
         {
-#if DEBUG
-            Trace.WriteLine($"Создана коллекция объектов: '{nameof(Diplomas)}'");
-#endif
             Diplomas.Load();
             return Diplomas.Local.ToObservableCollection();
         }
 
         public ObservableCollection<Email> GetEmails()
         {
-#if DEBUG
-            Trace.WriteLine($"Создана коллекция объектов: '{nameof(Emails)}'");
-#endif
             Emails.Load();
             return Emails.Local.ToObservableCollection();
         }
 
         public ObservableCollection<Group> GetGroups()
         {
-#if DEBUG
-            Trace.WriteLine($"Создана коллекция объектов: '{nameof(Groups)}'");
-#endif
             Groups.Load();
             return Groups.Local.ToObservableCollection();
         }
 
         public ObservableCollection<Hobby> GetHobbies()
         {
-#if DEBUG
-            Trace.WriteLine($"Создана коллекция объектов: '{nameof(Hobbies)}'");
-#endif
             Hobbies.Load();
             return Hobbies.Local.ToObservableCollection();
         }
 
         public ObservableCollection<Person> GetPersons()
         {
-#if DEBUG
-            Trace.WriteLine($"Создана коллекция объектов: '{nameof(Persons)}'");
-#endif
             Persons.Load();
             return Persons.Local.ToObservableCollection();
         }
 
         public ObservableCollection<Phone> GetPhones()
         {
-#if DEBUG
-            Trace.WriteLine($"Создана коллекция объектов: '{nameof(Phones)}'");
-#endif
             Phones.Load();
             return Phones.Local.ToObservableCollection();
         }
 
         public ObservableCollection<Relation> GetRelations()
         {
-#if DEBUG
-            Trace.WriteLine($"Создана коллекция объектов: '{nameof(Relations)}'");
-#endif
             Relations.Load();
             return Relations.Local.ToObservableCollection();
         }
 
         public ObservableCollection<School> GetSchools()
         {
-#if DEBUG
-            Trace.WriteLine($"Создана коллекция объектов: '{nameof(Schools)}'");
-#endif
             Schools.Load();
             return Schools.Local.ToObservableCollection();
         }
 
         public ObservableCollection<Specialty> GetSpecialties()
         {
-#if DEBUG
-            Trace.WriteLine($"Создана коллекция объектов: '{nameof(Specialties)}'");
-#endif
             Specialties.Load();
             return Specialties.Local.ToObservableCollection();
         }
 
         public ObservableCollection<Student> GetStudents()
         {
-#if DEBUG
-            Trace.WriteLine($"Создана коллекция объектов: '{nameof(Students)}'");
-#endif
             Students.Load();
             return Students.Local.ToObservableCollection();
         }
@@ -184,6 +154,10 @@ namespace StudentsManagerData
         public void Edit<Entity>(Entity entity)
         {
             this.Entry(entity).State = EntityState.Modified;
+        }
+        public new int SaveChanges()
+        {
+            return base.SaveChanges();
         }
     }
 }

@@ -38,7 +38,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            SpecialtyWindow specialtyWindow = new SpecialtyWindow(new Specialty());
+            SpecialtyWindow specialtyWindow = new SpecialtyWindow(new Specialty(), StudentsData);
             if (specialtyWindow.ShowDialog() == true)
             {
                 Specialty specialty = specialtyWindow.ViewModel.Specialty;
@@ -61,7 +61,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (specialty == null) return;
             Specialty vm = specialty.Clone() as Specialty;
 
-            SpecialtyWindow specialtyWindow = new SpecialtyWindow(vm);
+            SpecialtyWindow specialtyWindow = new SpecialtyWindow(vm, StudentsData);
 
             if (specialtyWindow.ShowDialog() == true)
             {
