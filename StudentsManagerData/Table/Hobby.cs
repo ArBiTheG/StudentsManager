@@ -13,14 +13,14 @@ namespace StudentsManagerData.Table
         int id;
         int person_id;
         Person person;
-        string? name;
+        string name;
         string? description;
 
         public Hobby()
         {
         }
         //Используется для клонирования
-        private Hobby(int id, int person_id, Person person, string? name, string? description)
+        private Hobby(int id, int person_id, Person person, string name, string? description)
         {
             this.id = id;
             this.person_id = person_id;
@@ -71,7 +71,7 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Наименование хобби
         /// </summary>
-        public string? Name { 
+        public string Name { 
             get 
             { 
                 return name;
@@ -134,6 +134,11 @@ namespace StudentsManagerData.Table
         public static bool operator !=(Hobby? left, Hobby? right)
         {
             return !(left == right);
+        }
+
+        public new string ToString()
+        {
+            return "id: " + id.ToString() + " / name: " + name.ToString();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

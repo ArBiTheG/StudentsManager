@@ -16,8 +16,8 @@ namespace StudentsManagerData.Table
         Person person;
         int group_id;
         Group group;
-        DateTime date_entry;
-        DateTime date_escape;
+        DateTime? date_entry;
+        DateTime? date_escape;
         bool is_escaped;
         string? reason;
 
@@ -25,7 +25,7 @@ namespace StudentsManagerData.Table
         {
         }
         //Используется для клонирования
-        private Student(int id, int person_id, Person person, int group_id, Group group, DateTime date_entry, DateTime date_escape, bool is_escaped, string? reason)
+        private Student(int id, int person_id, Person person, int group_id, Group group, DateTime? date_entry, DateTime? date_escape, bool is_escaped, string? reason)
         {
             this.id = id;
             this.person_id = person_id;
@@ -110,7 +110,7 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Дата поступления
         /// </summary>
-        public DateTime DateEntry { 
+        public DateTime? DateEntry { 
             get 
             { 
                 return date_entry; 
@@ -124,7 +124,7 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Дата отчисления
         /// </summary>
-        public DateTime DateEscape { 
+        public DateTime? DateEscape { 
             get 
             { 
                 return date_escape; 
@@ -172,6 +172,8 @@ namespace StudentsManagerData.Table
         {
             get
             {
+                if (Person == null || Group == null)
+                    return null;
                 return $"{Person.FullName} - {Group.Name}";
             }
         }
@@ -221,6 +223,10 @@ namespace StudentsManagerData.Table
         public static bool operator !=(Student? left, Student? right)
         {
             return !(left == right);
+        }
+        public new string ToString()
+        {
+            return "id: "+ id.ToString() + " / name: " + FullName.ToString();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

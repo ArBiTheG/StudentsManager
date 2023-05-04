@@ -23,7 +23,7 @@ namespace StudentsManagerData.Table
         {
         }
         //Используется для клонирования
-        private Group(int id, string name, int spec_id, Specialty specialy, bool is_distant, string? about, DateTime date_created, DateTime date_release)
+        private Group(int id, string name, int spec_id, Specialty specialy, bool is_distant, string about, DateTime date_created, DateTime date_release)
         {
             this.id = id;
             this.name = name;
@@ -191,6 +191,10 @@ namespace StudentsManagerData.Table
         public static bool operator !=(Group? left, Group? right)
         {
             return !(left == right);
+        }
+        public new string ToString()
+        {
+            return "id: " + id.ToString() + " / name: " + name.ToString();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

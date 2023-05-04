@@ -11,13 +11,13 @@ namespace StudentsManagerData.Table
     public class Specialty: ICloneable, IEquatable<Specialty?>, INotifyPropertyChanged
     {
         int id;
-        string? code;
-        string? name;
-        string? skill;
+        string code;
+        string name;
+        string skill;
         int duration;
         string? description;
-        DateTime date_created;
-        DateTime date_deleted;
+        DateTime? date_created;
+        DateTime? date_deleted;
         bool is_deleted;
         string? reason;
 
@@ -25,7 +25,7 @@ namespace StudentsManagerData.Table
         {
         }
         //Используется для клонирования
-        private Specialty(int id, string? code, string? name, string? skill, int duration, string? description, DateTime date_created, DateTime date_deleted, bool is_deleted, string? reason)
+        private Specialty(int id, string? code, string? name, string? skill, int duration, string? description, DateTime? date_created, DateTime? date_deleted, bool is_deleted, string? reason)
         {
             this.id = id;
             this.code = code;
@@ -128,7 +128,7 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Дата начала набора на специальность
         /// </summary>
-        public DateTime DateCreated { 
+        public DateTime? DateCreated { 
             get 
             { 
                 return date_created; 
@@ -142,7 +142,7 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Дата прекращения набора на специальность
         /// </summary>
-        public DateTime DateDeleted { 
+        public DateTime? DateDeleted { 
             get 
             { 
                 return date_deleted; 
@@ -232,6 +232,11 @@ namespace StudentsManagerData.Table
         public static bool operator !=(Specialty? left, Specialty? right)
         {
             return !(left == right);
+        }
+
+        public new string ToString()
+        {
+            return "id: " + id.ToString() + " / name: " + name.ToString();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

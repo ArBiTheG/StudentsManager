@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 
 namespace StudentsManagerData.Table
 {
@@ -281,6 +282,11 @@ namespace StudentsManagerData.Table
         public static bool operator !=(Person? left, Person? right)
         {
             return !(left == right);
+        }
+
+        public new string ToString()
+        {
+            return "id: " + id.ToString() + " / name: " + FullName.ToString();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StudentsManagerData
 {
-    public interface IStudentsData
+    public interface IStudentsData : IDisposable
     {
         /// <summary>
         /// Получить коллекцию дипломов/аттестатов из базы данных

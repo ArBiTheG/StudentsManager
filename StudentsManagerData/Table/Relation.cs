@@ -152,6 +152,10 @@ namespace StudentsManagerData.Table
         {
             return !(left == right);
         }
+        public new string ToString()
+        {
+            return "id: " + id.ToString();// + " / name: " + name.ToString();
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

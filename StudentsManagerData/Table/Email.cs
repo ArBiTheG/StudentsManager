@@ -13,14 +13,14 @@ namespace StudentsManagerData.Table
         int id;
         int person_id;
         Person person;
-        string? name;
+        string name;
         string? description;
 
         public Email()
         {
         }
         //Используется для клонирования
-        private Email(int id, int person_id, Person person, string? name, string? description)
+        private Email(int id, int person_id, Person person, string name, string? description)
         {
             this.id = id;
             this.person_id = person_id;
@@ -74,7 +74,7 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Электронная почта
         /// </summary>
-        public string? Name
+        public string Name
         {
             get
             {
@@ -139,6 +139,11 @@ namespace StudentsManagerData.Table
         public static bool operator !=(Email? left, Email? right)
         {
             return !(left == right);
+        }
+
+        public new string ToString()
+        {
+            return "id: " + id.ToString() + " / name: " + name.ToString();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

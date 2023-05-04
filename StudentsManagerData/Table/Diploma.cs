@@ -14,9 +14,9 @@ namespace StudentsManagerData.Table
         int id;
         int person_id;
         Person person;
-        string? series;
-        string? number;
-        DateTime given;
+        string series;
+        string number;
+        DateTime? given;
         int school_id;
         School school;
         string? name;
@@ -26,7 +26,7 @@ namespace StudentsManagerData.Table
         }
 
         //Используется для клонирования
-        private Diploma(int id, int person_id, Person person, string? series, string? number, DateTime given, int school_id, School school, string? name)
+        private Diploma(int id, int person_id, Person person, string series, string number, DateTime? given, int school_id, School school, string? name)
         {
             this.id = id;
             this.person_id = person_id;
@@ -116,7 +116,7 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Дата выдачи документа
         /// </summary>
-        public DateTime Given
+        public DateTime? Given
         {
             get
             {
@@ -220,6 +220,11 @@ namespace StudentsManagerData.Table
         public static bool operator !=(Diploma? left, Diploma? right)
         {
             return !(left == right);
+        }
+
+        public new string ToString()
+        {
+            return "id: " + id.ToString() + " / series: " + series.ToString() + " / number: " + number.ToString();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

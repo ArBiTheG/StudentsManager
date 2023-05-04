@@ -12,8 +12,8 @@ namespace StudentsManagerData.Table
     public class School: ICloneable, IEquatable<School?>, INotifyPropertyChanged
     {
         int id;
-        string? full_name;
-        string? short_name;
+        string full_name;
+        string short_name;
         string? address;
         string? description;
 
@@ -21,7 +21,7 @@ namespace StudentsManagerData.Table
         {
         }
         //Используется для клонирования
-        private School(int id, string? full_name, string? short_name, string? address, string? description)
+        private School(int id, string full_name, string short_name, string? address, string? description)
         {
             this.id = id;
             this.full_name = full_name;
@@ -58,7 +58,7 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Короткое наименование школы
         /// </summary>
-        public string? ShortName {
+        public string ShortName {
             get
             { 
                 return short_name;
@@ -139,6 +139,10 @@ namespace StudentsManagerData.Table
         public static bool operator !=(School? left, School? right)
         {
             return !(left == right);
+        }
+        public new string ToString()
+        {
+            return "id: " + id.ToString() + " / name: " + full_name.ToString();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
