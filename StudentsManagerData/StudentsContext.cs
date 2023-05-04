@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace StudentsManagerData
 {
-    public class StudentsContext : DbContext
+    internal class StudentsContext : DbContext
     {
         /// <summary>
         /// Набор сущностей Diplomas

@@ -20,8 +20,6 @@ namespace StudentsManagerApp.ViewModel
 {
     public class MainWindowModel : INotifyPropertyChanged
     {
-        StudentsContext studentsContext = new StudentsContext();
-
         ClockModule clockModule = new ClockModule();
 
         UserControl? content;
