@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
@@ -55,8 +56,14 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             Email? email = selected_obj as Email;
             if (email == null) return;
-            StudentsData.Remove(email);
-            StudentsData.SaveChanges();
+
+            string text = $"Вы действительно хотите удалить запись '{email.Name}'?";
+            var result = MessageBox.Show(text, "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+            if (result == MessageBoxResult.Yes)
+            {
+                StudentsData.Remove(email);
+                StudentsData.SaveChanges();
+            }
         }
 
         public override void EditField(object? selected_obj)

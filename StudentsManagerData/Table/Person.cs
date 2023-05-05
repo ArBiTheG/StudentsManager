@@ -14,29 +14,39 @@ namespace StudentsManagerData.Table
         string middle_name;
         string last_name;
         DateTime birthday;
-        byte sex;
+        byte gender;
         string? series_passport;
         string? number_passport;
         string? given_passport;
         DateTime? date_passport;
+        string? snils;
+        bool is_militaried;
+        string? military_ticket;
+        bool is_invalid;
+        string? invalid_name;
         string? about;
 
         public Person()
         {
         }
         //Используется для клонирования
-        private Person(int id, string first_name, string middle_name, string last_name, DateTime birthday, byte sex, string? series_passport, string? number_passport, string? given_passport, DateTime? date_passport, string? about)
+        private Person(int id, string first_name, string middle_name, string last_name, DateTime birthday, byte gender, string? series_passport, string? number_passport, string? given_passport, DateTime? date_passport, string? snils, bool is_militaried, string? military_ticket, bool is_invalid, string? invalid_name, string? about)
         {
             this.id = id;
             this.first_name = first_name;
             this.middle_name = middle_name;
             this.last_name = last_name;
             this.birthday = birthday;
-            this.sex = sex;
+            this.gender = gender;
             this.series_passport = series_passport;
             this.number_passport = number_passport;
             this.given_passport = given_passport;
             this.date_passport = date_passport;
+            this.snils = snils;
+            this.is_militaried = is_militaried;
+            this.military_ticket = military_ticket;
+            this.is_invalid = is_invalid;
+            this.invalid_name = invalid_name;
             this.about = about;
         }
 
@@ -111,15 +121,15 @@ namespace StudentsManagerData.Table
         /// <summary>
         /// Пол
         /// </summary>
-        public byte Sex { 
+        public byte Gender { 
             get 
             {
-                return sex; 
+                return gender; 
             } 
             set
             { 
-                sex = value;
-                OnPropertyChanged("Sex");
+                gender = value;
+                OnPropertyChanged("Gender");
             }
         }
         /// <summary>
@@ -177,7 +187,82 @@ namespace StudentsManagerData.Table
             { 
                 date_passport = value;
                 OnPropertyChanged("DatePassport");
-            } 
+            }
+        }
+        /// <summary>
+        /// Снилс
+        /// </summary>
+        public string? Snils
+        {
+            get
+            {
+                return snils;
+            }
+            set
+            {
+                snils = value;
+                OnPropertyChanged("Snils");
+            }
+        }
+        /// <summary>
+        /// Отслужил
+        /// </summary>
+        public bool IsMilitaried
+        {
+            get
+            {
+                return is_militaried;
+            }
+            set
+            {
+                is_militaried = value;
+                OnPropertyChanged("IsMilitaried");
+            }
+        }
+        /// <summary>
+        /// Военный билет
+        /// </summary>
+        public string? MilitaryTicket
+        {
+            get
+            {
+                return military_ticket;
+            }
+            set
+            {
+                military_ticket = value;
+                OnPropertyChanged("MilitaryTicket");
+            }
+        }
+        /// <summary>
+        /// Имеет инвалидность
+        /// </summary>
+        public bool IsInvalid
+        {
+            get
+            {
+                return is_invalid;
+            }
+            set
+            {
+                is_invalid = value;
+                OnPropertyChanged("IsInvalid");
+            }
+        }
+        /// <summary>
+        /// Название инвалидности
+        /// </summary>
+        public string? InvalidName
+        {
+            get
+            {
+                return invalid_name;
+            }
+            set
+            {
+                invalid_name = value;
+                OnPropertyChanged("InvalidName");
+            }
         }
         /// <summary>
         /// Подробности
@@ -244,14 +329,19 @@ namespace StudentsManagerData.Table
             MiddleName = person.middle_name;
             LastName = person.last_name;
             Birthday = person.birthday;
-            Sex = person.sex;
+            Gender = person.gender;
             SeriesPassport = person.series_passport;
             NumberPassport = person.number_passport;
             GivenPassport = person.given_passport;
             DatePassport = person.date_passport;
+            Snils = person.snils;
+            IsMilitaried = person.is_militaried;
+            MilitaryTicket = person.military_ticket;
+            IsInvalid = person.is_invalid;
+            InvalidName = person.invalid_name;
             About = person.about;
         }
-        public object Clone() => new Person(id, first_name, middle_name, last_name, birthday, sex, series_passport, number_passport, given_passport, date_passport, about);
+        public object Clone() => new Person(id, first_name, middle_name, last_name, birthday, gender, series_passport, number_passport, given_passport, date_passport, snils, is_militaried, military_ticket, is_invalid, invalid_name, about);
 
         public override bool Equals(object? obj)
         {
@@ -266,11 +356,16 @@ namespace StudentsManagerData.Table
                    middle_name == other.middle_name &&
                    last_name == other.last_name &&
                    birthday == other.birthday &&
-                   sex == other.sex &&
+                   gender == other.gender &&
                    series_passport == other.series_passport &&
                    number_passport == other.number_passport &&
                    given_passport == other.given_passport &&
                    date_passport == other.date_passport &&
+                   snils == other.snils &&
+                   is_militaried == other.is_militaried &&
+                   military_ticket == other.military_ticket &&
+                   is_invalid == other.is_invalid &&
+                   invalid_name == other.invalid_name &&
                    about == other.about;
         }
 

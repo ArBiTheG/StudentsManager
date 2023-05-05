@@ -55,8 +55,14 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             Person? person = selected_obj as Person;
             if (person == null) return;
-            StudentsData.Remove(person);
-            StudentsData.SaveChanges();
+
+            string text = $"Вы действительно хотите удалить запись '{person.FullName}'?";
+            var result = MessageBox.Show(text, "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+            if (result == MessageBoxResult.Yes)
+            {
+                StudentsData.Remove(person);
+                StudentsData.SaveChanges();
+            }
         }
 
         public override void EditField(object? selected_obj)

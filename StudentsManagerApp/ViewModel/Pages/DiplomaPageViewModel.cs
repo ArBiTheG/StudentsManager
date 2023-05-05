@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using StudentsManagerApp.View.DialogWindows;
 using System.Diagnostics;
+using System.Windows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
@@ -57,8 +58,14 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             Diploma? diploma = selected_obj as Diploma;
             if (diploma == null) return;
-            StudentsData.Remove(diploma);
-            StudentsData.SaveChanges();
+
+            string text = $"Вы действительно хотите удалить запись '{diploma.Specialty}'?";
+            var result = MessageBox.Show(text, "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+            if (result == MessageBoxResult.Yes)
+            {
+                StudentsData.Remove(diploma);
+                StudentsData.SaveChanges();
+            }
         }
 
         public override void EditField(object? selected_obj)

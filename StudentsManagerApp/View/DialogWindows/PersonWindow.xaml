@@ -61,6 +61,10 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="256"/>
@@ -76,12 +80,15 @@
                 <TextBlock Grid.Row="7" Grid.Column="0" Text="Номер паспорта"/>
                 <TextBlock Grid.Row="8" Grid.Column="0" Text="Дата выдачи"/>
                 <TextBlock Grid.Row="9" Grid.Column="0" Text="Кем выдан"/>
+                <TextBlock Grid.Row="10" Grid.Column="0" Text="СНИЛС"/>
+                <TextBlock Grid.Row="11" Grid.Column="0" Text="Отслужил"/>
+                <TextBlock Grid.Row="12" Grid.Column="0" Text="Военный билет"/>
+                <TextBlock Grid.Row="13" Grid.Column="0" Text="Имеет инвалидность"/>
+                <TextBlock Grid.Row="14" Grid.Column="0" Text="Наименование инвалидности"/>
                 <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Person.LastName}"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Person.FirstName}"/>
                 <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Person.MiddleName}"/>
-                <ComboBox Grid.Row="3" Grid.Column="1" SelectedIndex="{Binding Person.Sex}">
-                    <ComboBoxItem Content="Мужской"/>
-                    <ComboBoxItem Content="Женский"/>
+                <ComboBox Grid.Row="3" Grid.Column="1" SelectedIndex="{Binding Person.Gender}" ItemsSource="{Binding Genders}" SelectedValue="Id" DisplayMemberPath="Name">
                 </ComboBox>
                 <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Person.Birthday}"/>
                 <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Person.About}"/>
@@ -89,6 +96,11 @@
                 <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Person.NumberPassport}"/>
                 <DatePicker Grid.Row="8" Grid.Column="1" SelectedDate="{Binding Person.DatePassport}"/>
                 <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Person.GivenPassport}"/>
+                <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Person.Snils}"/>
+                <CheckBox Grid.Row="11" Grid.Column="1" IsChecked="{Binding Person.IsMilitaried}"/>
+                <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding Person.MilitaryTicket}"/>
+                <CheckBox Grid.Row="13" Grid.Column="1" IsChecked="{Binding Person.IsInvalid}"/>
+                <TextBox Grid.Row="14" Grid.Column="1" Text="{Binding Person.InvalidName}"/>
             </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal">

@@ -19,14 +19,15 @@ namespace StudentsManagerData.Table
         DateTime? given;
         int school_id;
         School school;
-        string? name;
+        string? specialty;
+        string? education;
 
         public Diploma()
         {
         }
 
         //Используется для клонирования
-        private Diploma(int id, int person_id, Person person, string series, string number, DateTime? given, int school_id, School school, string? name)
+        private Diploma(int id, int person_id, Person person, string series, string number, DateTime? given, int school_id, School school, string? specialty, string? education)
         {
             this.id = id;
             this.person_id = person_id;
@@ -36,7 +37,8 @@ namespace StudentsManagerData.Table
             this.given = given;
             this.school_id = school_id;
             this.school = school;
-            this.name = name;
+            this.specialty = specialty;
+            this.education = education;
         }
 
         /// <summary>
@@ -130,7 +132,7 @@ namespace StudentsManagerData.Table
         }
 
         /// <summary>
-        /// Код школы
+        /// Код учебного заведения
         /// </summary>
         public int SchoolId
         {
@@ -145,7 +147,7 @@ namespace StudentsManagerData.Table
         }
 
         /// <summary>
-        /// Объект школы
+        /// Объект учебного заведения
         /// </summary>
         public School School
         {
@@ -161,18 +163,34 @@ namespace StudentsManagerData.Table
         }
 
         /// <summary>
-        /// Наименование документа
+        /// Получил специальность
         /// </summary>
-        public string? Name
+        public string? Specialty
         {
             get
             {
-                return name;
+                return specialty;
             }
             set
             {
-                name = value;
-                OnPropertyChanged("Name");
+                specialty = value;
+                OnPropertyChanged("Specialty");
+            }
+        }
+
+        /// <summary>
+        /// Получил образование
+        /// </summary>
+        public string? Education
+        {
+            get
+            {
+                return education;
+            }
+            set
+            {
+                education = value;
+                OnPropertyChanged("Education");
             }
         }
 
@@ -189,9 +207,10 @@ namespace StudentsManagerData.Table
             Given = diploma.given;
             SchoolId = diploma.school_id;
             School = diploma.school;
-            Name = diploma.name;
+            Specialty = diploma.specialty;
+            Education = diploma.education;
         }
-        public object Clone() => new Diploma(id, person_id, person, series, number, given, school_id, school, name);
+        public object Clone() => new Diploma(id, person_id, person, series, number, given, school_id, school, specialty, education);
 
         public override bool Equals(object? obj)
         {
@@ -209,7 +228,8 @@ namespace StudentsManagerData.Table
                    given == other.given &&
                    school_id == other.school_id &&
                    EqualityComparer<School>.Default.Equals(school, other.school) &&
-                   name == other.name;
+                   specialty == other.specialty &&
+                   education == other.education;
         }
 
         public static bool operator ==(Diploma? left, Diploma? right)

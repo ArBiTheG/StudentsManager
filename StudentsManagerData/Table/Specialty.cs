@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -181,6 +182,19 @@ namespace StudentsManagerData.Table
                 OnPropertyChanged("Reason");
             }
         }
+
+        /// <summary>
+        /// Полное имя
+        /// </summary>
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                return $"{Code} {Name}";
+            }
+        }
+
         /// <summary>
         /// Группы
         /// </summary>

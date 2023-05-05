@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
@@ -53,8 +54,14 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             Student? student = selected_obj as Student;
             if (student == null) return;
-            StudentsData.Remove(student);
-            StudentsData.SaveChanges();
+
+            string text = $"Вы действительно хотите удалить запись '{student.FullName}'?";
+            var result = MessageBox.Show(text, "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+            if (result == MessageBoxResult.Yes)
+            {
+                StudentsData.Remove(student);
+                StudentsData.SaveChanges();
+            }
         }
 
         public override void EditField(object? selected_obj)

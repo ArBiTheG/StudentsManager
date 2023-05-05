@@ -14,6 +14,7 @@ namespace StudentsManagerApp.ViewModel.Dialogs
     {
         private IStudentsData StudentsData;
         public Person Person { get; private set; }
+        public Gender[] Genders { get; } = Gender.List;
         public PersonDialogViewModel(Person person, IStudentsData studentsData)
         {
             Person = person;

@@ -63,8 +63,8 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Номер телефона"/>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Описание"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Владелец"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Phone.Name}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Phone.Description}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Phone.Name}" Grid.ColumnSpan="2"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Phone.Description}" Grid.ColumnSpan="2"/>
                 <ComboBox Grid.Row="2" Grid.Column="1" SelectedItem="{Binding Phone.Person}" ItemsSource="{Binding Persons}" DisplayMemberPath="FullName">
                 </ComboBox>
                 <Button Grid.Row="2" Grid.Column="2" Command="{Binding AddPersonCommand}">Создать</Button>

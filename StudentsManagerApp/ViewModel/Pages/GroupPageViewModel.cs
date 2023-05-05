@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using StudentsManagerApp.View.DialogWindows;
+using System.Windows;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
@@ -52,8 +53,14 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             Group? group = selected_obj as Group;
             if (group == null) return;
-            StudentsData.Remove(group);
-            StudentsData.SaveChanges();
+
+            string text = $"Вы действительно хотите удалить запись '{group.Name}'?";
+            var result = MessageBox.Show(text, "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+            if (result == MessageBoxResult.Yes)
+            {
+                StudentsData.Remove(group);
+                StudentsData.SaveChanges();
+            }
         }
 
         public override void EditField(object? selected_obj)
