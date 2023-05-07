@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.ViewModel.Dialogs;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
@@ -43,11 +44,33 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            RelationWindow relationWindow = new RelationWindow(new Relation(), StudentsData);
+            RelationDialogViewModel viewModelDialog = new RelationDialogViewModel(new Relation(), StudentsData);
+            viewModelDialog.LoadChilds();
+            viewModelDialog.LoadParents();
+
+            RelationWindow relationWindow = new RelationWindow(viewModelDialog);
             if (relationWindow.ShowDialog() == true)
             {
-                Relation relation = relationWindow.ViewModel.Relation;
+                Relation relation = viewModelDialog.Relation;
                 StudentsData.Add(relation);
+                StudentsData.SaveChanges();
+            }
+        }
+
+        public override void EditField(object? selected_obj)
+        {
+            Relation? relation = selected_obj as Relation;
+            if (relation == null) return;
+
+            RelationDialogViewModel viewModelDialog = new RelationDialogViewModel((Relation)relation.Clone(), StudentsData);
+            viewModelDialog.LoadChilds();
+            viewModelDialog.LoadParents();
+
+            RelationWindow relationWindow = new RelationWindow(viewModelDialog);
+            if (relationWindow.ShowDialog() == true)
+            {
+                relation.Load(viewModelDialog.Relation);
+                StudentsData.Edit(relation);
                 StudentsData.SaveChanges();
             }
         }
@@ -59,22 +82,5 @@ namespace StudentsManagerApp.ViewModel.Pages
             StudentsData.Remove(relation);
             StudentsData.SaveChanges();
         }
-
-        public override void EditField(object? selected_obj)
-        {
-            Relation? relation = selected_obj as Relation;
-            if (relation == null) return;
-            Relation vm = relation.Clone() as Relation;
-
-            RelationWindow relationWindow = new RelationWindow(vm, StudentsData);
-
-            if (relationWindow.ShowDialog() == true)
-            {
-                relation.Load(relationWindow.ViewModel.Relation);
-                StudentsData.Edit(relation);
-                StudentsData.SaveChanges();
-            }
-        }
-
     }
 }

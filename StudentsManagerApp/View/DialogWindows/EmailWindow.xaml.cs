@@ -23,12 +23,10 @@ namespace StudentsManagerApp.View.DialogWindows
     /// </summary>
     public partial class EmailWindow : Window
     {
-        public EmailDialogViewModel ViewModel { get; private set; }
-        public EmailWindow(Email email, IStudentsData studentsData)
+        public EmailWindow(EmailDialogViewModel viewModel)
         {
             InitializeComponent();
-            ViewModel = new EmailDialogViewModel(email, studentsData);
-            DataContext = ViewModel;
+            DataContext = viewModel;
         }
 
         void Accept_Click(object sender, RoutedEventArgs e)

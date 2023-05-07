@@ -17,14 +17,20 @@ namespace StudentsManagerApp.ViewModel.Dialogs
     {
         private IStudentsData StudentsData;
         public Student Student { get; set; }
-        public ObservableCollection<Person> Persons { get; private set; }
-        public ObservableCollection<Group> Groups { get; private set; }
+        public ObservableCollection<Person>? Persons { get; private set; }
+        public ObservableCollection<Group>? Groups { get; private set; }
         public StudentDialogViewModel(Student student, IStudentsData studentsData)
         {
             Student = student;
             StudentsData = studentsData;
-            Persons = studentsData.GetPersons();
-            Groups = studentsData.GetGroups();
+        }
+        public void LoadPersons()
+        {
+            Persons = StudentsData.GetPersons();
+        }
+        public void LoadGroups()
+        {
+            Groups = StudentsData.GetGroups();
         }
 
         RelayCommand? addPersonCommand;
@@ -35,10 +41,12 @@ namespace StudentsManagerApp.ViewModel.Dialogs
             {
                 return addPersonCommand ?? (addPersonCommand = new RelayCommand((obj) =>
                 {
-                    PersonWindow personWindow = new PersonWindow(new Person(), StudentsData);
+                    PersonDialogViewModel viewModelDialog = new PersonDialogViewModel(new Person(), StudentsData);
+
+                    PersonWindow personWindow = new PersonWindow(viewModelDialog);
                     if (personWindow.ShowDialog() == true)
                     {
-                        Person person = personWindow.ViewModel.Person;
+                        Person person = viewModelDialog.Person;
                         StudentsData.Add(person);
                         StudentsData.SaveChanges();
                         Student.Person = person;
@@ -53,10 +61,13 @@ namespace StudentsManagerApp.ViewModel.Dialogs
             {
                 return addGroupCommand ?? (addGroupCommand = new RelayCommand((obj) =>
                 {
-                    GroupWindow groupWindow = new GroupWindow(new Group(), StudentsData);
+                    GroupDialogViewModel viewModelDialog = new GroupDialogViewModel(new Group(), StudentsData);
+                    viewModelDialog.LoadSpecialties();
+
+                    GroupWindow groupWindow = new GroupWindow(viewModelDialog);
                     if (groupWindow.ShowDialog() == true)
                     {
-                        Group group = groupWindow.ViewModel.Group;
+                        Group group = viewModelDialog.Group;
                         StudentsData.Add(group);
                         StudentsData.SaveChanges();
                         Student.Group = group;

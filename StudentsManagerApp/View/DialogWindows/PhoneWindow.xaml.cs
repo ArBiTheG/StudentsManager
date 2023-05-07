@@ -23,12 +23,10 @@ namespace StudentsManagerApp.View.DialogWindows
     /// </summary>
     public partial class PhoneWindow : Window
     {
-        public PhoneDialogViewModel ViewModel { get; private set; }
-        public PhoneWindow(Phone phone, IStudentsData studentsData)
+        public PhoneWindow(PhoneDialogViewModel viewModel)
         {
             InitializeComponent();
-            ViewModel = new PhoneDialogViewModel(phone, studentsData);
-            DataContext = ViewModel;
+            DataContext = viewModel;
         }
         void Accept_Click(object sender, RoutedEventArgs e)
         {

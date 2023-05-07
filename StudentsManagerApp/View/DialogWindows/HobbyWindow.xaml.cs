@@ -23,12 +23,10 @@ namespace StudentsManagerApp.View.DialogWindows
     /// </summary>
     public partial class HobbyWindow : Window
     {
-        public HobbyDialogViewModel ViewModel { get; private set; }
-        public HobbyWindow(Hobby hobby, IStudentsData studentsData)
+        public HobbyWindow(HobbyDialogViewModel viewModel)
         {
             InitializeComponent();
-            ViewModel = new HobbyDialogViewModel(hobby, studentsData);
-            DataContext = ViewModel;
+            DataContext = viewModel;
         }
 
         void Accept_Click(object sender, RoutedEventArgs e)

@@ -17,12 +17,15 @@ namespace StudentsManagerApp.ViewModel.Dialogs
     {
         private IStudentsData StudentsData;
         public Group Group { get; set; }
-        public ObservableCollection<Specialty> Specialties { get; private set; }
+        public ObservableCollection<Specialty>? Specialties { get; private set; }
         public GroupDialogViewModel(Group group, IStudentsData studentsData) 
         { 
             Group=group;
             StudentsData = studentsData;
-            Specialties = studentsData.GetSpecialties();
+        }
+        public void LoadSpecialties()
+        {
+            Specialties = StudentsData.GetSpecialties();
         }
 
         RelayCommand? addSpecialtyCommand;
@@ -32,10 +35,12 @@ namespace StudentsManagerApp.ViewModel.Dialogs
             {
                 return addSpecialtyCommand ?? (addSpecialtyCommand = new RelayCommand((obj) =>
                 {
-                    SpecialtyWindow specialtyWindow = new SpecialtyWindow(new Specialty(), StudentsData);
+                    SpecialtyDialogViewModel viewModelDialog = new SpecialtyDialogViewModel(new Specialty(), StudentsData);
+
+                    SpecialtyWindow specialtyWindow = new SpecialtyWindow(viewModelDialog);
                     if (specialtyWindow.ShowDialog() == true)
                     {
-                        Specialty specialty = specialtyWindow.ViewModel.Specialty;
+                        Specialty specialty = viewModelDialog.Specialty;
                         StudentsData.Add(specialty);
                         StudentsData.SaveChanges();
                         Group.Specialty = specialty;

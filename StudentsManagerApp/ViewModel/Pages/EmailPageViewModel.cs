@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.ViewModel.Dialogs;
 using StudentsManagerData;
 using StudentsManagerData.Table;
 using System;
@@ -43,11 +44,31 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            EmailWindow emailWindow = new EmailWindow(new Email(), StudentsData);
+            EmailDialogViewModel viewModelDialog = new EmailDialogViewModel(new Email(), StudentsData);
+            viewModelDialog.LoadPersons();
+
+            EmailWindow emailWindow = new EmailWindow(viewModelDialog);
             if (emailWindow.ShowDialog() == true)
             {
-                Email email = emailWindow.ViewModel.Email;
+                Email email = viewModelDialog.Email;
                 StudentsData.Add(email);
+                StudentsData.SaveChanges();
+            }
+        }
+
+        public override void EditField(object? selected_obj)
+        {
+            Email? email = selected_obj as Email;
+            if (email == null) return;
+
+            EmailDialogViewModel viewModelDialog = new EmailDialogViewModel((Email)email.Clone(), StudentsData);
+            viewModelDialog.LoadPersons();
+
+            EmailWindow emailWindow = new EmailWindow(viewModelDialog);
+            if (emailWindow.ShowDialog() == true)
+            {
+                email.Load(viewModelDialog.Email);
+                StudentsData.Edit(email);
                 StudentsData.SaveChanges();
             }
         }
@@ -62,22 +83,6 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (result == MessageBoxResult.Yes)
             {
                 StudentsData.Remove(email);
-                StudentsData.SaveChanges();
-            }
-        }
-
-        public override void EditField(object? selected_obj)
-        {
-            Email? email = selected_obj as Email;
-            if (email == null) return;
-            Email vm = email.Clone() as Email;
-
-            EmailWindow emailWindow = new EmailWindow(vm, StudentsData);
-
-            if (emailWindow.ShowDialog() == true)
-            {
-                email.Load(emailWindow.ViewModel.Email);
-                StudentsData.Edit(email);
                 StudentsData.SaveChanges();
             }
         }

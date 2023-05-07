@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using StudentsManagerApp.View.DialogWindows;
 using System.Windows;
+using StudentsManagerApp.ViewModel.Dialogs;
+using System.Windows.Media.Imaging;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
@@ -39,11 +41,29 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            SchoolWindow schoolWindow = new SchoolWindow(new School(), StudentsData);
+            SchoolDialogViewModel viewModelDialog = new SchoolDialogViewModel(new School(), StudentsData);
+
+            SchoolWindow schoolWindow = new SchoolWindow(viewModelDialog);
             if (schoolWindow.ShowDialog() == true)
             {
-                School school = schoolWindow.ViewModel.School;
+                School school = viewModelDialog.School;
                 StudentsData.Add(school);
+                StudentsData.SaveChanges();
+            }
+        }
+
+        public override void EditField(object? selected_obj)
+        {
+            School? school = selected_obj as School;
+            if (school == null) return;
+
+            SchoolDialogViewModel viewModelDialog = new SchoolDialogViewModel((School)school.Clone(), StudentsData);
+
+            SchoolWindow schoolWindow = new SchoolWindow(viewModelDialog);
+            if (schoolWindow.ShowDialog() == true)
+            {
+                school.Load(viewModelDialog.School);
+                StudentsData.Edit(school);
                 StudentsData.SaveChanges();
             }
         }
@@ -60,22 +80,5 @@ namespace StudentsManagerApp.ViewModel.Pages
                 StudentsData.SaveChanges();
             }
         }
-
-        public override void EditField(object? selected_obj)
-        {
-            School? school = selected_obj as School;
-            if (school == null) return;
-            School vm = school.Clone() as School;
-
-            SchoolWindow schoolWindow = new SchoolWindow(vm, StudentsData);
-
-            if (schoolWindow.ShowDialog() == true)
-            {
-                school.Load(schoolWindow.ViewModel.School);
-                StudentsData.Edit(school);
-                StudentsData.SaveChanges();
-            }
-        }
-
     }
 }

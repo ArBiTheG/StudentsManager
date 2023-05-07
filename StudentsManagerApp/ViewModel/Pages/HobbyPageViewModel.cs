@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using StudentsManagerApp.View.DialogWindows;
 using System.Windows;
+using StudentsManagerApp.ViewModel.Dialogs;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
@@ -42,11 +43,31 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            HobbyWindow hobbyWindow = new HobbyWindow(new Hobby(), StudentsData);
+            HobbyDialogViewModel viewModelDialog = new HobbyDialogViewModel(new Hobby(), StudentsData);
+            viewModelDialog.LoadPersons();
+
+            HobbyWindow hobbyWindow = new HobbyWindow(viewModelDialog);
             if (hobbyWindow.ShowDialog() == true)
             {
-                Hobby hobby = hobbyWindow.ViewModel.Hobby;
+                Hobby hobby = viewModelDialog.Hobby;
                 StudentsData.Add(hobby);
+                StudentsData.SaveChanges();
+            }
+        }
+
+        public override void EditField(object? selected_obj)
+        {
+            Hobby? hobby = selected_obj as Hobby;
+            if (hobby == null) return;
+
+            HobbyDialogViewModel viewModelDialog = new HobbyDialogViewModel((Hobby)hobby.Clone(), StudentsData);
+            viewModelDialog.LoadPersons();
+
+            HobbyWindow hobbyWindow = new HobbyWindow(viewModelDialog);
+            if (hobbyWindow.ShowDialog() == true)
+            {
+                hobby.Load(viewModelDialog.Hobby);
+                StudentsData.Edit(hobby);
                 StudentsData.SaveChanges();
             }
         }
@@ -61,22 +82,6 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (result == MessageBoxResult.Yes)
             {
                 StudentsData.Remove(hobby);
-                StudentsData.SaveChanges();
-            }
-        }
-
-        public override void EditField(object? selected_obj)
-        {
-            Hobby? hobby = selected_obj as Hobby;
-            if (hobby == null) return;
-            Hobby vm = hobby.Clone() as Hobby;
-
-            HobbyWindow hobbyWindow = new HobbyWindow(vm, StudentsData);
-
-            if (hobbyWindow.ShowDialog() == true)
-            {
-                hobby.Load(hobbyWindow.ViewModel.Hobby);
-                StudentsData.Edit(hobby);
                 StudentsData.SaveChanges();
             }
         }

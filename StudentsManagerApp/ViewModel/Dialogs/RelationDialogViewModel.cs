@@ -17,14 +17,20 @@ namespace StudentsManagerApp.ViewModel.Dialogs
     {
         private IStudentsData StudentsData;
         public Relation Relation { get; set; }
-        public ObservableCollection<Person> Childs { get; private set; }
-        public ObservableCollection<Person> Parents { get; private set; }
+        public ObservableCollection<Person>? Childs { get; private set; }
+        public ObservableCollection<Person>? Parents { get; private set; }
         public RelationDialogViewModel(Relation relation, IStudentsData studentsData)
         {
             Relation = relation;
             StudentsData = studentsData;
-            Childs = studentsData.GetPersons();
-            Parents = studentsData.GetPersons();
+        }
+        public void LoadChilds()
+        {
+            Childs = StudentsData.GetPersons();
+        }
+        public void LoadParents()
+        {
+            Parents = StudentsData.GetPersons();
         }
 
         RelayCommand? addChildCommand;
@@ -35,10 +41,12 @@ namespace StudentsManagerApp.ViewModel.Dialogs
             {
                 return addChildCommand ?? (addChildCommand = new RelayCommand((obj) =>
                 {
-                    PersonWindow personWindow = new PersonWindow(new Person(), StudentsData);
+                    PersonDialogViewModel viewModelDialog = new PersonDialogViewModel(new Person(), StudentsData);
+
+                    PersonWindow personWindow = new PersonWindow(viewModelDialog);
                     if (personWindow.ShowDialog() == true)
                     {
-                        Person person = personWindow.ViewModel.Person;
+                        Person person = viewModelDialog.Person;
                         StudentsData.Add(person);
                         StudentsData.SaveChanges();
                         Relation.Child = person;
@@ -52,10 +60,12 @@ namespace StudentsManagerApp.ViewModel.Dialogs
             {
                 return addParentCommand ?? (addParentCommand = new RelayCommand((obj) =>
                 {
-                    PersonWindow personWindow = new PersonWindow(new Person(), StudentsData);
+                    PersonDialogViewModel viewModelDialog = new PersonDialogViewModel(new Person(), StudentsData);
+
+                    PersonWindow personWindow = new PersonWindow(viewModelDialog);
                     if (personWindow.ShowDialog() == true)
                     {
-                        Person person = personWindow.ViewModel.Person;
+                        Person person = viewModelDialog.Person;
                         StudentsData.Add(person);
                         StudentsData.SaveChanges();
                         Relation.Parent = person;

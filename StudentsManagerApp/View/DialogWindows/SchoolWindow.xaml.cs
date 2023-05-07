@@ -22,12 +22,10 @@ namespace StudentsManagerApp.View.DialogWindows
     /// </summary>
     public partial class SchoolWindow : Window
     {
-        public SchoolDialogViewModel ViewModel { get; private set; }
-        public SchoolWindow(School school, IStudentsData studentsData)
+        public SchoolWindow(SchoolDialogViewModel viewModel)
         {
             InitializeComponent();
-            ViewModel = new SchoolDialogViewModel(school, studentsData);
-            DataContext = ViewModel;
+            DataContext = viewModel;
         }
         void Accept_Click(object sender, RoutedEventArgs e)
         {

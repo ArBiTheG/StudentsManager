@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using StudentsManagerApp.View.DialogWindows;
 using System.Windows;
+using StudentsManagerApp.ViewModel.Dialogs;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
@@ -43,11 +44,31 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            PhoneWindow phoneWindow = new PhoneWindow(new Phone(), StudentsData);
+            PhoneDialogViewModel viewModelDialog = new PhoneDialogViewModel(new Phone(), StudentsData);
+            viewModelDialog.LoadPersons();
+
+            PhoneWindow phoneWindow = new PhoneWindow(viewModelDialog);
             if (phoneWindow.ShowDialog() == true)
             {
-                Phone phone = phoneWindow.ViewModel.Phone;
+                Phone phone = viewModelDialog.Phone;
                 StudentsData.Add(phone);
+                StudentsData.SaveChanges();
+            }
+        }
+
+        public override void EditField(object? selected_obj)
+        {
+            Phone? phone = selected_obj as Phone;
+            if (phone == null) return;
+
+            PhoneDialogViewModel viewModelDialog = new PhoneDialogViewModel((Phone)phone.Clone(), StudentsData);
+            viewModelDialog.LoadPersons();
+
+            PhoneWindow phoneWindow = new PhoneWindow(viewModelDialog);
+            if (phoneWindow.ShowDialog() == true)
+            {
+                phone.Load(viewModelDialog.Phone);
+                StudentsData.Edit(phone);
                 StudentsData.SaveChanges();
             }
         }
@@ -65,22 +86,5 @@ namespace StudentsManagerApp.ViewModel.Pages
                 StudentsData.SaveChanges();
             }
         }
-
-        public override void EditField(object? selected_obj)
-        {
-            Phone? phone = selected_obj as Phone;
-            if (phone == null) return;
-            Phone vm = phone.Clone() as Phone;
-
-            PhoneWindow phoneWindow = new PhoneWindow(vm, StudentsData);
-
-            if (phoneWindow.ShowDialog() == true)
-            {
-                phone.Load(phoneWindow.ViewModel.Phone);
-                StudentsData.Edit(phone);
-                StudentsData.SaveChanges();
-            }
-        }
-
     }
 }

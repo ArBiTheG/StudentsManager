@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using StudentsManagerApp.View.DialogWindows;
 using System.Windows;
+using StudentsManagerApp.ViewModel.Dialogs;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
@@ -40,11 +41,32 @@ namespace StudentsManagerApp.ViewModel.Pages
         }
         public override void AddField(object? obj)
         {
-            GroupWindow groupWindow = new GroupWindow(new Group(), StudentsData);
+            GroupDialogViewModel viewModelDialog = new GroupDialogViewModel(new Group(), StudentsData);
+            viewModelDialog.LoadSpecialties();
+
+            GroupWindow groupWindow = new GroupWindow(viewModelDialog);
             if (groupWindow.ShowDialog() == true)
             {
-                Group group = groupWindow.ViewModel.Group;
+                Group group = viewModelDialog.Group;
                 StudentsData.Add(group);
+                StudentsData.SaveChanges();
+            }
+        }
+
+        public override void EditField(object? selected_obj)
+        {
+            Group? group = selected_obj as Group;
+            if (group == null) return;
+
+            GroupDialogViewModel viewModelDialog = new GroupDialogViewModel((Group)group.Clone(), StudentsData);
+            viewModelDialog.LoadSpecialties();
+
+            GroupWindow groupWindow = new GroupWindow(viewModelDialog);
+
+            if (groupWindow.ShowDialog() == true)
+            {
+                group.Load(viewModelDialog.Group);
+                StudentsData.Edit(group);
                 StudentsData.SaveChanges();
             }
         }
@@ -62,22 +84,5 @@ namespace StudentsManagerApp.ViewModel.Pages
                 StudentsData.SaveChanges();
             }
         }
-
-        public override void EditField(object? selected_obj)
-        {
-            Group? group = selected_obj as Group;
-            if (group == null) return;
-            Group vm = group.Clone() as Group;
-
-            GroupWindow groupWindow = new GroupWindow(vm, StudentsData);
-
-            if (groupWindow.ShowDialog() == true)
-            {
-                group.Load(groupWindow.ViewModel.Group);
-                StudentsData.Edit(group);
-                StudentsData.SaveChanges();
-            }
-        }
-
     }
 }

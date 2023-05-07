@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using StudentsManagerApp.View.DialogWindows;
 using System.Diagnostics;
 using System.Windows;
+using StudentsManagerApp.ViewModel.Dialogs;
 
 namespace StudentsManagerApp.ViewModel.Pages
 {
@@ -45,11 +46,34 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            DiplomaWindow diplomaWindow = new DiplomaWindow(new Diploma(), StudentsData);
+            DiplomaDialogViewModel viewModelDialog = new DiplomaDialogViewModel(new Diploma(), StudentsData);
+            viewModelDialog.LoadPersons();
+            viewModelDialog.LoadSchools();
+
+            DiplomaWindow diplomaWindow = new DiplomaWindow(viewModelDialog);
             if (diplomaWindow.ShowDialog() == true)
             {
-                Diploma diploma = diplomaWindow.ViewModel.Diploma;
+                Diploma diploma = viewModelDialog.Diploma;
                 StudentsData.Add(diploma);
+                StudentsData.SaveChanges();
+            }
+        }
+
+        public override void EditField(object? selected_obj)
+        {
+            Diploma? diploma = selected_obj as Diploma;
+            if (diploma == null) return;
+
+            DiplomaDialogViewModel viewModelDialog = new DiplomaDialogViewModel( (Diploma)diploma.Clone() , StudentsData);
+            viewModelDialog.LoadPersons();
+            viewModelDialog.LoadSchools();
+
+            DiplomaWindow diplomaWindow = new DiplomaWindow(viewModelDialog);
+
+            if (diplomaWindow.ShowDialog() == true)
+            {
+                diploma.Load(viewModelDialog.Diploma);
+                StudentsData.Edit(diploma);
                 StudentsData.SaveChanges();
             }
         }
@@ -64,22 +88,6 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (result == MessageBoxResult.Yes)
             {
                 StudentsData.Remove(diploma);
-                StudentsData.SaveChanges();
-            }
-        }
-
-        public override void EditField(object? selected_obj)
-        {
-            Diploma? diploma = selected_obj as Diploma;
-            if (diploma == null) return;
-            Diploma vm = diploma.Clone() as Diploma;
-
-            DiplomaWindow diplomaWindow = new DiplomaWindow(vm, StudentsData);
-
-            if (diplomaWindow.ShowDialog() == true)
-            {
-                diploma.Load(diplomaWindow.ViewModel.Diploma);
-                StudentsData.Edit(diploma);
                 StudentsData.SaveChanges();
             }
         }

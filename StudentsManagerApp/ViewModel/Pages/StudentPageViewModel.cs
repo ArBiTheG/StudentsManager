@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.ViewModel.Dialogs;
 using StudentsManagerData;
 using StudentsManagerData.Table;
 using System;
@@ -41,11 +42,33 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            StudentWindow studentWindow = new StudentWindow(new Student(), StudentsData);
+            StudentDialogViewModel viewModelDialog = new StudentDialogViewModel(new Student(), StudentsData);
+            viewModelDialog.LoadPersons();
+            viewModelDialog.LoadGroups();
+
+            StudentWindow studentWindow = new StudentWindow(viewModelDialog);
             if (studentWindow.ShowDialog() == true)
             {
-                Student student = studentWindow.ViewModel.Student;
+                Student student = viewModelDialog.Student;
                 StudentsData.Add(student);
+                StudentsData.SaveChanges();
+            }
+        }
+
+        public override void EditField(object? selected_obj)
+        {
+            Student? student = selected_obj as Student;
+            if (student == null) return;
+
+            StudentDialogViewModel viewModelDialog = new StudentDialogViewModel((Student)student.Clone(), StudentsData);
+            viewModelDialog.LoadPersons();
+            viewModelDialog.LoadGroups();
+
+            StudentWindow studentWindow = new StudentWindow(viewModelDialog);
+            if (studentWindow.ShowDialog() == true)
+            {
+                student.Load(viewModelDialog.Student);
+                StudentsData.Edit(student);
                 StudentsData.SaveChanges();
             }
         }
@@ -63,22 +86,5 @@ namespace StudentsManagerApp.ViewModel.Pages
                 StudentsData.SaveChanges();
             }
         }
-
-        public override void EditField(object? selected_obj)
-        {
-            Student? student = selected_obj as Student;
-            if (student == null) return;
-            Student vm = student.Clone() as Student;
-
-            StudentWindow studentWindow = new StudentWindow(vm, StudentsData);
-
-            if (studentWindow.ShowDialog() == true)
-            {
-                student.Load(studentWindow.ViewModel.Student);
-                StudentsData.Edit(student);
-                StudentsData.SaveChanges();
-            }
-        }
-
     }
 }

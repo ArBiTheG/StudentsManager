@@ -23,12 +23,10 @@ namespace StudentsManagerApp.View.DialogWindows
     /// </summary>
     public partial class GroupWindow : Window
     {
-        public GroupDialogViewModel ViewModel { get; private set; }
-        public GroupWindow(Group group, IStudentsData studentsData)
+        public GroupWindow(GroupDialogViewModel viewModel)
         {
             InitializeComponent();
-            ViewModel = new GroupDialogViewModel(group, studentsData);
-            DataContext = ViewModel;
+            DataContext = viewModel;
         }
 
         void Accept_Click(object sender, RoutedEventArgs e)

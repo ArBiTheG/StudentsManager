@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.ViewModel.Dialogs;
 using StudentsManagerData;
 using StudentsManagerData.Table;
 using System;
@@ -42,11 +43,29 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            PersonWindow personWindow = new PersonWindow(new Person(), StudentsData);
+            PersonDialogViewModel viewModelDialog = new PersonDialogViewModel(new Person(), StudentsData);
+
+            PersonWindow personWindow = new PersonWindow(viewModelDialog);
             if (personWindow.ShowDialog() == true)
             {
-                Person person = personWindow.ViewModel.Person;
+                Person person = viewModelDialog.Person;
                 StudentsData.Add(person);
+                StudentsData.SaveChanges();
+            }
+        }
+
+        public override void EditField(object? selected_obj)
+        {
+            Person? person = selected_obj as Person;
+            if (person == null) return;
+
+            PersonDialogViewModel viewModelDialog = new PersonDialogViewModel((Person)person.Clone(), StudentsData);
+
+            PersonWindow personWindow = new PersonWindow(viewModelDialog);
+            if (personWindow.ShowDialog() == true)
+            {
+                person.Load(viewModelDialog.Person);
+                StudentsData.Edit(person);
                 StudentsData.SaveChanges();
             }
         }
@@ -61,22 +80,6 @@ namespace StudentsManagerApp.ViewModel.Pages
             if (result == MessageBoxResult.Yes)
             {
                 StudentsData.Remove(person);
-                StudentsData.SaveChanges();
-            }
-        }
-
-        public override void EditField(object? selected_obj)
-        {
-            Person? person = selected_obj as Person;
-            if (person == null) return;
-            Person vm = person.Clone() as Person;
-
-            PersonWindow personWindow = new PersonWindow(vm, StudentsData);
-
-            if (personWindow.ShowDialog() == true)
-            {
-                person.Load(personWindow.ViewModel.Person);
-                StudentsData.Edit(person);
                 StudentsData.SaveChanges();
             }
         }

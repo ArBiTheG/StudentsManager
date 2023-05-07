@@ -17,12 +17,15 @@ namespace StudentsManagerApp.ViewModel.Dialogs
     {
         private IStudentsData StudentsData;
         public Phone Phone { get; set; }
-        public ObservableCollection<Person> Persons { get; private set; }
+        public ObservableCollection<Person>? Persons { get; private set; }
         public PhoneDialogViewModel(Phone phone, IStudentsData studentsData)
         {
             Phone = phone;
             StudentsData = studentsData;
-            Persons = studentsData.GetPersons();
+        }
+        public void LoadPersons()
+        {
+            Persons = StudentsData.GetPersons();
         }
 
         RelayCommand? addPersonCommand;
@@ -32,10 +35,12 @@ namespace StudentsManagerApp.ViewModel.Dialogs
             {
                 return addPersonCommand ?? (addPersonCommand = new RelayCommand((obj) =>
                 {
-                    PersonWindow personWindow = new PersonWindow(new Person(), StudentsData);
+                    PersonDialogViewModel viewModelDialog = new PersonDialogViewModel(new Person(), StudentsData);
+
+                    PersonWindow personWindow = new PersonWindow(viewModelDialog);
                     if (personWindow.ShowDialog() == true)
                     {
-                        Person person = personWindow.ViewModel.Person;
+                        Person person = viewModelDialog.Person;
                         StudentsData.Add(person);
                         StudentsData.SaveChanges();
                         Phone.Person = person;

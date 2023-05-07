@@ -22,12 +22,10 @@ namespace StudentsManagerApp.View.DialogWindows
     /// </summary>
     public partial class SpecialtyWindow : Window
     {
-        public SpecialtyDialogViewModel ViewModel { get; private set; }
-        public SpecialtyWindow(Specialty specialty, IStudentsData studentsData)
+        public SpecialtyWindow(SpecialtyDialogViewModel viewModel)
         {
             InitializeComponent();
-            ViewModel = new SpecialtyDialogViewModel(specialty, studentsData);
-            DataContext = ViewModel;
+            DataContext = viewModel;
         }
 
         void Accept_Click(object sender, RoutedEventArgs e)

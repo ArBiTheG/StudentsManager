@@ -93,32 +93,32 @@ namespace StudentsManagerData
             modelBuilder.Entity<Student>().HasKey(u => u.Id);
 
 
-            // Установка уникальных ключей для Diploma.Series и Diploma.Number
-            modelBuilder.Entity<Diploma>().HasAlternateKey(u => new { u.Series, u.Number });
-
-            // Установка уникальных ключей для Email.PersonId и Email.Name
-            modelBuilder.Entity<Email>().HasAlternateKey(u => new { u.PersonId, u.Name });
-
-            // Установка уникальных ключей для Group.SpecialtyId и Group.Name
-            modelBuilder.Entity<Group>().HasAlternateKey(u => new { u.SpecialtyId, u.Name });
-
-            // Установка уникальных ключей для Hobby.PersonId и Hobby.Name
-            modelBuilder.Entity<Hobby>().HasAlternateKey(u => new { u.PersonId, u.Name });
-
-            // Установка уникальных ключей для Phone.PersonId и Phone.Name
-            modelBuilder.Entity<Phone>().HasAlternateKey(u => new { u.PersonId, u.Name });
-
-            // Установка уникальных ключей для Relation.ChildId и Relation.ParentId
-            modelBuilder.Entity<Relation>().HasAlternateKey(u => new { u.ChildId, u.ParentId });
-
-            // Установка уникальных ключей для School.FullName
-            modelBuilder.Entity<School>().HasAlternateKey(u => new { u.FullName});
-
-            // Установка уникальных ключей для Specialty.Code и Specialty.Name
-            modelBuilder.Entity<Specialty>().HasAlternateKey(u => new { u.Code, u.Name });
-
-            // Установка уникальных ключей для Student.PersonId и Student.GroupId
-            modelBuilder.Entity<Student>().HasAlternateKey(u => new { u.PersonId, u.GroupId });
+            //// Установка уникальных ключей для Diploma.Series и Diploma.Number
+            //modelBuilder.Entity<Diploma>().HasAlternateKey(u => new { u.Series, u.Number });
+            //
+            //// Установка уникальных ключей для Email.PersonId и Email.Name
+            //modelBuilder.Entity<Email>().HasAlternateKey(u => new { u.PersonId, u.Name });
+            //
+            //// Установка уникальных ключей для Group.SpecialtyId и Group.Name
+            //modelBuilder.Entity<Group>().HasAlternateKey(u => new { u.SpecialtyId, u.Name });
+            //
+            //// Установка уникальных ключей для Hobby.PersonId и Hobby.Name
+            //modelBuilder.Entity<Hobby>().HasAlternateKey(u => new { u.PersonId, u.Name });
+            //
+            //// Установка уникальных ключей для Phone.PersonId и Phone.Name
+            //modelBuilder.Entity<Phone>().HasAlternateKey(u => new { u.PersonId, u.Name });
+            //
+            //// Установка уникальных ключей для Relation.ChildId и Relation.ParentId
+            //modelBuilder.Entity<Relation>().HasAlternateKey(u => new { u.ChildId, u.ParentId });
+            //
+            //// Установка уникальных ключей для School.FullName
+            //modelBuilder.Entity<School>().HasAlternateKey(u => new { u.FullName});
+            //
+            //// Установка уникальных ключей для Specialty.Code и Specialty.Name
+            //modelBuilder.Entity<Specialty>().HasAlternateKey(u => new { u.Code, u.Name });
+            //
+            //// Установка уникальных ключей для Student.PersonId и Student.GroupId
+            //modelBuilder.Entity<Student>().HasAlternateKey(u => new { u.PersonId, u.GroupId });
 
 
             // Подключение внешнего ключа от Hobby.Person к Person

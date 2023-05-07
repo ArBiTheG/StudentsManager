@@ -17,14 +17,20 @@ namespace StudentsManagerApp.ViewModel.Dialogs
     {
         private IStudentsData StudentsData;
         public Diploma Diploma { get; private set; }
-        public ObservableCollection<Person> Persons { get; private set; }
-        public ObservableCollection<School> Schools { get; private set; }
+        public ObservableCollection<Person>? Persons { get; private set; }
+        public ObservableCollection<School>? Schools { get; private set; }
         public DiplomaDialogViewModel(Diploma diploma, IStudentsData studentsData)
         {
             Diploma = diploma;
             StudentsData = studentsData;
-            Persons = studentsData.GetPersons();
-            Schools = studentsData.GetSchools();
+        }
+        public void LoadPersons()
+        {
+            Persons = StudentsData.GetPersons();
+        }
+        public void LoadSchools()
+        {
+            Schools = StudentsData.GetSchools();
         }
 
         RelayCommand? addPersonCommand;
@@ -35,10 +41,12 @@ namespace StudentsManagerApp.ViewModel.Dialogs
             { 
                 return addPersonCommand ?? (addPersonCommand = new RelayCommand((obj) =>
                 {
-                    PersonWindow personWindow = new PersonWindow(new Person(), StudentsData);
+                    PersonDialogViewModel viewModelDialog = new PersonDialogViewModel(new Person(), StudentsData);
+
+                    PersonWindow personWindow = new PersonWindow(viewModelDialog);
                     if (personWindow.ShowDialog() == true)
                     {
-                        Person person = personWindow.ViewModel.Person;
+                        Person person = viewModelDialog.Person;
                         StudentsData.Add(person);
                         StudentsData.SaveChanges();
                         Diploma.Person = person;
@@ -52,10 +60,12 @@ namespace StudentsManagerApp.ViewModel.Dialogs
             {
                 return addSchoolCommand ?? (addSchoolCommand = new RelayCommand((obj) =>
                 {
-                    SchoolWindow schoolWindow = new SchoolWindow(new School(), StudentsData);
+                    SchoolDialogViewModel viewModelDialog = new SchoolDialogViewModel(new School(), StudentsData);
+
+                    SchoolWindow schoolWindow = new SchoolWindow(viewModelDialog);
                     if (schoolWindow.ShowDialog() == true)
                     {
-                        School school = schoolWindow.ViewModel.School;
+                        School school = viewModelDialog.School;
                         StudentsData.Add(school);
                         StudentsData.SaveChanges();
                         Diploma.School = school;

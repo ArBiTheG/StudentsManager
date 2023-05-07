@@ -23,12 +23,10 @@ namespace StudentsManagerApp.View.DialogWindows
     /// </summary>
     public partial class DiplomaWindow : Window
     {
-        public DiplomaDialogViewModel ViewModel { get; private set; }
-        public DiplomaWindow(Diploma diploma, IStudentsData studentsData)
+        public DiplomaWindow(DiplomaDialogViewModel viewModel)
         {
             InitializeComponent();
-            ViewModel = new DiplomaDialogViewModel(diploma, studentsData);
-            DataContext = ViewModel;
+            DataContext = viewModel;
         }
 
         void Accept_Click(object sender, RoutedEventArgs e)

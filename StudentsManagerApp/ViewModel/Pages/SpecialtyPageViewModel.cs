@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.ViewModel.Dialogs;
 using StudentsManagerData;
 using StudentsManagerData.Table;
 using System;
@@ -39,11 +40,30 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
-            SpecialtyWindow specialtyWindow = new SpecialtyWindow(new Specialty(), StudentsData);
+            SpecialtyDialogViewModel viewModelDialog = new SpecialtyDialogViewModel(new Specialty(), StudentsData);
+
+            SpecialtyWindow specialtyWindow = new SpecialtyWindow(viewModelDialog);
             if (specialtyWindow.ShowDialog() == true)
             {
-                Specialty specialty = specialtyWindow.ViewModel.Specialty;
+                Specialty specialty = viewModelDialog.Specialty;
                 StudentsData.Add(specialty);
+                StudentsData.SaveChanges();
+            }
+        }
+
+        public override void EditField(object? selected_obj)
+        {
+            Specialty? specialty = selected_obj as Specialty;
+            if (specialty == null) return;
+            Specialty vm = specialty.Clone() as Specialty;
+
+            SpecialtyDialogViewModel viewModelDialog = new SpecialtyDialogViewModel((Specialty)specialty.Clone(), StudentsData);
+
+            SpecialtyWindow specialtyWindow = new SpecialtyWindow(viewModelDialog);
+            if (specialtyWindow.ShowDialog() == true)
+            {
+                specialty.Load(viewModelDialog.Specialty);
+                StudentsData.Edit(specialty);
                 StudentsData.SaveChanges();
             }
         }
@@ -61,22 +81,5 @@ namespace StudentsManagerApp.ViewModel.Pages
                 StudentsData.SaveChanges();
             }
         }
-
-        public override void EditField(object? selected_obj)
-        {
-            Specialty? specialty = selected_obj as Specialty;
-            if (specialty == null) return;
-            Specialty vm = specialty.Clone() as Specialty;
-
-            SpecialtyWindow specialtyWindow = new SpecialtyWindow(vm, StudentsData);
-
-            if (specialtyWindow.ShowDialog() == true)
-            {
-                specialty.Load(specialtyWindow.ViewModel.Specialty);
-                StudentsData.Edit(specialty);
-                StudentsData.SaveChanges();
-            }
-        }
-
     }
 }
