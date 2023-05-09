@@ -72,7 +72,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             if (diplomaWindow.ShowDialog() == true)
             {
-                diploma.Load(viewModelDialog.Diploma);
+                diploma.Copy(viewModelDialog.Diploma);
                 StudentsData.Edit(diploma);
                 StudentsData.SaveChanges();
             }
@@ -83,7 +83,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             Diploma? diploma = selected_obj as Diploma;
             if (diploma == null) return;
 
-            string text = $"Вы действительно хотите удалить запись '{diploma.Specialty}'?";
+            string text = $"Вы действительно хотите удалить запись '{diploma.Skill}'?";
             var result = MessageBox.Show(text, "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
             if (result == MessageBoxResult.Yes)
             {

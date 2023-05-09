@@ -67,7 +67,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             EmailWindow emailWindow = new EmailWindow(viewModelDialog);
             if (emailWindow.ShowDialog() == true)
             {
-                email.Load(viewModelDialog.Email);
+                email.Copy(viewModelDialog.Email);
                 StudentsData.Edit(email);
                 StudentsData.SaveChanges();
             }

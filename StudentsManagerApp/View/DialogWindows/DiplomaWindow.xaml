@@ -74,11 +74,11 @@
                 </ComboBox>
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Diploma.Series}" Grid.ColumnSpan="2"/>
                 <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Diploma.Number}" Grid.ColumnSpan="2"/>
-                <DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding Diploma.Given}" Grid.ColumnSpan="2"/>
+                <DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding Diploma.DateGiven}" Grid.ColumnSpan="2"/>
                 <ComboBox Grid.Row="4" Grid.Column="1" SelectedItem="{Binding Diploma.School}" ItemsSource="{Binding Schools}" DisplayMemberPath="ShortName">
                 </ComboBox>
-                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Diploma.Specialty}" Grid.ColumnSpan="2"/>
-                <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Diploma.Education}" Grid.ColumnSpan="2"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Diploma.Skill}" Grid.ColumnSpan="2"/>
+                <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Diploma.TypeDiploma}" Grid.ColumnSpan="2"/>
                 <Button Grid.Row="0" Grid.Column="2" Command="{Binding AddPersonCommand}">Создать</Button>
                 <Button Grid.Row="4" Grid.Column="2" Command="{Binding AddSchoolCommand}">Создать</Button>
             </Grid>

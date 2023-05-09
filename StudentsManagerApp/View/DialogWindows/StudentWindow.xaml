@@ -74,8 +74,8 @@
                 </ComboBox>
                 <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Student.DateEntry}" Grid.ColumnSpan="2"/>
                 <CheckBox x:Name="checkBox" Grid.Row="3" Grid.Column="1" IsChecked="{Binding Student.IsEscaped}" Grid.ColumnSpan="2"/>
-                <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Student.DateEscape}" IsEnabled="{Binding IsChecked, ElementName=checkBox}" Grid.ColumnSpan="2"/>
-                <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Student.Reason}" IsEnabled="{Binding IsChecked, ElementName=checkBox}" Grid.ColumnSpan="2"/>
+                <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Student.DateEscaped}" IsEnabled="{Binding IsChecked, ElementName=checkBox}" Grid.ColumnSpan="2"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Student.ReasonEscaped}" IsEnabled="{Binding IsChecked, ElementName=checkBox}" Grid.ColumnSpan="2"/>
                 <Button Grid.Row="0" Grid.Column="2" Command="{Binding AddPersonCommand}">Создать</Button>
                 <Button Grid.Row="1" Grid.Column="2" Command="{Binding AddGroupCommand}">Создать</Button>
             </Grid>

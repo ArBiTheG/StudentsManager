@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StudentsManagerData.Table
 {
-    public class Hobby: ICloneable, IEquatable<Hobby?>, INotifyPropertyChanged
+    public class Hobby: ICopyable<Hobby?>, ICloneable<Hobby?>, IEquatable<Hobby?>, INotifyPropertyChanged
     {
         int id;
         int person_id;
@@ -18,15 +19,6 @@ namespace StudentsManagerData.Table
 
         public Hobby()
         {
-        }
-        //Используется для клонирования
-        private Hobby(int id, int person_id, Person person, string name, string? description)
-        {
-            this.id = id;
-            this.person_id = person_id;
-            this.person = person;
-            this.name = name;
-            this.description = description;
         }
 
         /// <summary>
@@ -38,7 +30,6 @@ namespace StudentsManagerData.Table
                 return id;
             }
         }
-
         /// <summary>
         /// Код человека
         /// </summary>
@@ -52,7 +43,6 @@ namespace StudentsManagerData.Table
                 person_id = value; 
             } 
         }
-
         /// <summary>
         /// Объект человека
         /// </summary>
@@ -64,10 +54,9 @@ namespace StudentsManagerData.Table
             set
             { 
                 person = value;
-                OnPropertyChanged("Person");
+                OnPropertyChanged(nameof(Person));
             } 
         }
-
         /// <summary>
         /// Наименование хобби
         /// </summary>
@@ -79,12 +68,11 @@ namespace StudentsManagerData.Table
             set 
             { 
                 name = value;
-                OnPropertyChanged("Name");
+                OnPropertyChanged(nameof(Name));
             }
         }
-
         /// <summary>
-        /// Описание
+        /// Описание хобби
         /// </summary>
         public string? Description { 
             get 
@@ -94,26 +82,38 @@ namespace StudentsManagerData.Table
             set
             {
                 description = value;
-                OnPropertyChanged("Description");
+                OnPropertyChanged(nameof(Description));
             }
         }
 
-        /// <summary>
-        /// Загрузить значения в поля
-        /// </summary>
-        /// <param name="hobby">Откуда будут взяты значения полей</param>
-        public void Load(Hobby hobby)
+        public override string ToString()
         {
+            return "id: " + id.ToString() + " / name: " + name.ToString();
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return Equals(obj as Hobby);
+        }
+
+        public void Copy(Hobby? hobby)
+        {
+            if (hobby == null) return;
             PersonId = hobby.person_id;
             Person = hobby.person;
             Name = hobby.name;
             Description = hobby.description;
         }
-        public object Clone() => new Hobby(id,person_id,person,name,description);
-
-        public override bool Equals(object? obj)
+        public Hobby Clone()
         {
-            return Equals(obj as Hobby);
+            return new Hobby()
+            {
+                id = id,
+                person_id = person_id,
+                person = person,
+                name = name,
+                description = description
+            };
         }
 
         public bool Equals(Hobby? other)
@@ -121,7 +121,7 @@ namespace StudentsManagerData.Table
             return other is not null &&
                    id == other.id &&
                    person_id == other.person_id &&
-                   EqualityComparer<Person>.Default.Equals(person, other.person) &&
+                   person == other.person &&
                    name == other.name &&
                    description == other.description;
         }
@@ -134,11 +134,6 @@ namespace StudentsManagerData.Table
         public static bool operator !=(Hobby? left, Hobby? right)
         {
             return !(left == right);
-        }
-
-        public new string ToString()
-        {
-            return "id: " + id.ToString() + " / name: " + name.ToString();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

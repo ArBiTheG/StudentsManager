@@ -66,7 +66,7 @@
                 <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding School.FullName}"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding School.ShortName}"/>
                 <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding School.Address}"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding School.Description}"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding School.About}"/>
             </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal">

@@ -62,7 +62,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             SpecialtyWindow specialtyWindow = new SpecialtyWindow(viewModelDialog);
             if (specialtyWindow.ShowDialog() == true)
             {
-                specialty.Load(viewModelDialog.Specialty);
+                specialty.Copy(viewModelDialog.Specialty);
                 StudentsData.Edit(specialty);
                 StudentsData.SaveChanges();
             }

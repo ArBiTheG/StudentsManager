@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 
 namespace StudentsManagerData.Table
 {
-    public class Person: ICloneable, IEquatable<Person?>, INotifyPropertyChanged
+    public class Person: IPerson,ICopyable<Person?>, ICloneable<Person?>, IEquatable<Person?>, INotifyPropertyChanged
     {
         int id;
         string first_name;
@@ -15,39 +16,10 @@ namespace StudentsManagerData.Table
         string last_name;
         DateTime birthday;
         byte gender;
-        string? series_passport;
-        string? number_passport;
-        string? given_passport;
-        DateTime? date_passport;
-        string? snils;
-        bool is_militaried;
-        string? military_ticket;
-        bool is_invalid;
-        string? invalid_name;
         string? about;
 
         public Person()
         {
-        }
-        //Используется для клонирования
-        private Person(int id, string first_name, string middle_name, string last_name, DateTime birthday, byte gender, string? series_passport, string? number_passport, string? given_passport, DateTime? date_passport, string? snils, bool is_militaried, string? military_ticket, bool is_invalid, string? invalid_name, string? about)
-        {
-            this.id = id;
-            this.first_name = first_name;
-            this.middle_name = middle_name;
-            this.last_name = last_name;
-            this.birthday = birthday;
-            this.gender = gender;
-            this.series_passport = series_passport;
-            this.number_passport = number_passport;
-            this.given_passport = given_passport;
-            this.date_passport = date_passport;
-            this.snils = snils;
-            this.is_militaried = is_militaried;
-            this.military_ticket = military_ticket;
-            this.is_invalid = is_invalid;
-            this.invalid_name = invalid_name;
-            this.about = about;
         }
 
         /// <summary>
@@ -70,8 +42,8 @@ namespace StudentsManagerData.Table
             set
             {
                 first_name = value;
-                OnPropertyChanged("FirstName");
-                OnPropertyChanged("FullName");
+                OnPropertyChanged(nameof(FirstName));
+                OnPropertyChanged(nameof(FullName));
             }
         }
         /// <summary>
@@ -85,8 +57,8 @@ namespace StudentsManagerData.Table
             set
             {
                 middle_name = value;
-                OnPropertyChanged("MiddleName");
-                OnPropertyChanged("FullName");
+                OnPropertyChanged(nameof(MiddleName));
+                OnPropertyChanged(nameof(FullName));
             } 
         }
         /// <summary>
@@ -100,8 +72,8 @@ namespace StudentsManagerData.Table
             set
             { 
                 last_name = value;
-                OnPropertyChanged("LastName");
-                OnPropertyChanged("FullName");
+                OnPropertyChanged(nameof(LastName));
+                OnPropertyChanged(nameof(FullName));
             }
         }
         /// <summary>
@@ -115,7 +87,7 @@ namespace StudentsManagerData.Table
             set
             { 
                 birthday = value;
-                OnPropertyChanged("Birthday");
+                OnPropertyChanged(nameof(Birthday));
             } 
         }
         /// <summary>
@@ -129,139 +101,7 @@ namespace StudentsManagerData.Table
             set
             { 
                 gender = value;
-                OnPropertyChanged("Gender");
-            }
-        }
-        /// <summary>
-        /// Серия паспорта
-        /// </summary>
-        public string? SeriesPassport {
-            get 
-            { 
-                return series_passport; 
-            }
-            set
-            { 
-                series_passport = value;
-                OnPropertyChanged("SeriesPassport");
-            } 
-        }
-        /// <summary>
-        /// Номер паспорта
-        /// </summary>
-        public string? NumberPassport { 
-            get 
-            {
-                return number_passport; 
-            } 
-            set 
-            { 
-                number_passport = value;
-                OnPropertyChanged("NumberPassport");
-            }
-        }
-        /// <summary>
-        /// Кем выдан паспорт
-        /// </summary>
-        public string? GivenPassport
-        { 
-            get 
-            { 
-                return given_passport; 
-            } 
-            set 
-            { 
-                given_passport = value;
-                OnPropertyChanged("GivenPassport");
-            } 
-        }
-        /// <summary>
-        /// Дата вручения паспорта
-        /// </summary>
-        public DateTime? DatePassport { 
-            get 
-            { 
-                return date_passport; 
-            } 
-            set 
-            { 
-                date_passport = value;
-                OnPropertyChanged("DatePassport");
-            }
-        }
-        /// <summary>
-        /// Снилс
-        /// </summary>
-        public string? Snils
-        {
-            get
-            {
-                return snils;
-            }
-            set
-            {
-                snils = value;
-                OnPropertyChanged("Snils");
-            }
-        }
-        /// <summary>
-        /// Отслужил
-        /// </summary>
-        public bool IsMilitaried
-        {
-            get
-            {
-                return is_militaried;
-            }
-            set
-            {
-                is_militaried = value;
-                OnPropertyChanged("IsMilitaried");
-            }
-        }
-        /// <summary>
-        /// Военный билет
-        /// </summary>
-        public string? MilitaryTicket
-        {
-            get
-            {
-                return military_ticket;
-            }
-            set
-            {
-                military_ticket = value;
-                OnPropertyChanged("MilitaryTicket");
-            }
-        }
-        /// <summary>
-        /// Имеет инвалидность
-        /// </summary>
-        public bool IsInvalid
-        {
-            get
-            {
-                return is_invalid;
-            }
-            set
-            {
-                is_invalid = value;
-                OnPropertyChanged("IsInvalid");
-            }
-        }
-        /// <summary>
-        /// Название инвалидности
-        /// </summary>
-        public string? InvalidName
-        {
-            get
-            {
-                return invalid_name;
-            }
-            set
-            {
-                invalid_name = value;
-                OnPropertyChanged("InvalidName");
+                OnPropertyChanged(nameof(Gender));
             }
         }
         /// <summary>
@@ -275,7 +115,7 @@ namespace StudentsManagerData.Table
             set 
             { 
                 about = value;
-                OnPropertyChanged("About");
+                OnPropertyChanged(nameof(About));
             }
         }
         /// <summary>
@@ -291,16 +131,40 @@ namespace StudentsManagerData.Table
         }
 
         /// <summary>
-        /// Студенты
+        /// Объект студента
         /// </summary>
-        public List<Student> Students { get; set; }
+        public Student? Student { get; set; }
+
         /// <summary>
-        /// Атестаты/Дипломы
+        /// Объект куратора
         /// </summary>
-        public List<Diploma> Diplomas { get; set; }
+        public Curator? Curator { get; set; }
+
         /// <summary>
-        /// Хобби
+        /// Объект ИНН
         /// </summary>
+        public INN? INN { get; set; }
+
+        /// <summary>
+        /// Объект Паспорта
+        /// </summary>
+        public Passport? Passport { get; set; }
+
+        /// <summary>
+        /// Объект Снилса
+        /// </summary>
+        public Snils? Snils { get; set; }
+
+        /// <summary>
+        /// Объект инвалидности
+        /// </summary>
+        public Invalid? Invalid { get; set; }
+
+        /// <summary>
+        /// Объект инвалидности
+        /// </summary>
+        public Diploma? Diploma { get; set; }
+
         public List<Hobby> Hobbies { get; set; }
         /// <summary>
         /// Номера телефонов
@@ -323,25 +187,34 @@ namespace StudentsManagerData.Table
         /// Загрузить значения в поля
         /// </summary>
         /// <param name="person">Откуда будут взяты значения полей</param>
-        public void Load(Person person)
+        public void Copy(Person? person)
         {
+            if (person == null) return;
             FirstName = person.first_name;
             MiddleName = person.middle_name;
             LastName = person.last_name;
             Birthday = person.birthday;
             Gender = person.gender;
-            SeriesPassport = person.series_passport;
-            NumberPassport = person.number_passport;
-            GivenPassport = person.given_passport;
-            DatePassport = person.date_passport;
-            Snils = person.snils;
-            IsMilitaried = person.is_militaried;
-            MilitaryTicket = person.military_ticket;
-            IsInvalid = person.is_invalid;
-            InvalidName = person.invalid_name;
             About = person.about;
         }
-        public object Clone() => new Person(id, first_name, middle_name, last_name, birthday, gender, series_passport, number_passport, given_passport, date_passport, snils, is_militaried, military_ticket, is_invalid, invalid_name, about);
+        public Person Clone()
+        {
+            return new Person()
+            {
+                id= id, 
+                first_name= first_name,
+                middle_name= middle_name,
+                last_name= last_name, 
+                birthday= birthday, 
+                gender= gender,
+                about= about
+            };
+        }
+
+        public override string ToString()
+        {
+            return "id: " + id.ToString() + " / name: " + FullName.ToString();
+        }
 
         public override bool Equals(object? obj)
         {
@@ -357,15 +230,6 @@ namespace StudentsManagerData.Table
                    last_name == other.last_name &&
                    birthday == other.birthday &&
                    gender == other.gender &&
-                   series_passport == other.series_passport &&
-                   number_passport == other.number_passport &&
-                   given_passport == other.given_passport &&
-                   date_passport == other.date_passport &&
-                   snils == other.snils &&
-                   is_militaried == other.is_militaried &&
-                   military_ticket == other.military_ticket &&
-                   is_invalid == other.is_invalid &&
-                   invalid_name == other.invalid_name &&
                    about == other.about;
         }
 
@@ -377,11 +241,6 @@ namespace StudentsManagerData.Table
         public static bool operator !=(Person? left, Person? right)
         {
             return !(left == right);
-        }
-
-        public new string ToString()
-        {
-            return "id: " + id.ToString() + " / name: " + FullName.ToString();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

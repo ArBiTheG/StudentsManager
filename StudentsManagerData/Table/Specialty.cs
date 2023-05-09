@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -9,35 +10,21 @@ using System.Threading.Tasks;
 
 namespace StudentsManagerData.Table
 {
-    public class Specialty: ICloneable, IEquatable<Specialty?>, INotifyPropertyChanged
+    public class Specialty: ICopyable<Specialty?>, ICloneable<Specialty?>, IEquatable<Specialty?>, INotifyPropertyChanged
     {
         int id;
         string code;
         string name;
         string skill;
         int duration;
-        string? description;
+        string? about;
         DateTime? date_created;
         DateTime? date_deleted;
         bool is_deleted;
-        string? reason;
+        string? reason_deleted;
 
         public Specialty()
         {
-        }
-        //Используется для клонирования
-        private Specialty(int id, string? code, string? name, string? skill, int duration, string? description, DateTime? date_created, DateTime? date_deleted, bool is_deleted, string? reason)
-        {
-            this.id = id;
-            this.code = code;
-            this.name = name;
-            this.skill = skill;
-            this.duration = duration;
-            this.description = description;
-            this.date_created = date_created;
-            this.date_deleted = date_deleted;
-            this.is_deleted = is_deleted;
-            this.reason = reason;
         }
 
         /// <summary>
@@ -49,7 +36,6 @@ namespace StudentsManagerData.Table
                 return id; 
             } 
         }
-
         /// <summary>
         /// Шифр специальности
         /// </summary>
@@ -61,10 +47,9 @@ namespace StudentsManagerData.Table
             set 
             { 
                 code = value;
-                OnPropertyChanged("Code");
+                OnPropertyChanged(nameof(Code));
             } 
         }
-
         /// <summary>
         /// Наименование специальности
         /// </summary>
@@ -76,10 +61,9 @@ namespace StudentsManagerData.Table
             set 
             { 
                 name = value;
-                OnPropertyChanged("Name");
+                OnPropertyChanged(nameof(Name));
             } 
         }
-
         /// <summary>
         /// Квалификация выпускника
         /// </summary>
@@ -91,10 +75,9 @@ namespace StudentsManagerData.Table
             set 
             { 
                 skill = value;
-                OnPropertyChanged("Skill");
+                OnPropertyChanged(nameof(Skill));
             } 
         }
-
         /// <summary>
         /// Длительность обучения
         /// </summary>
@@ -109,21 +92,21 @@ namespace StudentsManagerData.Table
             set 
             { 
                 duration = value;
-                OnPropertyChanged("Duration");
+                OnPropertyChanged(nameof(Duration));
             } 
         }
         /// <summary>
         /// Описание специальности
         /// </summary>
-        public string? Description { 
+        public string? About { 
             get 
             { 
-                return description; 
+                return about; 
             } 
             set 
             { 
-                description = value;
-                OnPropertyChanged("Description");
+                about = value;
+                OnPropertyChanged(nameof(About));
             } 
         }
         /// <summary>
@@ -137,8 +120,23 @@ namespace StudentsManagerData.Table
             set 
             { 
                 date_created = value;
-                OnPropertyChanged("DateCreated");
-            } 
+                OnPropertyChanged(nameof(DateCreated));
+            }
+        }
+        /// <summary>
+        /// Набор прекращён?
+        /// </summary>
+        public bool IsDeleted
+        {
+            get
+            {
+                return is_deleted;
+            }
+            set
+            {
+                is_deleted = value;
+                OnPropertyChanged(nameof(IsDeleted));
+            }
         }
         /// <summary>
         /// Дата прекращения набора на специальность
@@ -151,35 +149,21 @@ namespace StudentsManagerData.Table
             set 
             { 
                 date_deleted = value;
-                OnPropertyChanged("DateDeleted");
+                OnPropertyChanged(nameof(DateDeleted));
             } 
-        }
-        /// <summary>
-        /// Набор прекращён?
-        /// </summary>
-        public bool IsDeleted { 
-            get 
-            { 
-                return is_deleted;
-            } 
-            set 
-            { 
-                is_deleted = value;
-                OnPropertyChanged("IsDeleted");
-            }
         }
         /// <summary>
         /// Причина прекращения набора на специальность
         /// </summary>
-        public string? Reason { 
+        public string? ReasonDeleted { 
             get
             { 
-                return reason;
+                return reason_deleted;
             } 
             set 
             { 
-                reason = value;
-                OnPropertyChanged("Reason");
+                reason_deleted = value;
+                OnPropertyChanged(nameof(ReasonDeleted));
             }
         }
 
@@ -200,27 +184,44 @@ namespace StudentsManagerData.Table
         /// </summary>
         public List<Group> Groups { get; set; }
 
-        /// <summary>
-        /// Загрузить значения в поля
-        /// </summary>
-        /// <param name="specialty">Откуда будут взяты значения полей</param>
-        public void Load(Specialty specialty)
+        public override string ToString()
         {
-            Code = specialty.code;
-            Name = specialty.name;
-            Skill = specialty.skill;
-            Duration = specialty.duration;
-            Description = specialty.description;
-            DateCreated = specialty.date_created;
-            DateDeleted = specialty.date_deleted;
-            IsDeleted = specialty.is_deleted;
-            Reason = specialty.reason;
+            return "id: " + id.ToString() + " / name: " + name.ToString();
         }
-        public object Clone() => new Specialty(id,code,name,skill,duration,description,date_created,date_deleted, is_deleted,reason);
 
         public override bool Equals(object? obj)
         {
             return Equals(obj as Specialty);
+        }
+
+        public void Copy(Specialty? specialty)
+        {
+            if (specialty == null) return;
+            Code = specialty.code;
+            Name = specialty.name;
+            Skill = specialty.skill;
+            Duration = specialty.duration;
+            About = specialty.about;
+            DateCreated = specialty.date_created;
+            DateDeleted = specialty.date_deleted;
+            IsDeleted = specialty.is_deleted;
+            ReasonDeleted = specialty.reason_deleted;
+        }
+        public Specialty Clone()
+        {
+            return new Specialty()
+            {
+                id = id,
+                code = code,
+                name = name,
+                skill = skill,
+                duration = duration,
+                about = about,
+                date_created = date_created,
+                date_deleted = date_deleted,
+                is_deleted = is_deleted,
+                reason_deleted = reason_deleted
+            };
         }
 
         public bool Equals(Specialty? other)
@@ -231,11 +232,11 @@ namespace StudentsManagerData.Table
                    name == other.name &&
                    skill == other.skill &&
                    duration == other.duration &&
-                   description == other.description &&
+                   about == other.about &&
                    date_created == other.date_created &&
                    date_deleted == other.date_deleted &&
                    is_deleted == other.is_deleted &&
-                   reason == other.reason;
+                   reason_deleted == other.reason_deleted;
         }
 
         public static bool operator ==(Specialty? left, Specialty? right)
@@ -248,10 +249,6 @@ namespace StudentsManagerData.Table
             return !(left == right);
         }
 
-        public new string ToString()
-        {
-            return "id: " + id.ToString() + " / name: " + name.ToString();
-        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

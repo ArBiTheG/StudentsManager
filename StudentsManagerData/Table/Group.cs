@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -8,31 +9,23 @@ using System.Threading.Tasks;
 
 namespace StudentsManagerData.Table
 {
-    public class Group: ICloneable, IEquatable<Group?>, INotifyPropertyChanged
+    public class Group: ICopyable<Group?>,ICloneable<Group?>, IEquatable<Group?>, INotifyPropertyChanged
     {
         int id;
         string name;
         int spec_id;
         Specialty specialty;
-        bool is_distant;
+        byte type_training;
         string? about;
         DateTime date_created;
-        DateTime date_release;
+        bool is_deleted;
+        DateTime date_deleted;
+        string? reason_deleted;
+        int curator_id;
+        Curator curator;
 
         public Group()
         {
-        }
-        //Используется для клонирования
-        private Group(int id, string name, int spec_id, Specialty specialy, bool is_distant, string about, DateTime date_created, DateTime date_release)
-        {
-            this.id = id;
-            this.name = name;
-            this.spec_id = spec_id;
-            this.specialty = specialy;
-            this.is_distant = is_distant;
-            this.about = about;
-            this.date_created = date_created;
-            this.date_release = date_release;
         }
 
         /// <summary>
@@ -44,7 +37,6 @@ namespace StudentsManagerData.Table
                 return id; 
             } 
         }
-
         /// <summary>
         /// Наименование группы
         /// </summary>
@@ -56,10 +48,9 @@ namespace StudentsManagerData.Table
             set
             { 
                 name = value;
-                OnPropertyChanged("Name");
+                OnPropertyChanged(nameof(Name));
             }
         }
-
         /// <summary>
         /// Код специальности
         /// </summary>
@@ -73,7 +64,6 @@ namespace StudentsManagerData.Table
                 spec_id = value;
             }
         }
-
         /// <summary>
         /// Объект специальности
         /// </summary>
@@ -85,21 +75,21 @@ namespace StudentsManagerData.Table
             set 
             { 
                 specialty = value;
-                OnPropertyChanged("Specialy");
+                OnPropertyChanged(nameof(Specialty));
             } 
         }
         /// <summary>
-        /// Заочник?
+        /// Форма обучения
         /// </summary>
-        public bool IsDistant { 
+        public byte TypeTraining { 
             get 
             { 
-                return is_distant; 
+                return type_training; 
             } 
             set 
             { 
-                is_distant = value;
-                OnPropertyChanged("IsDistant");
+                type_training = value;
+                OnPropertyChanged(nameof(TypeTraining));
             } 
         }
         /// <summary>
@@ -113,7 +103,7 @@ namespace StudentsManagerData.Table
             set 
             { 
                 about = value;
-                OnPropertyChanged("About");
+                OnPropertyChanged(nameof(About));
             } 
         }
         /// <summary>
@@ -127,48 +117,126 @@ namespace StudentsManagerData.Table
             set 
             {
                 date_created = value;
-                OnPropertyChanged("DateCreated");
-            } 
+                OnPropertyChanged(nameof(DateCreated));
+            }
         }
         /// <summary>
-        /// Дата выпуска группы
+        /// Удалена ли группа
         /// </summary>
-        public DateTime DateRelease { 
+        public bool IsDeleted
+        {
+            get
+            {
+                return is_deleted;
+            }
+            set
+            {
+                is_deleted = value;
+                OnPropertyChanged(nameof(IsDeleted));
+            }
+        }
+        /// <summary>
+        /// Дата удаления группы
+        /// </summary>
+        public DateTime DateDeleted { 
             get 
             {
-                return date_release; 
+                return date_deleted; 
             } 
             set 
             { 
-                date_release = value;
-                OnPropertyChanged("DateRelease");
+                date_deleted = value;
+                OnPropertyChanged(nameof(DateDeleted));
             }
         }
+
+        /// <summary>
+        /// Причина удаления группы
+        /// </summary>
+        public string? ReasonDeleted
+        {
+            get
+            {
+                return reason_deleted;
+            }
+            set
+            {
+                reason_deleted = value;
+                OnPropertyChanged(nameof(ReasonDeleted));
+            }
+        }
+
+        /// <summary>
+        /// Код куратора
+        /// </summary>
+        public int CuratorId
+        {
+            get
+            {
+                return curator_id;
+            }
+            set
+            {
+                curator_id = value;
+            }
+        }
+        
+        /// <summary>
+        /// Объект куратора
+        /// </summary>
+        public Curator Curator
+        {
+            get
+            {
+                return curator;
+            }
+            set
+            {
+                curator = value;
+                OnPropertyChanged(nameof(Curator));
+            }
+        }
+
         /// <summary>
         /// Студенты
         /// </summary>
         public List<Student> Students { get; set; }
 
-        /// <summary>
-        /// Загрузить значения в поля
-        /// </summary>
-        /// <param name="group">Откуда будут взяты значения полей</param>
-        public void Load(Group group)
+        public override string ToString()
         {
-            Name = group.name;
-            SpecialtyId = group.spec_id;
-            Specialty = group.specialty;
-            IsDistant = group.is_distant;
-            About = group.about;
-            DateCreated = group.date_created;
-            DateRelease = group.date_release;
+            return "id: " + id.ToString() + " / name: " + name.ToString();
         }
-        public object Clone() => new Group(id, name, spec_id, specialty, is_distant, about, date_created, date_release);
-
         public override bool Equals(object? obj)
         {
             return Equals(obj as Group);
         }
+
+        public void Copy(Group? group)
+        {
+            if (group == null) return;
+            Name = group.name;
+            SpecialtyId = group.spec_id;
+            Specialty = group.specialty;
+            TypeTraining = group.type_training;
+            About = group.about;
+            DateCreated = group.date_created;
+            DateDeleted = group.date_deleted;
+        }
+        public Group Clone()
+        {
+            return new Group()
+            {
+                id = id, 
+                name = name, 
+                spec_id = spec_id, 
+                specialty = specialty, 
+                type_training = type_training, 
+                about = about, 
+                date_created = date_created, 
+                date_deleted = date_deleted
+            };
+        }
+
 
         public bool Equals(Group? other)
         {
@@ -176,11 +244,11 @@ namespace StudentsManagerData.Table
                    id == other.id &&
                    name == other.name &&
                    spec_id == other.spec_id &&
-                   EqualityComparer<Specialty>.Default.Equals(specialty, other.specialty) &&
-                   is_distant == other.is_distant &&
+                   specialty == other.specialty &&
+                   type_training == other.type_training &&
                    about == other.about &&
                    date_created == other.date_created &&
-                   date_release == other.date_release;
+                   date_deleted == other.date_deleted;
         }
 
         public static bool operator ==(Group? left, Group? right)
@@ -191,10 +259,6 @@ namespace StudentsManagerData.Table
         public static bool operator !=(Group? left, Group? right)
         {
             return !(left == right);
-        }
-        public new string ToString()
-        {
-            return "id: " + id.ToString() + " / name: " + name.ToString();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

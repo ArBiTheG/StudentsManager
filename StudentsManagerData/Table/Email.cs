@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StudentsManagerData.Table
 {
-    public class Email: ICloneable, IEquatable<Email?>, INotifyPropertyChanged
+    public class Email: ICopyable<Email?>, ICloneable<Email?>, IEquatable<Email?>, INotifyPropertyChanged
     {
         int id;
         int person_id;
@@ -18,15 +19,6 @@ namespace StudentsManagerData.Table
 
         public Email()
         {
-        }
-        //Используется для клонирования
-        private Email(int id, int person_id, Person person, string name, string? description)
-        {
-            this.id = id;
-            this.person_id = person_id;
-            this.person = person;
-            this.name = name;
-            this.description = description;
         }
 
         /// <summary>
@@ -67,7 +59,7 @@ namespace StudentsManagerData.Table
             set
             {
                 person = value;
-                OnPropertyChanged("Person");
+                OnPropertyChanged(nameof(Person));
             }
         }
 
@@ -83,7 +75,7 @@ namespace StudentsManagerData.Table
             set
             {
                 name = value;
-                OnPropertyChanged("Name");
+                OnPropertyChanged(nameof(Name));
             }
         }
 
@@ -99,26 +91,39 @@ namespace StudentsManagerData.Table
             set
             {
                 description = value;
-                OnPropertyChanged("Description");
+                OnPropertyChanged(nameof(Description));
             }
         }
 
-        /// <summary>
-        /// Загрузить значения в поля
-        /// </summary>
-        /// <param name="email">Откуда будут взяты значения полей</param>
-        public void Load(Email email)
+        public override string ToString()
         {
-            PersonId = email.person_id;
-            Person = email.person;
-            Name = email.name;
-            Description = email.description;
+            return "id: " + id.ToString() + " / name: " + name.ToString();
         }
-        public object Clone() => new Email(id,person_id,person,name,description);
 
         public override bool Equals(object? obj)
         {
             return Equals(obj as Email);
+        }
+
+        public Email Clone()
+        {
+            return new Email()
+            {
+                id = id,
+                person_id = person_id,
+                person = person,
+                name = name,
+                description = description
+            };
+        }
+
+        public void Copy(Email? email)
+        {
+            if (email == null) return;
+            PersonId = email.person_id;
+            Person = email.person;
+            Name = email.name;
+            Description = email.description;
         }
 
         public bool Equals(Email? other)
@@ -126,7 +131,7 @@ namespace StudentsManagerData.Table
             return other is not null &&
                    id == other.id &&
                    person_id == other.person_id &&
-                   EqualityComparer<Person>.Default.Equals(person, other.person) &&
+                   person == other.person &&
                    name == other.name &&
                    description == other.description;
         }
@@ -139,11 +144,6 @@ namespace StudentsManagerData.Table
         public static bool operator !=(Email? left, Email? right)
         {
             return !(left == right);
-        }
-
-        public new string ToString()
-        {
-            return "id: " + id.ToString() + " / name: " + name.ToString();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

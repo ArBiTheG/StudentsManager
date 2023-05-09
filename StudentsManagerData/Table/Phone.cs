@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StudentsManagerData.Table
 {
-    public class Phone: ICloneable, IEquatable<Phone?>, INotifyPropertyChanged
+    public class Phone: ICopyable<Phone?>, ICloneable<Phone?>, IEquatable<Phone?>, INotifyPropertyChanged
     {
         int id;
         int person_id;
@@ -18,15 +19,6 @@ namespace StudentsManagerData.Table
 
         public Phone()
         {
-        }
-        //Используется для клонирования
-        private Phone(int id, int person_id, Person person, string name, string? description)
-        {
-            this.id = id;
-            this.person_id = person_id;
-            this.person = person;
-            this.name = name;
-            this.description = description;
         }
 
         /// <summary>
@@ -64,7 +56,7 @@ namespace StudentsManagerData.Table
             set 
             { 
                 person = value;
-                OnPropertyChanged("Person");
+                OnPropertyChanged(nameof(Person));
             }
         }
 
@@ -79,7 +71,7 @@ namespace StudentsManagerData.Table
             set 
             { 
                 name = value;
-                OnPropertyChanged("Name");
+                OnPropertyChanged(nameof(Name));
             } 
         }
 
@@ -94,23 +86,33 @@ namespace StudentsManagerData.Table
             set
             { 
                 description = value;
-                OnPropertyChanged("Description");
+                OnPropertyChanged(nameof(Description));
             }
         }
 
-        /// <summary>
-        /// Загрузить значения в поля
-        /// </summary>
-        /// <param name="phone">Откуда будут взяты значения полей</param>
-        public void Load(Phone phone)
+        public void Copy(Phone? phone)
         {
+            if (phone == null) return;
             PersonId = phone.person_id;
             Person = phone.person;
             Name = phone.name;
             Description = phone.description;
         }
-        public object Clone() => new Phone(id, person_id, person, name, description);
+        public Phone Clone() { 
+            return new Phone()
+            {
+                id = id, 
+                person_id = person_id, 
+                person = person, 
+                name = name, 
+                description = description
+            }; 
+        }
 
+        public override string ToString()
+        {
+            return "id: " + id.ToString() + " / name: " + name.ToString();
+        }
         public override bool Equals(object? obj)
         {
             return Equals(obj as Phone);
@@ -121,7 +123,7 @@ namespace StudentsManagerData.Table
             return other is not null &&
                    id == other.id &&
                    person_id == other.person_id &&
-                   EqualityComparer<Person>.Default.Equals(person, other.person) &&
+                   person == other.person &&
                    name == other.name &&
                    description == other.description;
         }
@@ -134,11 +136,6 @@ namespace StudentsManagerData.Table
         public static bool operator !=(Phone? left, Phone? right)
         {
             return !(left == right);
-        }
-
-        public new string ToString()
-        {
-            return "id: " + id.ToString() + " / name: " + name.ToString();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

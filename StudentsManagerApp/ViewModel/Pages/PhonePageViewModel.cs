@@ -67,7 +67,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             PhoneWindow phoneWindow = new PhoneWindow(viewModelDialog);
             if (phoneWindow.ShowDialog() == true)
             {
-                phone.Load(viewModelDialog.Phone);
+                phone.Copy(viewModelDialog.Phone);
                 StudentsData.Edit(phone);
                 StudentsData.SaveChanges();
             }

@@ -67,7 +67,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             StudentWindow studentWindow = new StudentWindow(viewModelDialog);
             if (studentWindow.ShowDialog() == true)
             {
-                student.Load(viewModelDialog.Student);
+                student.Copy(viewModelDialog.Student);
                 StudentsData.Edit(student);
                 StudentsData.SaveChanges();
             }

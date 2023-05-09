@@ -66,7 +66,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             HobbyWindow hobbyWindow = new HobbyWindow(viewModelDialog);
             if (hobbyWindow.ShowDialog() == true)
             {
-                hobby.Load(viewModelDialog.Hobby);
+                hobby.Copy(viewModelDialog.Hobby);
                 StudentsData.Edit(hobby);
                 StudentsData.SaveChanges();
             }

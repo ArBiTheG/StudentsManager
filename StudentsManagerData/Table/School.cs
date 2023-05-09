@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -9,25 +10,16 @@ using System.Xml.Linq;
 
 namespace StudentsManagerData.Table
 {
-    public class School: ICloneable, IEquatable<School?>, INotifyPropertyChanged
+    public class School: ICopyable<School?>, ICloneable<School?>, IEquatable<School?>, INotifyPropertyChanged
     {
         int id;
         string full_name;
         string short_name;
         string? address;
-        string? description;
+        string? about;
 
         public School()
         {
-        }
-        //Используется для клонирования
-        private School(int id, string full_name, string short_name, string? address, string? description)
-        {
-            this.id = id;
-            this.full_name = full_name;
-            this.short_name = short_name;
-            this.address = address;
-            this.description = description;
         }
 
         /// <summary>
@@ -39,7 +31,6 @@ namespace StudentsManagerData.Table
                 return id;
             } 
         }
-
         /// <summary>
         /// Полное наименование школы
         /// </summary>
@@ -51,10 +42,9 @@ namespace StudentsManagerData.Table
             set 
             { 
                 full_name = value;
-                OnPropertyChanged("FullName");
+                OnPropertyChanged(nameof(FullName));
             } 
         }
-
         /// <summary>
         /// Короткое наименование школы
         /// </summary>
@@ -66,10 +56,9 @@ namespace StudentsManagerData.Table
             set 
             { 
                 short_name = value;
-                OnPropertyChanged("ShortName");
+                OnPropertyChanged(nameof(ShortName));
             }
         }
-
         /// <summary>
         /// Адрес школы
         /// </summary>
@@ -81,21 +70,20 @@ namespace StudentsManagerData.Table
             set
             { 
                 address = value;
-                OnPropertyChanged("Address");
+                OnPropertyChanged(nameof(Address));
             }
         }
-
         /// <summary>
         /// Описание школы
         /// </summary>
-        public string? Description {
+        public string? About {
             get
             { 
-                return description; 
+                return about; 
             } 
             set
-            { description = value;
-                OnPropertyChanged("Description");
+            { about = value;
+                OnPropertyChanged(nameof(About));
             }
         }
         /// <summary>
@@ -103,22 +91,33 @@ namespace StudentsManagerData.Table
         /// </summary>
         public List<Diploma> Diplomas { get; set; }
 
-        /// <summary>
-        /// Загрузить значения в поля
-        /// </summary>
-        /// <param name="school">Откуда будут взяты значения полей</param>
-        public void Load(School school)
+        public override string ToString()
         {
-            FullName = school.full_name;
-            ShortName = school.short_name;
-            Address = school.address;
-            Description = school.description;
+            return "id: " + id.ToString() + " / name: " + full_name.ToString();
         }
-        public object Clone() => new School(id,full_name,short_name,address,description);
-
         public override bool Equals(object? obj)
         {
             return Equals(obj as School);
+        }
+
+        public void Copy(School? school)
+        {
+            if (school == null) return;
+            FullName = school.full_name;
+            ShortName = school.short_name;
+            Address = school.address;
+            About = school.about;
+        }
+        public School Clone()
+        {
+            return new School()
+            {
+                id = id,
+                full_name = full_name,
+                short_name = short_name,
+                address = address,
+                about = about
+            };
         }
 
         public bool Equals(School? other)
@@ -128,7 +127,7 @@ namespace StudentsManagerData.Table
                    full_name == other.full_name &&
                    short_name == other.short_name &&
                    address == other.address &&
-                   description == other.description;
+                   about == other.about;
         }
 
         public static bool operator ==(School? left, School? right)
@@ -139,10 +138,6 @@ namespace StudentsManagerData.Table
         public static bool operator !=(School? left, School? right)
         {
             return !(left == right);
-        }
-        public new string ToString()
-        {
-            return "id: " + id.ToString() + " / name: " + full_name.ToString();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

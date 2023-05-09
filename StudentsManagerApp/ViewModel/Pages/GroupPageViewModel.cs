@@ -65,7 +65,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             if (groupWindow.ShowDialog() == true)
             {
-                group.Load(viewModelDialog.Group);
+                group.Copy(viewModelDialog.Group);
                 StudentsData.Edit(group);
                 StudentsData.SaveChanges();
             }

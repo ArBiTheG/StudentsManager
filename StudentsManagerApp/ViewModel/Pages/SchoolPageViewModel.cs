@@ -62,7 +62,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             SchoolWindow schoolWindow = new SchoolWindow(viewModelDialog);
             if (schoolWindow.ShowDialog() == true)
             {
-                school.Load(viewModelDialog.School);
+                school.Copy(viewModelDialog.School);
                 StudentsData.Edit(school);
                 StudentsData.SaveChanges();
             }

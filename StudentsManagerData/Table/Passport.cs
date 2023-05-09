@@ -11,36 +11,37 @@ using System.Threading.Tasks;
 
 namespace StudentsManagerData.Table
 {
-    public class Student : IPerson, ICopyable<Student?>, ICloneable<Student?>, IEquatable<Student?>, INotifyPropertyChanged
+    public class Passport : IPerson, ICopyable<Passport?>, ICloneable<Passport?>, IEquatable<Passport?>, INotifyPropertyChanged
     {
-        int id;
-        int person_id;
-        Person person;
-        int group_id;
-        Group group;
-        DateTime? date_entry;
-        DateTime? date_escaped;
-        bool is_escaped;
-        string? reason_escaped;
-        string? about;
+        private int id;
+        private int person_id;
+        private Person person;
+        private string series;
+        private string number;
+        private DateTime? date_given;
+        private string given;
 
-        public Student()
+        public Passport()
         {
+
         }
 
         /// <summary>
         /// Код
         /// </summary>
-        public int Id {
+        public int Id
+        {
             get
             {
                 return id;
             }
         }
+
         /// <summary>
         /// Код человека
         /// </summary>
-        public int PersonId {
+        public int PersonId
+        {
             get
             {
                 return person_id;
@@ -50,10 +51,12 @@ namespace StudentsManagerData.Table
                 person_id = value;
             }
         }
+
         /// <summary>
         /// Объект человека
         /// </summary>
-        public Person Person {
+        public Person Person
+        {
             get
             {
                 return person;
@@ -62,111 +65,72 @@ namespace StudentsManagerData.Table
             {
                 person = value;
                 OnPropertyChanged(nameof(Person));
-                OnPropertyChanged(nameof(FullName));
-            }
-        }
-        /// <summary>
-        /// Код группы
-        /// </summary>
-        public int GroupId {
-            get
-            {
-                return group_id;
-            }
-            set
-            {
-                group_id = value;
-            }
-        }
-        /// <summary>
-        /// Объект группы
-        /// </summary>
-        public Group Group {
-            get
-            {
-                return group;
-            }
-            set
-            {
-                group = value;
-                OnPropertyChanged(nameof(Group));
-                OnPropertyChanged(nameof(FullName));
-            }
-        }
-        /// <summary>
-        /// Дата поступления
-        /// </summary>
-        public DateTime? DateEntry {
-            get
-            {
-                return date_entry;
-            }
-            set
-            {
-                date_entry = value;
-                OnPropertyChanged(nameof(DateEntry));
-            }
-        }
-        /// <summary>
-        /// Отчислен?
-        /// </summary>
-        public bool IsEscaped
-        {
-            get
-            {
-                return is_escaped;
-            }
-            set
-            {
-                is_escaped = value;
-                OnPropertyChanged(nameof(IsEscaped));
-            }
-        }
-        /// <summary>
-        /// Дата отчисления
-        /// </summary>
-        public DateTime? DateEscaped {
-            get
-            {
-                return date_escaped;
-            }
-            set
-            {
-                date_escaped = value;
-                OnPropertyChanged(nameof(DateEscaped));
-            }
-        }
-        /// <summary>
-        /// Причина отчисления
-        /// </summary>
-        public string? ReasonEscaped {
-            get
-            {
-                return reason_escaped;
-            }
-            set
-            {
-                reason_escaped = value;
-                OnPropertyChanged(nameof(ReasonEscaped));
-            }
-        }
-        /// <summary>
-        /// О студенте
-        /// </summary>
-        public string? About
-        {
-            get
-            {
-                return about;
-            }
-            set
-            {
-                about = value;
-                OnPropertyChanged(nameof(About));
             }
         }
 
-        public List<Decree> Decrees { get; set; }
+        /// <summary>
+        /// Серия паспорта
+        /// </summary>
+        public string Series
+        {
+            get
+            {
+                return series;
+            }
+            set
+            {
+                series = value;
+                OnPropertyChanged(nameof(Series));
+            }
+        }
+
+        /// <summary>
+        /// Номер паспорта
+        /// </summary>
+        public string Number
+        {
+            get
+            {
+                return number;
+            }
+            set
+            {
+                number = value;
+                OnPropertyChanged(nameof(Number));
+            }
+        }
+
+        /// <summary>
+        /// Кем выдан паспорт
+        /// </summary>
+        public string Given
+        {
+            get
+            {
+                return given;
+            }
+            set
+            {
+                given = value;
+                OnPropertyChanged(nameof(Given));
+            }
+        }
+
+        /// <summary>
+        /// Дата выдачи паспорта
+        /// </summary>
+        public DateTime? DateGiven
+        {
+            get
+            {
+                return date_given;
+            }
+            set
+            {
+                date_given = value;
+                OnPropertyChanged(nameof(DateGiven));
+            }
+        }
 
         [NotMapped]
         public string FirstName
@@ -247,67 +211,59 @@ namespace StudentsManagerData.Table
 
         public override string ToString()
         {
-            return "id: " + id.ToString() + " / name: " + FullName.ToString();
+            return "id: " + id.ToString();
         }
 
         public override bool Equals(object? obj)
         {
-            return Equals(obj as Student);
+            return Equals(obj as Passport);
         }
 
-        public void Copy(Student? student)
+        public static bool operator ==(Passport? left, Passport? right)
         {
-            if (student == null) return;
-            PersonId = student.person_id;
-            Person = student.person;
-            GroupId = student.group_id;
-            Group = student.group;
-            DateEntry = student.date_entry;
-            DateEscaped = student.date_escaped;
-            IsEscaped = student.is_escaped;
-            ReasonEscaped = student.reason_escaped;
-            About = student.about;
+            return EqualityComparer<Passport>.Default.Equals(left, right);
         }
-        public Student Clone()
+
+        public static bool operator !=(Passport? left, Passport? right)
         {
-            return new Student()
+            return !(left == right);
+        }
+
+        public Passport? Clone()
+        {
+            return new Passport()
             {
                 id = id,
                 person_id = person_id,
                 person = person,
-                group_id = group_id,
-                group = group,
-                date_entry = date_entry,
-                date_escaped = date_escaped,
-                is_escaped = is_escaped,
-                reason_escaped = reason_escaped,
-                about = about
+                series = series,
+                number = number,
+                given = given,
+                date_given = date_given,
             };
         }
 
-        public bool Equals(Student? other)
+        public void Copy(Passport? entity)
+        {
+            if (entity == null) return;
+            PersonId = entity.person_id;
+            Person = entity.person;
+            Series = entity.series;
+            Number = entity.number;
+            Given = entity.given;
+            DateGiven = entity.date_given;
+        }
+
+        public bool Equals(Passport? other)
         {
             return other is not null &&
                    id == other.id &&
                    person_id == other.person_id &&
                    person == other.person &&
-                   group_id == other.group_id &&
-                   group == other.group &&
-                   date_entry == other.date_entry &&
-                   date_escaped == other.date_escaped &&
-                   is_escaped == other.is_escaped &&
-                   reason_escaped == other.reason_escaped &&
-                   about == other.about;
-        }
-
-        public static bool operator ==(Student? left, Student? right)
-        {
-            return EqualityComparer<Student>.Default.Equals(left, right);
-        }
-
-        public static bool operator !=(Student? left, Student? right)
-        {
-            return !(left == right);
+                   series == other.series &&
+                   number == other.number &&
+                   given == other.given &&
+                   date_given == other.date_given;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

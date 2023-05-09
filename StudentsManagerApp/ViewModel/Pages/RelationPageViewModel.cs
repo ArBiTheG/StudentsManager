@@ -69,7 +69,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             RelationWindow relationWindow = new RelationWindow(viewModelDialog);
             if (relationWindow.ShowDialog() == true)
             {
-                relation.Load(viewModelDialog.Relation);
+                relation.Copy(viewModelDialog.Relation);
                 StudentsData.Edit(relation);
                 StudentsData.SaveChanges();
             }

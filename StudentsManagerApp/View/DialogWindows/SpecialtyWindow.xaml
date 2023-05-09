@@ -78,11 +78,11 @@
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Specialty.Name}"/>
                 <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Specialty.Skill}"/>
                 <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Specialty.Duration}"/>
-                <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Specialty.Description}"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Specialty.About}"/>
                 <DatePicker Grid.Row="5" Grid.Column="1" SelectedDate="{Binding Specialty.DateCreated}"/>
                 <CheckBox x:Name="checkBox" Grid.Row="6" Grid.Column="1" IsChecked="{Binding Specialty.IsDeleted}"/>
                 <DatePicker Grid.Row="7" Grid.Column="1" SelectedDate="{Binding Specialty.DateDeleted}" IsEnabled="{Binding IsChecked, ElementName=checkBox}"/>
-                <TextBox Grid.Row="8" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Specialty.Reason}" IsEnabled="{Binding IsChecked, ElementName=checkBox}"/>
+                <TextBox Grid.Row="8" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Specialty.ReasonDeleted}" IsEnabled="{Binding IsChecked, ElementName=checkBox}"/>
             </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
