@@ -2,6 +2,7 @@
 using StudentsManagerData.Table;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -12,13 +13,12 @@ namespace StudentsManagerApp.ViewModel.Dialogs
 {
     public class PersonDialogViewModel
     {
-        private IStudentsData StudentsData;
         public Person Person { get; private set; }
-        public Gender[] Genders { get; } = Gender.List;
+        public ObservableCollection<School> Schools { get; private set; }
         public PersonDialogViewModel(Person person, IStudentsData studentsData)
         {
             Person = person;
-            StudentsData = studentsData;
+            Schools = studentsData.GetSchools();
         }
     }
 }

@@ -48,6 +48,7 @@ namespace StudentsManagerData.Table
             { 
                 code = value;
                 OnPropertyChanged(nameof(Code));
+                OnPropertyChanged(nameof(FullName));
             } 
         }
         /// <summary>
@@ -62,6 +63,7 @@ namespace StudentsManagerData.Table
             { 
                 name = value;
                 OnPropertyChanged(nameof(Name));
+                OnPropertyChanged(nameof(FullName));
             } 
         }
         /// <summary>
@@ -175,7 +177,7 @@ namespace StudentsManagerData.Table
         {
             get
             {
-                return $"{Code} {Name}";
+                return $"{code} {name}";
             }
         }
 

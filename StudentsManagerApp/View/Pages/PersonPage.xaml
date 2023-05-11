@@ -33,27 +33,30 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListBox x:Name="list" ItemsSource="{Binding Persons}">
+        <Label>
+            <TextBlock FontSize="24">Личные данные</TextBlock>
+        </Label>
+        <ListBox Grid.Row="1" x:Name="list" ItemsSource="{Binding Persons}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
                         <TextBlock Text="{Binding LastName}" FontSize="16" />
-                        <TextBlock Text="{Binding FirstName}" FontSize="16" />
-                        <TextBlock Text="{Binding MiddleName}" FontSize="16" />
+                        <TextBlock Text="{Binding FirstName}" FontSize="14" />
+                        <TextBlock Text="{Binding MiddleName}" FontSize="14" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel IsEnabled="{Binding Loaded}" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="2" IsEnabled="{Binding Loaded}" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="Добавить" Margin="10" Padding="3" Command="{Binding AddCommand}"  />
             <Button Content="Изменить" Margin="10" Command="{Binding EditCommand}"
                     CommandParameter="{Binding ElementName=list, Path=SelectedItem}"  />
             <Button Content="Удалить" Margin="10" Command="{Binding DeleteCommand}"
                     CommandParameter="{Binding ElementName=list, Path=SelectedItem}"  />
-            <Button Content="Обновить" Margin="10" Command="{Binding UpdateCommand}"  />
         </StackPanel>
 
     </Grid>

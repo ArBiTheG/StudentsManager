@@ -22,12 +22,6 @@ namespace StudentsManagerData
 #endif
         }
 
-        public ObservableCollection<Diploma> GetDiplomas()
-        {
-            _studentsContext.Diplomas.Load();
-            return _studentsContext.Diplomas.Local.ToObservableCollection();
-        }
-
         public ObservableCollection<Email> GetEmails()
         {
             _studentsContext.Emails.Load();

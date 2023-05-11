@@ -29,15 +29,14 @@ namespace StudentsManagerApp.ViewModel
         static PageInfo[] pageInfo =
         {
             new PageInfo {DisplayName = "Главная", Name = "Main"},
-            new PageInfo {DisplayName = "Основные данные", Name = "Person"},
+            new PageInfo {DisplayName = "Основные данные", Name = "Person", Enabled = true},
             new PageInfo {DisplayName = "Данные студентов", Name = "Student"},
             new PageInfo {DisplayName = "Управление группами", Name = "Group"},
-            new PageInfo {DisplayName = "Управление специальностями", Name = "Specialty"},
-            new PageInfo {DisplayName = "Список электронных почт", Name = "Email"},
-            new PageInfo {DisplayName = "Список номеров телефонов", Name = "Phone"},
-            new PageInfo {DisplayName = "Список хобби", Name = "Hobby"},
-            new PageInfo {DisplayName = "Список школ", Name = "School"},
-            new PageInfo {DisplayName = "Список аттестатов/дипломов", Name = "Diploma"},
+            new PageInfo {DisplayName = "Управление специальностями", Name = "Specialty", Enabled = true},
+            new PageInfo {DisplayName = "Список электронных почт", Name = "Email", Enabled = true},
+            new PageInfo {DisplayName = "Список номеров телефонов", Name = "Phone", Enabled = true},
+            new PageInfo {DisplayName = "Список хобби", Name = "Hobby", Enabled = true},
+            new PageInfo {DisplayName = "Список школ", Name = "School", Enabled = true},
         };
 
         public ClockModule Clock { get => clockModule; }
@@ -98,9 +97,6 @@ namespace StudentsManagerApp.ViewModel
                               break;
                           case "School":
                               Content = new SchoolPage();
-                              break;
-                          case "Diploma":
-                              Content = new DiplomaPage();
                               break;
                           case "Main":
                           default:

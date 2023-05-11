@@ -15,18 +15,11 @@ namespace StudentsManagerApp.ViewModel.Pages
 {
     public class HobbyPageViewModel : BasePageViewModel
     {
-        private IStudentsData StudentsData;
-        private ObservableCollection<Hobby> hobbies;
-        private ObservableCollection<Person> persons;
-        public override void Load()
-        {
-            StudentsData = new StudentsDataProxy();
-            // Подгружаем второстепенные данные
-            persons = StudentsData.GetPersons();
-            // Подгружаем основные данные
-            Hobbies = StudentsData.GetHobbies();
-        }
-        public ObservableCollection<Hobby> Hobbies
+        private IStudentsData? StudentsData;
+        private ObservableCollection<Hobby>? hobbies;
+        private ObservableCollection<Person>? persons;
+
+        public ObservableCollection<Hobby>? Hobbies
         {
             get { return hobbies; }
             set
@@ -36,6 +29,15 @@ namespace StudentsManagerApp.ViewModel.Pages
             }
         }
 
+        public override void Load()
+        {
+            StudentsData = new StudentsDataProxy();
+            // Подгружаем второстепенные данные
+            persons = StudentsData.GetPersons();
+            // Подгружаем основные данные
+            Hobbies = StudentsData.GetHobbies();
+        }
+
         public override void Close()
         {
             throw new NotImplementedException();
@@ -43,8 +45,9 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void AddField(object? obj)
         {
+            if (StudentsData == null) return;
+
             HobbyDialogViewModel viewModelDialog = new HobbyDialogViewModel(new Hobby(), StudentsData);
-            viewModelDialog.LoadPersons();
 
             HobbyWindow hobbyWindow = new HobbyWindow(viewModelDialog);
             if (hobbyWindow.ShowDialog() == true)
@@ -57,11 +60,12 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void EditField(object? selected_obj)
         {
+            if (StudentsData == null) return;
+
             Hobby? hobby = selected_obj as Hobby;
             if (hobby == null) return;
 
-            HobbyDialogViewModel viewModelDialog = new HobbyDialogViewModel((Hobby)hobby.Clone(), StudentsData);
-            viewModelDialog.LoadPersons();
+            HobbyDialogViewModel viewModelDialog = new HobbyDialogViewModel(hobby.Clone(), StudentsData);
 
             HobbyWindow hobbyWindow = new HobbyWindow(viewModelDialog);
             if (hobbyWindow.ShowDialog() == true)
@@ -74,6 +78,8 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void DeleteField(object? selected_obj)
         {
+            if (StudentsData == null) return;
+
             Hobby? hobby = selected_obj as Hobby;
             if (hobby == null) return;
 

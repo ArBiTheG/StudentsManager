@@ -45,7 +45,6 @@ namespace StudentsManagerApp.ViewModel.Pages
         public override void AddField(object? obj)
         {
             PhoneDialogViewModel viewModelDialog = new PhoneDialogViewModel(new Phone(), StudentsData);
-            viewModelDialog.LoadPersons();
 
             PhoneWindow phoneWindow = new PhoneWindow(viewModelDialog);
             if (phoneWindow.ShowDialog() == true)
@@ -61,8 +60,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             Phone? phone = selected_obj as Phone;
             if (phone == null) return;
 
-            PhoneDialogViewModel viewModelDialog = new PhoneDialogViewModel((Phone)phone.Clone(), StudentsData);
-            viewModelDialog.LoadPersons();
+            PhoneDialogViewModel viewModelDialog = new PhoneDialogViewModel(phone.Clone(), StudentsData);
 
             PhoneWindow phoneWindow = new PhoneWindow(viewModelDialog);
             if (phoneWindow.ShowDialog() == true)

@@ -52,7 +52,7 @@
                 <ItemsControl ItemsSource="{Binding PageInfo}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Button Content="{Binding DisplayName}" Style="{StaticResource PageButton}" Command="{Binding RelativeSource={RelativeSource FindAncestor, 
+                            <Button Content="{Binding DisplayName}" IsEnabled="{Binding Enabled}" Style="{StaticResource PageButton}" Command="{Binding RelativeSource={RelativeSource FindAncestor, 
 AncestorType={x:Type Window}}, Path=DataContext.ChangePage}" CommandParameter="{Binding Name}"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

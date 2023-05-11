@@ -11,10 +11,6 @@ namespace StudentsManagerData
     public interface IStudentsData : IDisposable
     {
         /// <summary>
-        /// Получить коллекцию дипломов/аттестатов из базы данных
-        /// </summary>
-        public ObservableCollection<Diploma> GetDiplomas();
-        /// <summary>
         /// Получить коллекцию электронных почт из базы данных
         /// </summary>
         public ObservableCollection<Email> GetEmails();

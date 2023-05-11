@@ -16,15 +16,9 @@ namespace StudentsManagerApp.ViewModel.Pages
 {
     public class SchoolPageViewModel : BasePageViewModel
     {
-        private IStudentsData StudentsData;
-        private ObservableCollection<School> schools;
-        public override void Load()
-        {
-            StudentsData = new StudentsDataProxy();
-            // Подгружаем основные данные
-            Schools = StudentsData.GetSchools();
-        }
-        public ObservableCollection<School> Schools
+        private IStudentsData? StudentsData;
+        private ObservableCollection<School>? schools;
+        public ObservableCollection<School>? Schools
         {
             get { return schools; }
             set
@@ -34,13 +28,17 @@ namespace StudentsManagerApp.ViewModel.Pages
             }
         }
 
-        public override void Close()
+        public override void Load()
         {
-            throw new NotImplementedException();
+            StudentsData = new StudentsDataProxy();
+            // Подгружаем основные данные
+            Schools = StudentsData.GetSchools();
         }
 
         public override void AddField(object? obj)
         {
+            if (StudentsData == null) return;
+
             SchoolDialogViewModel viewModelDialog = new SchoolDialogViewModel(new School(), StudentsData);
 
             SchoolWindow schoolWindow = new SchoolWindow(viewModelDialog);
@@ -54,10 +52,12 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void EditField(object? selected_obj)
         {
+            if (StudentsData == null) return;
+
             School? school = selected_obj as School;
             if (school == null) return;
 
-            SchoolDialogViewModel viewModelDialog = new SchoolDialogViewModel((School)school.Clone(), StudentsData);
+            SchoolDialogViewModel viewModelDialog = new SchoolDialogViewModel(school.Clone(), StudentsData);
 
             SchoolWindow schoolWindow = new SchoolWindow(viewModelDialog);
             if (schoolWindow.ShowDialog() == true)
@@ -70,8 +70,11 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void DeleteField(object? selected_obj)
         {
+            if (StudentsData == null) return;
+
             School? school = selected_obj as School;
             if (school == null) return;
+
             string text = $"Вы действительно хотите удалить запись '{school.FullName}'?";
             var result = MessageBox.Show(text, "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
             if (result == MessageBoxResult.Yes)
@@ -79,6 +82,10 @@ namespace StudentsManagerApp.ViewModel.Pages
                 StudentsData.Remove(school);
                 StudentsData.SaveChanges();
             }
+        }
+
+        public override void Close()
+        {
         }
     }
 }

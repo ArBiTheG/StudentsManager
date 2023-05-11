@@ -12,9 +12,9 @@ namespace StudentsManagerApp.ViewModel.Dialogs
 {
     public class SpecialtyDialogViewModel
     {
-        private IStudentsData StudentsData;
+        private IStudentsData? StudentsData;
         public Specialty Specialty { get; private set; }
-        public SpecialtyDialogViewModel(Specialty specialty, IStudentsData studentsData)
+        public SpecialtyDialogViewModel(Specialty specialty, IStudentsData? studentsData)
         {
             Specialty = specialty;
             StudentsData = studentsData;

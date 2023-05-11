@@ -15,10 +15,6 @@ namespace StudentsManagerData
     internal class StudentsContext : DbContext
     {
         /// <summary>
-        /// Набор сущностей Diplomas
-        /// </summary>
-        public DbSet<Diploma> Diplomas { get; set; } = null!;
-        /// <summary>
         /// Набор сущностей Emails
         /// </summary>
         public DbSet<Email> Emails { get; set; } = null!;
@@ -62,22 +58,6 @@ namespace StudentsManagerData
         /// Набор сущностей Decrees
         /// </summary>
         public DbSet<Decree> Decrees { get; set; } = null!;
-        /// <summary>
-        /// Набор сущностей INNs
-        /// </summary>
-        public DbSet<INN> INNs { get; set; } = null!;
-        /// <summary>
-        /// Набор сущностей Invalids
-        /// </summary>
-        public DbSet<Invalid> Invalids { get; set; } = null!;
-        /// <summary>
-        /// Набор сущностей Passports
-        /// </summary>
-        public DbSet<Passport> Passports { get; set; } = null!;
-        /// <summary>
-        /// Набор сущностей Snilses
-        /// </summary>
-        public DbSet<Snils> Snilses { get; set; } = null!;
 
 
         public StudentsContext()
@@ -90,8 +70,6 @@ namespace StudentsManagerData
 #if DEBUG
             Trace.WriteLine("Инициализация первичных ключей");
 #endif
-            // Установка первичного ключа для Diploma.Id
-            modelBuilder.Entity<Diploma>().HasKey(u => u.Id);
             // Установка первичного ключа для Email.Id
             modelBuilder.Entity<Email>().HasKey(u => u.Id);
             // Установка первичного ключа для Group.Id
@@ -114,14 +92,6 @@ namespace StudentsManagerData
             modelBuilder.Entity<Curator>().HasKey(u => u.Id);
             // Установка первичного ключа для Decree.Id
             modelBuilder.Entity<Decree>().HasKey(u => u.Id);
-            // Установка первичного ключа для INN.Id
-            modelBuilder.Entity<INN>().HasKey(u => u.Id);
-            // Установка первичного ключа для Invalid.Id
-            modelBuilder.Entity<Invalid>().HasKey(u => u.Id);
-            // Установка первичного ключа для Passport.Id
-            modelBuilder.Entity<Passport>().HasKey(u => u.Id);
-            // Установка первичного ключа для Snils.Id
-            modelBuilder.Entity<Snils>().HasKey(u => u.Id);
 
 #if DEBUG
             Trace.WriteLine("Инициализация уникальных ключей");
@@ -131,16 +101,6 @@ namespace StudentsManagerData
             modelBuilder.Entity<Student>().HasAlternateKey(u => u.PersonId );
             // Установка уникального ключа для Curator.PersonId
             modelBuilder.Entity<Curator>().HasAlternateKey(u => u.PersonId);
-            // Установка уникального ключа для INN.PersonId
-            modelBuilder.Entity<INN>().HasAlternateKey(u => u.PersonId);
-            // Установка уникального ключа для Passport.PersonId
-            modelBuilder.Entity<Passport>().HasAlternateKey(u => u.PersonId);
-            // Установка уникального ключа для Snils.PersonId
-            modelBuilder.Entity<Snils>().HasAlternateKey(u => u.PersonId);
-            // Установка уникального ключа для Invalid.PersonId
-            modelBuilder.Entity<Invalid>().HasAlternateKey(u => u.PersonId);
-            // Установка уникального ключа для Diploma.PersonId
-            modelBuilder.Entity<Diploma>().HasAlternateKey(u => u.PersonId);
 
 
 #if DEBUG
@@ -166,38 +126,19 @@ namespace StudentsManagerData
             modelBuilder.Entity<Person>().HasMany(t => t.Parents)
                 .WithOne(g => g.Parent)
                 .HasForeignKey(g => g.ParentId);
-            // Подключение внешнего ключа от Diploma.Person к Person  (1 - 1)
-            modelBuilder.Entity<Person>().HasOne(t => t.Diploma)
+            // Подключение внешнего ключа от Student.Person к Person (1 - M)
+            modelBuilder.Entity<Person>().HasMany(t => t.Students)
                 .WithOne(g => g.Person)
-                .HasForeignKey<Diploma>(g => g.PersonId);
-            // Подключение внешнего ключа от Student.Person к Person (1 - 1)
-            modelBuilder.Entity<Person>().HasOne(t => t.Student)
-                .WithOne(g => g.Person)
-                .HasForeignKey<Student>(g => g.PersonId);
+                .HasForeignKey(g => g.PersonId);
+
             // Подключение внешнего ключа от Curator.Person к Person (1 - 1)
             modelBuilder.Entity<Person>().HasOne(t => t.Curator)
                 .WithOne(g => g.Person)
                 .HasForeignKey<Curator>(g => g.PersonId);
-            // Подключение внешнего ключа от Snils.Person к Person (1 - 1)
-            modelBuilder.Entity<Person>().HasOne(t => t.Snils)
-                .WithOne(g => g.Person)
-                .HasForeignKey<Snils>(g => g.PersonId);
-            // Подключение внешнего ключа от Snils.Person к Person (1 - 1)
-            modelBuilder.Entity<Person>().HasOne(t => t.Invalid)
-                .WithOne(g => g.Person)
-                .HasForeignKey<Invalid>(g => g.PersonId);
-            // Подключение внешнего ключа от Passport.Person к Person (1 - 1)
-            modelBuilder.Entity<Person>().HasOne(t => t.Passport)
-                .WithOne(g => g.Person)
-                .HasForeignKey<Passport>(g => g.PersonId);
             // Подключение внешнего ключа от Decree.Student к Student (1 - 1)
             modelBuilder.Entity<Student>().HasMany(t => t.Decrees)
                 .WithOne(g => g.Student)
                 .HasForeignKey(g => g.StudentId);
-            // Подключение внешнего ключа от Diploma.School к School  (1 - М)
-            modelBuilder.Entity<School>().HasMany(t => t.Diplomas)
-                .WithOne(g => g.School)
-                .HasForeignKey(g => g.SchoolId);
             // Подключение внешнего ключа от Student.Group к Group  (1 - М)
             modelBuilder.Entity<Group>().HasMany(t => t.Students)
                 .WithOne(g => g.Group)
@@ -206,6 +147,11 @@ namespace StudentsManagerData
             modelBuilder.Entity<Specialty>().HasMany(t => t.Groups)
                 .WithOne(g => g.Specialty)
                 .HasForeignKey(g => g.SpecialtyId);
+
+            // Подключение внешнего ключа от Person.EducationSchool к School (1 - M)
+            modelBuilder.Entity<School>().HasMany(t => t.Persons)
+                .WithOne(g => g.EducationSchool)
+                .HasForeignKey(g => g.EducationSchoolId);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

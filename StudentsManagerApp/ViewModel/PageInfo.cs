@@ -11,5 +11,6 @@ namespace StudentsManagerApp.ViewModel
     {
         public string DisplayName { get; set; }
         public string Name { get; set; }
+        public bool Enabled { get; set; }
     }
 }

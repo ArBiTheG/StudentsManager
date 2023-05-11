@@ -10,10 +10,6 @@ namespace StudentsManagerData
     {
         private StudentsData studentsData;
         /// <summary>
-        /// Коллекция кешированных сущностей Diplomas
-        /// </summary>
-        private ObservableCollection<Diploma> _diplomas;
-        /// <summary>
         /// Коллекция кешированных сущностей Emails
         /// </summary>
         private ObservableCollection<Email> _emails;
@@ -55,18 +51,6 @@ namespace StudentsManagerData
 #if DEBUG
             Trace.WriteLine($"Инициализирован: {this} / hash: {this.GetHashCode()}");
 #endif
-        }
-
-        public ObservableCollection<Diploma> GetDiplomas()
-        {
-            if (studentsData == null)
-                studentsData = new StudentsData();
-            if (_diplomas==null)
-                _diplomas = studentsData.GetDiplomas();
-#if DEBUG
-            Trace.WriteLine($"Получена коллекция объектов: '{nameof(Diploma)}' / hash: {_diplomas.GetHashCode()}");
-#endif
-            return _diplomas;
         }
 
         public ObservableCollection<Email> GetEmails()

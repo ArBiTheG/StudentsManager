@@ -11,15 +11,36 @@ namespace StudentsManagerData.Table
     public class Person: IPerson,ICopyable<Person?>, ICloneable<Person?>, IEquatable<Person?>, INotifyPropertyChanged
     {
         int id;
+        // Основная информация
         string first_name;
         string middle_name;
         string last_name;
         DateTime birthday;
         byte gender;
         string? about;
+        string? birthplace;
+        // Паспортные данные
+        string? passport_country;
+        string? passport_series;
+        string? passport_number;
+        string? passport_code;
+        string? passport_given;
+        DateTime? passport_date_given;
+        // ИНН
+        string? inn;
+        // СНИЛС
+        string? snils;
+        // Образование
+        string? education_document_type;
+        DateTime? education_date_finish;
+        string? education_series;
+        string? education_number;
+        int? education_school_id;
+        School? education_school;
 
         public Person()
         {
+
         }
 
         /// <summary>
@@ -81,14 +102,29 @@ namespace StudentsManagerData.Table
         /// </summary>
         public DateTime Birthday { 
             get
-            { 
+            {
                 return birthday;
             } 
             set
             { 
                 birthday = value;
                 OnPropertyChanged(nameof(Birthday));
-            } 
+            }
+        }
+        /// <summary>
+        /// Место рождения
+        /// </summary>
+        public string? BirthPlace
+        {
+            get
+            {
+                return birthplace;
+            }
+            set
+            {
+                birthplace = value;
+                OnPropertyChanged(nameof(BirthPlace));
+            }
         }
         /// <summary>
         /// Пол
@@ -118,6 +154,219 @@ namespace StudentsManagerData.Table
                 OnPropertyChanged(nameof(About));
             }
         }
+
+        /// <summary>
+        /// Гражданство
+        /// </summary>
+        public string? PassportCountry
+        {
+            get
+            {
+                return passport_country;
+            }
+            set
+            {
+                passport_country = value;
+                OnPropertyChanged(nameof(PassportCountry));
+            }
+        }
+        /// <summary>
+        /// Серия паспорта
+        /// </summary>
+        public string? PassportSeries
+        {
+            get
+            {
+                return passport_series;
+            }
+            set
+            {
+                passport_series = value;
+                OnPropertyChanged(nameof(PassportSeries));
+            }
+        }
+        /// <summary>
+        /// Номер паспорта
+        /// </summary>
+        public string? PassportNumber
+        {
+            get
+            {
+                return passport_number;
+            }
+            set
+            {
+                passport_number = value;
+                OnPropertyChanged(nameof(PassportNumber));
+            }
+        }
+        /// <summary>
+        /// Код подразделения паспорта
+        /// </summary>
+        public string? PassportCode
+        {
+            get
+            {
+                return passport_code;
+            }
+            set
+            {
+                passport_code = value;
+                OnPropertyChanged(nameof(PassportCode));
+            }
+        }
+        /// <summary>
+        /// Кем выдан паспорт
+        /// </summary>
+        public string? PassportGiven
+        {
+            get
+            {
+                return passport_given;
+            }
+            set 
+            {
+                passport_given = value;
+                OnPropertyChanged(nameof(PassportGiven));
+            }
+
+        }
+        /// <summary>
+        /// Дата получения паспорта
+        /// </summary>
+        public DateTime? PassportDateGiven
+        {
+            get
+            {
+                return passport_date_given;
+            }
+            set
+            {
+                passport_date_given = value;
+                OnPropertyChanged(nameof(PassportDateGiven));
+            }
+        }
+        /// <summary>
+        /// ИНН
+        /// </summary>
+        public string? INN
+        {
+            get
+            {
+                return inn;
+            }
+            set
+            {
+                inn = value;
+                OnPropertyChanged(nameof(INN));
+            }
+        }
+        /// <summary>
+        /// СНИЛС
+        /// </summary>
+        public string? SNILS
+        {
+            get
+            {
+                return snils;
+            }
+            set
+            {
+                snils = value;
+                OnPropertyChanged(nameof(SNILS));
+            }
+        }
+        /// <summary>
+        /// Тип образовательного документа 
+        /// </summary>
+        public string? EducationDocumentType
+        {
+            get
+            {
+                return education_document_type;
+            }
+            set
+            {
+                education_document_type = value;
+                OnPropertyChanged(nameof(EducationDocumentType));
+            }
+        }
+        /// <summary>
+        /// Дата завершения учебного заведения
+        /// </summary>
+        public DateTime? EducationDateFinish
+        {
+            get
+            {
+                return education_date_finish;
+            }
+            set
+            {
+                education_date_finish = value;
+                OnPropertyChanged(nameof(EducationDateFinish));
+            }
+        }
+        /// <summary>
+        /// Серия образовательного документа
+        /// </summary>
+        public string? EducationSeries
+        {
+            get
+            {
+                return education_series;
+            }
+            set
+            {
+                education_series = value;
+                OnPropertyChanged(nameof(EducationSeries));
+            }
+        }
+        /// <summary>
+        /// Номер образовательного документа
+        /// </summary>
+        public string? EducationNumber
+        {
+            get
+            {
+                return education_number;
+            }
+            set
+            {
+                education_number = value;
+                OnPropertyChanged(nameof(EducationNumber));
+            }
+        }
+        /// <summary>
+        /// Код школы
+        /// </summary>
+        public int? EducationSchoolId
+        {
+            get
+            {
+                return education_school_id;
+            }
+            set
+            {
+                education_school_id = value;
+                OnPropertyChanged(nameof(EducationSchoolId));
+            }
+        }
+        /// <summary>
+        /// Объект школы
+        /// </summary>
+        public School? EducationSchool
+        {
+            get
+            {
+                return education_school;
+            }
+            set
+            {
+                education_school = value;
+                OnPropertyChanged(nameof(EducationSchool));
+            }
+        }
+
         /// <summary>
         /// Полное имя
         /// </summary>
@@ -130,64 +379,51 @@ namespace StudentsManagerData.Table
             }
         }
 
-        /// <summary>
-        /// Объект студента
-        /// </summary>
-        public Student? Student { get; set; }
 
         /// <summary>
         /// Объект куратора
         /// </summary>
         public Curator? Curator { get; set; }
-
         /// <summary>
-        /// Объект ИНН
+        /// Объекты студента
         /// </summary>
-        public INN? INN { get; set; }
-
+        public List<Student> Students { get; set; } = new();
         /// <summary>
-        /// Объект Паспорта
+        /// Список увлечений
         /// </summary>
-        public Passport? Passport { get; set; }
-
-        /// <summary>
-        /// Объект Снилса
-        /// </summary>
-        public Snils? Snils { get; set; }
-
-        /// <summary>
-        /// Объект инвалидности
-        /// </summary>
-        public Invalid? Invalid { get; set; }
-
-        /// <summary>
-        /// Объект инвалидности
-        /// </summary>
-        public Diploma? Diploma { get; set; }
-
-        public List<Hobby> Hobbies { get; set; }
+        public List<Hobby> Hobbies { get; set; } = new();
         /// <summary>
         /// Номера телефонов
         /// </summary>
-        public List<Phone> Phones { get; set; }
+        public List<Phone> Phones { get; set; } = new();
         /// <summary>
         /// Адреса элетронных почт
         /// </summary>
-        public List<Email> Emails { get; set; }
+        public List<Email> Emails { get; set; } = new();
         /// <summary>
         /// Детей
         /// </summary>
-        public List<Relation> Childs { get; set; }
+        public List<Relation> Childs { get; set; } = new();
         /// <summary>
         /// Родителей
         /// </summary>
-        public List<Relation> Parents { get; set; }
+        public List<Relation> Parents { get; set; } = new();
 
         /// <summary>
-        /// Загрузить значения в поля
+        /// Список полов
         /// </summary>
-        /// <param name="person">Откуда будут взяты значения полей</param>
-        public void Copy(Person? person)
+        [NotMapped]
+        public static Dictionary<int, string> Genders { get; } = new Dictionary<int, string>()
+        {
+            { 1, "Мужской" },
+            { 2, "Женский" },
+        };
+
+/// <summary>
+/// Загрузить значения в поля
+/// </summary>
+/// <param name="person">Откуда будут взяты значения полей</param>
+public void Copy(Person? person)
         {
             if (person == null) return;
             FirstName = person.first_name;

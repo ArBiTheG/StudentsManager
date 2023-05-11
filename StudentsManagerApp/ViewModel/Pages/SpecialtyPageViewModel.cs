@@ -15,15 +15,9 @@ namespace StudentsManagerApp.ViewModel.Pages
 {
     public class SpecialtyPageViewModel : BasePageViewModel
     {
-        private IStudentsData StudentsData;
-        private ObservableCollection<Specialty> specialties;
-        public override void Load()
-        {
-            StudentsData = new StudentsDataProxy();
-            // Подгружаем основные данные
-            Specialties = StudentsData.GetSpecialties();
-        }
-        public ObservableCollection<Specialty> Specialties
+        private IStudentsData? StudentsData;
+        private ObservableCollection<Specialty>? specialties;
+        public ObservableCollection<Specialty>? Specialties
         {
             get { return specialties; }
             set
@@ -33,13 +27,21 @@ namespace StudentsManagerApp.ViewModel.Pages
             }
         }
 
+        public override void Load()
+        {
+            StudentsData = new StudentsDataProxy();
+            // Подгружаем основные данные
+            Specialties = StudentsData.GetSpecialties();
+        }
+
         public override void Close()
         {
-            throw new NotImplementedException();
         }
 
         public override void AddField(object? obj)
         {
+            if (StudentsData == null) return;
+
             SpecialtyDialogViewModel viewModelDialog = new SpecialtyDialogViewModel(new Specialty(), StudentsData);
 
             SpecialtyWindow specialtyWindow = new SpecialtyWindow(viewModelDialog);
@@ -53,11 +55,12 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void EditField(object? selected_obj)
         {
+            if (StudentsData == null) return;
+
             Specialty? specialty = selected_obj as Specialty;
             if (specialty == null) return;
-            Specialty vm = specialty.Clone() as Specialty;
 
-            SpecialtyDialogViewModel viewModelDialog = new SpecialtyDialogViewModel((Specialty)specialty.Clone(), StudentsData);
+            SpecialtyDialogViewModel viewModelDialog = new SpecialtyDialogViewModel(specialty.Clone(), StudentsData);
 
             SpecialtyWindow specialtyWindow = new SpecialtyWindow(viewModelDialog);
             if (specialtyWindow.ShowDialog() == true)
@@ -70,6 +73,8 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void DeleteField(object? selected_obj)
         {
+            if (StudentsData == null) return;
+
             Specialty? specialty = selected_obj as Specialty;
             if (specialty == null) return;
 

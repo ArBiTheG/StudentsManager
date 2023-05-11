@@ -86,10 +86,8 @@ namespace StudentsManagerData.Table
                 OnPropertyChanged(nameof(About));
             }
         }
-        /// <summary>
-        /// Дипломы
-        /// </summary>
-        public List<Diploma> Diplomas { get; set; }
+
+        public List<Person> Persons { get; set; } = new();
 
         public override string ToString()
         {

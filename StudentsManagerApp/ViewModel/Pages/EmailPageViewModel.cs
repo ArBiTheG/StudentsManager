@@ -16,18 +16,10 @@ namespace StudentsManagerApp.ViewModel.Pages
 {
     public class EmailPageViewModel : BasePageViewModel
     {
-        private IStudentsData StudentsData;
-        private ObservableCollection<Email> emails;
-        private ObservableCollection<Person> persons;
-        public override void Load()
-        {
-            StudentsData = new StudentsDataProxy();
-            // Подгружаем второстепенные данные
-            persons = StudentsData.GetPersons();
-            // Подгружаем основные данные
-            Emails = StudentsData.GetEmails();
-        }
-        public ObservableCollection<Email> Emails
+        private IStudentsData? StudentsData;
+        private ObservableCollection<Email>? emails;
+        private ObservableCollection<Person>? persons;
+        public ObservableCollection<Email>? Emails
         {
             get { return emails; }
             set
@@ -36,16 +28,25 @@ namespace StudentsManagerApp.ViewModel.Pages
                 OnPropertyChanged(nameof(Emails));
             }
         }
-        public override void Close()
+
+        public override void Load()
         {
-            throw new NotImplementedException();
+            StudentsData = new StudentsDataProxy();
+            // Подгружаем второстепенные данные
+            persons = StudentsData.GetPersons();
+            // Подгружаем основные данные
+            Emails = StudentsData.GetEmails();
         }
 
+        public override void Close()
+        {
+        }
 
         public override void AddField(object? obj)
         {
+            if (StudentsData == null) return;
+
             EmailDialogViewModel viewModelDialog = new EmailDialogViewModel(new Email(), StudentsData);
-            viewModelDialog.LoadPersons();
 
             EmailWindow emailWindow = new EmailWindow(viewModelDialog);
             if (emailWindow.ShowDialog() == true)
@@ -58,11 +59,12 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void EditField(object? selected_obj)
         {
+            if (StudentsData == null) return;
+
             Email? email = selected_obj as Email;
             if (email == null) return;
 
-            EmailDialogViewModel viewModelDialog = new EmailDialogViewModel((Email)email.Clone(), StudentsData);
-            viewModelDialog.LoadPersons();
+            EmailDialogViewModel viewModelDialog = new EmailDialogViewModel(email.Clone(), StudentsData);
 
             EmailWindow emailWindow = new EmailWindow(viewModelDialog);
             if (emailWindow.ShowDialog() == true)
@@ -75,6 +77,8 @@ namespace StudentsManagerApp.ViewModel.Pages
 
         public override void DeleteField(object? selected_obj)
         {
+            if (StudentsData == null) return;
+
             Email? email = selected_obj as Email;
             if (email == null) return;
 

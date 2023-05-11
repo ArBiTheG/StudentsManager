@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentsManagerApp.View.DialogWindows"
         mc:Ignorable="d"
-        Title="PersonWindow" Height="450" Width="600">
+        Title="PersonWindow" Height="450" Width="600" d:Height="Auto">
     <Window.Resources>
         <Style TargetType="ScrollViewer">
             <Setter Property="Margin" Value="5" />
@@ -48,42 +48,121 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ScrollViewer>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="256"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Фамилия"/>
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Имя"/>
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Отчество"/>
-                <TextBlock Grid.Row="3" Grid.Column="0" Text="Пол"/>
-                <TextBlock Grid.Row="4" Grid.Column="0" Text="Дата рождения"/>
-                <TextBlock Grid.Row="5" Grid.Column="0" Text="Подробности"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Person.LastName}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Person.FirstName}"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Person.MiddleName}"/>
-                <ComboBox Grid.Row="3" Grid.Column="1" SelectedIndex="{Binding Person.Gender}" ItemsSource="{Binding Genders}" SelectedValue="Id" DisplayMemberPath="Name">
-                </ComboBox>
-                <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Person.Birthday}"/>
-                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Person.About}"/>
-            </Grid>
+            <StackPanel>
+                <GroupBox Header="Основная информация" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="256"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Фамилия"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Person.LastName}"/>
+                        
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Имя"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Person.FirstName}"/>
+                        
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Отчество"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Person.MiddleName}"/>
+                        
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Пол"/>
+                        <ComboBox Grid.Row="3" Grid.Column="1" SelectedIndex="{Binding Person.Gender}" ItemsSource="{Binding Person.Genders}" SelectedValue="Key" DisplayMemberPath="Value"/>
+
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Дата рождения"/>
+                        <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Person.Birthday}"/>
+                        
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Подробности"/>
+                        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Person.About}"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Паспортные данные" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="256"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Серия"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Person.PassportSeries}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Номер"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Person.PassportNumber}"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Код подразделения"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Person.PassportCode}"/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Место рождения"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Person.BirthPlace}"/>
+
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Кем выдан"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Person.PassportGiven}"/>
+
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Когда выдан"/>
+                        <DatePicker Grid.Row="5" Grid.Column="1" SelectedDate="{Binding Person.PassportDateGiven}"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Второстепенная информация" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="256"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="ИНН"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Person.INN}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Снилс"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Person.SNILS}"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Информация об образовании" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="256"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Вид документа"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Person.EducationDocumentType}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Дата завершения"/>
+                        <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding Person.EducationDateFinish}"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Серия"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Person.EducationSeries}"/>
+                        
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Номер"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Person.EducationNumber}"/>
+
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Учебное заведение"/>
+                        <ComboBox Grid.Row="4" Grid.Column="1" SelectedItem="{Binding Person.EducationSchool}" ItemsSource="{Binding Schools}" DisplayMemberPath="ShortName"/>
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+            
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Button IsDefault="True" Click="Accept_Click">ОК</Button>
