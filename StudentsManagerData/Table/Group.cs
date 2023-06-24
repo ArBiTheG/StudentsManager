@@ -18,8 +18,8 @@ namespace StudentsManagerData.Table
         byte type_training;
         string? about;
         DateTime date_created;
-        bool is_deleted;
         DateTime date_deleted;
+        bool is_deleted;
         string? reason_deleted;
         int curator_id;
         Curator curator;

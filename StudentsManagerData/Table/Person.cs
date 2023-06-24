@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace StudentsManagerData.Table
 {
-    public class Person: IPerson,ICopyable<Person?>, ICloneable<Person?>, IEquatable<Person?>, INotifyPropertyChanged
+    public class Person: ICopyable<Person?>, ICloneable<Person?>, IEquatable<Person?>, INotifyPropertyChanged
     {
         int id;
         // Основная информация
@@ -419,11 +419,11 @@ namespace StudentsManagerData.Table
             { 2, "Женский" },
         };
 
-/// <summary>
-/// Загрузить значения в поля
-/// </summary>
-/// <param name="person">Откуда будут взяты значения полей</param>
-public void Copy(Person? person)
+        /// <summary>
+        /// Загрузить значения в поля
+        /// </summary>
+        /// <param name="person">Откуда будут взяты значения полей</param>
+        public void Copy(Person? person)
         {
             if (person == null) return;
             FirstName = person.first_name;

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace StudentsManagerData.Table
 {
-    public class Student : IPerson, ICopyable<Student?>, ICloneable<Student?>, IEquatable<Student?>, INotifyPropertyChanged
+    public class Student : ICopyable<Student?>, ICloneable<Student?>, IEquatable<Student?>, INotifyPropertyChanged
     {
         int id;
         int person_id;
@@ -167,72 +167,6 @@ namespace StudentsManagerData.Table
         }
 
         public List<Decree> Decrees { get; set; }
-
-        [NotMapped]
-        public string FirstName
-        {
-            get
-            {
-                if (person == null)
-                    return string.Empty;
-                return Person.FirstName;
-            }
-            set
-            {
-                if (person == null)
-                {
-#if DEBUG
-                    Trace.WriteLine($"Class '{this}': Отсутствует объект к которому присваивается свойство {nameof(FirstName)}");
-#endif
-                    return;
-                }
-                Person.FirstName = value;
-            }
-        }
-
-        [NotMapped]
-        public string MiddleName
-        {
-            get
-            {
-                if (person == null)
-                    return string.Empty;
-                return Person.MiddleName;
-            }
-            set
-            {
-                if (person == null)
-                {
-#if DEBUG
-                    Trace.WriteLine($"Class '{this}': Отсутствует объект к которому присваивается свойство {nameof(MiddleName)}");
-#endif
-                    return;
-                }
-                Person.MiddleName = value;
-            }
-        }
-
-        [NotMapped]
-        public string LastName
-        {
-            get
-            {
-                if (person == null)
-                    return string.Empty;
-                return Person.LastName;
-            }
-            set
-            {
-                if (person == null)
-                {
-#if DEBUG
-                    Trace.WriteLine($"Class '{this}': Отсутствует объект к которому присваивается свойство {nameof(LastName)}");
-#endif
-                    return;
-                }
-                Person.LastName = value;
-            }
-        }
 
         [NotMapped]
         public string FullName

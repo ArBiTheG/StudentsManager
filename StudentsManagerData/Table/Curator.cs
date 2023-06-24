@@ -13,7 +13,7 @@ using System.Xml.Linq;
 
 namespace StudentsManagerData.Table
 {
-    public class Curator : IPerson, ICopyable<Curator?>, ICloneable<Curator?>, IEquatable<Curator?>, INotifyPropertyChanged
+    public class Curator : ICopyable<Curator?>, ICloneable<Curator?>, IEquatable<Curator?>, INotifyPropertyChanged
     {
         private int id;
         private int person_id;
@@ -97,72 +97,6 @@ namespace StudentsManagerData.Table
         }
 
         [NotMapped]
-        public string FirstName
-        {
-            get
-            {
-                if (person == null)
-                    return string.Empty;
-                return Person.FirstName;
-            }
-            set
-            {
-                if (person == null)
-                {
-#if DEBUG
-                    Trace.WriteLine($"Class '{this}': Отсутствует объект к которому присваивается свойство {nameof(FirstName)}");
-#endif
-                    return;
-                }
-                Person.FirstName = value;
-            }
-        }
-
-        [NotMapped]
-        public string MiddleName
-        {
-            get
-            {
-                if (person == null)
-                    return string.Empty;
-                return Person.MiddleName;
-            }
-            set
-            {
-                if (person == null)
-                {
-#if DEBUG
-                    Trace.WriteLine($"Class '{this}': Отсутствует объект к которому присваивается свойство {nameof(MiddleName)}");
-#endif
-                    return;
-                }
-                Person.MiddleName = value;
-            }
-        }
-
-        [NotMapped]
-        public string LastName
-        {
-            get
-            {
-                if (person == null)
-                    return string.Empty;
-                return Person.LastName;
-            }
-            set
-            {
-                if (person == null)
-                {
-#if DEBUG
-                    Trace.WriteLine($"Class '{this}': Отсутствует объект к которому присваивается свойство {nameof(LastName)}");
-#endif
-                    return;
-                }
-                Person.LastName = value;
-            }
-        }
-
-        [NotMapped]
         public string FullName
         {
             get
@@ -175,7 +109,7 @@ namespace StudentsManagerData.Table
 
         public override string ToString()
         {
-            return "id: " + id.ToString();
+            return "id: " + id.ToString() + " / name: " + FullName.ToString();
         }
 
         public override bool Equals(object? obj)
