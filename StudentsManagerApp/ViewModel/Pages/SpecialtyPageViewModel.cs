@@ -2,7 +2,7 @@
 using StudentsManagerApp.View.DialogWindows;
 using StudentsManagerApp.ViewModel.Dialogs;
 using StudentsManagerData;
-using StudentsManagerData.Table;
+using StudentsManagerData.Tables;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -65,7 +65,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             SpecialtyWindow specialtyWindow = new SpecialtyWindow(viewModelDialog);
             if (specialtyWindow.ShowDialog() == true)
             {
-                specialty.Copy(viewModelDialog.Specialty);
+                viewModelDialog.Specialty.Copy(specialty);
                 StudentsData.Edit(specialty);
                 StudentsData.SaveChanges();
             }

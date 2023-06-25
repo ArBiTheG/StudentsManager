@@ -9,9 +9,9 @@ namespace StudentsManagerData
     public interface ICopyable<TEntity>
     {
         /// <summary>
-        /// Выполняет копирование значений с внешнего объекта, без создания нового экземпляра
+        /// Выполняет копирование значений с внешнего объекта, без создания нового объекта.
         /// </summary>
-        /// <param name="entity">Объект с которого будут скопированы значения</param>
-        void Copy(TEntity entity);
+        /// <param name="paste">Объект в который будет выполнено копирование значений из текущего объекта.</param>
+        void Copy(TEntity paste);
     }
 }

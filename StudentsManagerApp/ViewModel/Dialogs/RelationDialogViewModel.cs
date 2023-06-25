@@ -1,7 +1,7 @@
 ﻿using StudentsManager;
 using StudentsManagerApp.View.DialogWindows;
 using StudentsManagerData;
-using StudentsManagerData.Table;
+using StudentsManagerData.Tables;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

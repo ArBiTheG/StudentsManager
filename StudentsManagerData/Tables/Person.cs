@@ -6,12 +6,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 
-namespace StudentsManagerData.Table
+namespace StudentsManagerData.Tables
 {
     public class Person: ICopyable<Person?>, ICloneable<Person?>, IEquatable<Person?>, INotifyPropertyChanged
     {
         int id;
-        // Основная информация
+        // РћСЃРЅРѕРІРЅР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ
         string first_name;
         string middle_name;
         string last_name;
@@ -19,18 +19,18 @@ namespace StudentsManagerData.Table
         byte gender;
         string? about;
         string? birthplace;
-        // Паспортные данные
+        // РџР°СЃРїРѕСЂС‚РЅС‹Рµ РґР°РЅРЅС‹Рµ
         string? passport_country;
         string? passport_series;
         string? passport_number;
         string? passport_code;
         string? passport_given;
         DateTime? passport_date_given;
-        // ИНН
+        // РРќРќ
         string? inn;
-        // СНИЛС
+        // РЎРќРР›РЎ
         string? snils;
-        // Образование
+        // РћР±СЂР°Р·РѕРІР°РЅРёРµ
         string? education_document_type;
         DateTime? education_date_finish;
         string? education_series;
@@ -44,7 +44,7 @@ namespace StudentsManagerData.Table
         }
 
         /// <summary>
-        /// Код
+        /// РљРѕРґ
         /// </summary>
         public int Id { 
             get 
@@ -53,7 +53,7 @@ namespace StudentsManagerData.Table
             } 
         }
         /// <summary>
-        /// Имя
+        /// РРјСЏ
         /// </summary>
         public string FirstName {
             get
@@ -68,7 +68,7 @@ namespace StudentsManagerData.Table
             }
         }
         /// <summary>
-        /// Отчество
+        /// РћС‚С‡РµСЃС‚РІРѕ
         /// </summary>
         public string MiddleName { 
             get
@@ -83,7 +83,7 @@ namespace StudentsManagerData.Table
             } 
         }
         /// <summary>
-        /// Фамилия
+        /// Р¤Р°РјРёР»РёСЏ
         /// </summary>
         public string LastName {
             get 
@@ -98,7 +98,7 @@ namespace StudentsManagerData.Table
             }
         }
         /// <summary>
-        /// День рождения
+        /// Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ
         /// </summary>
         public DateTime Birthday { 
             get
@@ -112,7 +112,7 @@ namespace StudentsManagerData.Table
             }
         }
         /// <summary>
-        /// Место рождения
+        /// РњРµСЃС‚Рѕ СЂРѕР¶РґРµРЅРёСЏ
         /// </summary>
         public string? BirthPlace
         {
@@ -127,7 +127,7 @@ namespace StudentsManagerData.Table
             }
         }
         /// <summary>
-        /// Пол
+        /// РџРѕР»
         /// </summary>
         public byte Gender { 
             get 
@@ -141,7 +141,7 @@ namespace StudentsManagerData.Table
             }
         }
         /// <summary>
-        /// Подробности
+        /// РџРѕРґСЂРѕР±РЅРѕСЃС‚Рё
         /// </summary>
         public string? About { 
             get 
@@ -156,7 +156,7 @@ namespace StudentsManagerData.Table
         }
 
         /// <summary>
-        /// Гражданство
+        /// Р“СЂР°Р¶РґР°РЅСЃС‚РІРѕ
         /// </summary>
         public string? PassportCountry
         {
@@ -171,7 +171,7 @@ namespace StudentsManagerData.Table
             }
         }
         /// <summary>
-        /// Серия паспорта
+        /// РЎРµСЂРёСЏ РїР°СЃРїРѕСЂС‚Р°
         /// </summary>
         public string? PassportSeries
         {
@@ -186,7 +186,7 @@ namespace StudentsManagerData.Table
             }
         }
         /// <summary>
-        /// Номер паспорта
+        /// РќРѕРјРµСЂ РїР°СЃРїРѕСЂС‚Р°
         /// </summary>
         public string? PassportNumber
         {
@@ -201,7 +201,7 @@ namespace StudentsManagerData.Table
             }
         }
         /// <summary>
-        /// Код подразделения паспорта
+        /// РљРѕРґ РїРѕРґСЂР°Р·РґРµР»РµРЅРёСЏ РїР°СЃРїРѕСЂС‚Р°
         /// </summary>
         public string? PassportCode
         {
@@ -216,7 +216,7 @@ namespace StudentsManagerData.Table
             }
         }
         /// <summary>
-        /// Кем выдан паспорт
+        /// РљРµРј РІС‹РґР°РЅ РїР°СЃРїРѕСЂС‚
         /// </summary>
         public string? PassportGiven
         {
@@ -232,7 +232,7 @@ namespace StudentsManagerData.Table
 
         }
         /// <summary>
-        /// Дата получения паспорта
+        /// Р”Р°С‚Р° РїРѕР»СѓС‡РµРЅРёСЏ РїР°СЃРїРѕСЂС‚Р°
         /// </summary>
         public DateTime? PassportDateGiven
         {
@@ -247,7 +247,7 @@ namespace StudentsManagerData.Table
             }
         }
         /// <summary>
-        /// ИНН
+        /// РРќРќ
         /// </summary>
         public string? INN
         {
@@ -262,7 +262,7 @@ namespace StudentsManagerData.Table
             }
         }
         /// <summary>
-        /// СНИЛС
+        /// РЎРќРР›РЎ
         /// </summary>
         public string? SNILS
         {
@@ -277,7 +277,7 @@ namespace StudentsManagerData.Table
             }
         }
         /// <summary>
-        /// Тип образовательного документа 
+        /// РўРёРї РѕР±СЂР°Р·РѕРІР°С‚РµР»СЊРЅРѕРіРѕ РґРѕРєСѓРјРµРЅС‚Р° 
         /// </summary>
         public string? EducationDocumentType
         {
@@ -292,7 +292,7 @@ namespace StudentsManagerData.Table
             }
         }
         /// <summary>
-        /// Дата завершения учебного заведения
+        /// Р”Р°С‚Р° Р·Р°РІРµСЂС€РµРЅРёСЏ СѓС‡РµР±РЅРѕРіРѕ Р·Р°РІРµРґРµРЅРёСЏ
         /// </summary>
         public DateTime? EducationDateFinish
         {
@@ -307,7 +307,7 @@ namespace StudentsManagerData.Table
             }
         }
         /// <summary>
-        /// Серия образовательного документа
+        /// РЎРµСЂРёСЏ РѕР±СЂР°Р·РѕРІР°С‚РµР»СЊРЅРѕРіРѕ РґРѕРєСѓРјРµРЅС‚Р°
         /// </summary>
         public string? EducationSeries
         {
@@ -322,7 +322,7 @@ namespace StudentsManagerData.Table
             }
         }
         /// <summary>
-        /// Номер образовательного документа
+        /// РќРѕРјРµСЂ РѕР±СЂР°Р·РѕРІР°С‚РµР»СЊРЅРѕРіРѕ РґРѕРєСѓРјРµРЅС‚Р°
         /// </summary>
         public string? EducationNumber
         {
@@ -337,7 +337,7 @@ namespace StudentsManagerData.Table
             }
         }
         /// <summary>
-        /// Код школы
+        ///РљРѕРґ С€РєРѕР»С‹
         /// </summary>
         public int? EducationSchoolId
         {
@@ -352,7 +352,7 @@ namespace StudentsManagerData.Table
             }
         }
         /// <summary>
-        /// Объект школы
+        /// РћР±СЉРµРєС‚ С€РєРѕР»С‹
         /// </summary>
         public School? EducationSchool
         {
@@ -368,7 +368,7 @@ namespace StudentsManagerData.Table
         }
 
         /// <summary>
-        /// Полное имя
+        /// РџРѕР»РЅРѕРµ РёРјСЏ
         /// </summary>
         [NotMapped]
         public string FullName
@@ -381,57 +381,54 @@ namespace StudentsManagerData.Table
 
 
         /// <summary>
-        /// Объект куратора
+        /// РћР±СЉРµРєС‚ РєСѓСЂР°С‚РѕСЂР°
         /// </summary>
         public Curator? Curator { get; set; }
         /// <summary>
-        /// Объекты студента
+        /// РћР±СЉРµРєС‚С‹ СЃС‚СѓРґРµРЅС‚РѕРІ
         /// </summary>
         public List<Student> Students { get; set; } = new();
         /// <summary>
-        /// Список увлечений
+        /// РЎРїРёСЃРѕРє СѓРІР»РµС‡РµРЅРёР№
         /// </summary>
         public List<Hobby> Hobbies { get; set; } = new();
         /// <summary>
-        /// Номера телефонов
+        /// РќРѕРјРµСЂР° С‚РµР»РµС„РѕРЅРѕРІ
         /// </summary>
         public List<Phone> Phones { get; set; } = new();
         /// <summary>
-        /// Адреса элетронных почт
+        /// РђРґСЂРµСЃР° СЌР»РµС‚СЂРѕРЅРЅС‹С… РїРѕС‡С‚
         /// </summary>
         public List<Email> Emails { get; set; } = new();
         /// <summary>
-        /// Детей
+        /// Р”РµС‚РµР№
         /// </summary>
         public List<Relation> Childs { get; set; } = new();
         /// <summary>
-        /// Родителей
+        /// Р РѕРґРёС‚РµР»РµР№
         /// </summary>
         public List<Relation> Parents { get; set; } = new();
 
         /// <summary>
-        /// Список полов
+        /// РЎРїРёСЃРѕРє РїРѕР»РѕРІ
         /// </summary>
         [NotMapped]
         public static Dictionary<int, string> Genders { get; } = new Dictionary<int, string>()
         {
-            { 1, "Мужской" },
-            { 2, "Женский" },
+            { 1, "РњСѓР¶СЃРєРѕР№" },
+            { 2, "Р–РµРЅСЃРєРёР№" },
         };
 
-        /// <summary>
-        /// Загрузить значения в поля
-        /// </summary>
-        /// <param name="person">Откуда будут взяты значения полей</param>
         public void Copy(Person? person)
         {
             if (person == null) return;
-            FirstName = person.first_name;
-            MiddleName = person.middle_name;
-            LastName = person.last_name;
-            Birthday = person.birthday;
-            Gender = person.gender;
-            About = person.about;
+            person.FirstName = first_name;
+            person.MiddleName = middle_name;
+            person.LastName = last_name;
+            person.Birthday = birthday;
+            person.Gender = gender;
+            person.About = about;
+            //// TODO: Р”РѕРїРѕР»РЅРёС‚СЊ РЅРѕРІС‹Рµ РїРѕР»СЏ
         }
         public Person Clone()
         {
@@ -445,6 +442,7 @@ namespace StudentsManagerData.Table
                 gender= gender,
                 about= about
             };
+            // TODO: Р”РѕРїРѕР»РЅРёС‚СЊ РЅРѕРІС‹Рµ РїРѕР»СЏ
         }
 
         public override string ToString()

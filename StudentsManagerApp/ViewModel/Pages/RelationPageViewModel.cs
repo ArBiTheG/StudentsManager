@@ -1,4 +1,4 @@
-﻿using StudentsManagerData.Table;
+﻿using StudentsManagerData.Tables;
 using StudentsManagerData;
 using System;
 using System.Collections.Generic;
@@ -69,7 +69,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             RelationWindow relationWindow = new RelationWindow(viewModelDialog);
             if (relationWindow.ShowDialog() == true)
             {
-                relation.Copy(viewModelDialog.Relation);
+                viewModelDialog.Relation.Copy(relation);
                 StudentsData.Edit(relation);
                 StudentsData.SaveChanges();
             }

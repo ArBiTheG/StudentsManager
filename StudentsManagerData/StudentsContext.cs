@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StudentsManagerData.Table;
+using StudentsManagerData.Tables;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

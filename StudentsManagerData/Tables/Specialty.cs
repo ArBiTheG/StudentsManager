@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentsManagerData.Table
+namespace StudentsManagerData.Tables
 {
     public class Specialty: ICopyable<Specialty?>, ICloneable<Specialty?>, IEquatable<Specialty?>, INotifyPropertyChanged
     {
@@ -199,15 +199,15 @@ namespace StudentsManagerData.Table
         public void Copy(Specialty? specialty)
         {
             if (specialty == null) return;
-            Code = specialty.code;
-            Name = specialty.name;
-            Skill = specialty.skill;
-            Duration = specialty.duration;
-            About = specialty.about;
-            DateCreated = specialty.date_created;
-            DateDeleted = specialty.date_deleted;
-            IsDeleted = specialty.is_deleted;
-            ReasonDeleted = specialty.reason_deleted;
+            specialty.Code = code;
+            specialty.Name = name;
+            specialty.Skill = skill;
+            specialty.Duration = duration;
+            specialty.About = about;
+            specialty.DateCreated = date_created;
+            specialty.DateDeleted = date_deleted;
+            specialty.IsDeleted = is_deleted;
+            specialty.ReasonDeleted = reason_deleted;
         }
         public Specialty Clone()
         {

@@ -7,9 +7,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentsManagerData.Table
+namespace StudentsManagerData.Tables
 {
-    public class Phone: ICopyable<Phone?>, ICloneable<Phone?>, IEquatable<Phone?>, INotifyPropertyChanged
+    public class Hobby: ICopyable<Hobby?>, ICloneable<Hobby?>, IEquatable<Hobby?>, INotifyPropertyChanged
     {
         int id;
         int person_id;
@@ -17,7 +17,7 @@ namespace StudentsManagerData.Table
         string name;
         string? description;
 
-        public Phone()
+        public Hobby()
         {
         }
 
@@ -25,100 +25,98 @@ namespace StudentsManagerData.Table
         /// Код
         /// </summary>
         public int Id { 
-            get
-            {
-                return id; 
-            } 
+            get 
+            { 
+                return id;
+            }
         }
-
         /// <summary>
         /// Код человека
         /// </summary>
-        public int PersonId { 
+        public int PersonId {
             get 
-            { 
+            {
                 return person_id;
             } 
-            set 
+            set
             { 
-                person_id = value;
+                person_id = value; 
             } 
         }
-
         /// <summary>
         /// Объект человека
         /// </summary>
         public Person Person { 
-            get 
-            {
-                return person;
+            get
+            { 
+                return person; 
             } 
-            set 
+            set
             { 
                 person = value;
                 OnPropertyChanged(nameof(Person));
-            }
+            } 
         }
-
         /// <summary>
-        /// Номер телефона
+        /// Наименование хобби
         /// </summary>
         public string Name { 
             get 
-            {
-                return name; 
+            { 
+                return name;
             } 
             set 
             { 
                 name = value;
                 OnPropertyChanged(nameof(Name));
-            } 
+            }
         }
-
         /// <summary>
-        /// Описание
+        /// Описание хобби
         /// </summary>
-        public string? Description {
+        public string? Description { 
             get 
             { 
-                return description; 
+                return description;
             } 
             set
-            { 
+            {
                 description = value;
                 OnPropertyChanged(nameof(Description));
             }
-        }
-
-        public void Copy(Phone? phone)
-        {
-            if (phone == null) return;
-            PersonId = phone.person_id;
-            Person = phone.person;
-            Name = phone.name;
-            Description = phone.description;
-        }
-        public Phone Clone() { 
-            return new Phone()
-            {
-                id = id, 
-                person_id = person_id, 
-                person = person, 
-                name = name, 
-                description = description
-            }; 
         }
 
         public override string ToString()
         {
             return "id: " + id.ToString() + " / name: " + name.ToString();
         }
+
         public override bool Equals(object? obj)
         {
-            return Equals(obj as Phone);
+            return Equals(obj as Hobby);
         }
 
-        public bool Equals(Phone? other)
+        public void Copy(Hobby? hobby)
+        {
+            if (hobby == null) return;
+            hobby.PersonId = person_id;
+            hobby.Person = person;
+            hobby.Name = name;
+            hobby.Description = description;
+        }
+        public Hobby Clone()
+        {
+            return new Hobby()
+            {
+                id = id,
+                person_id = person_id,
+                person = person,
+                name = name,
+                description = description
+            };
+        }
+
+        public bool Equals(Hobby? other)
         {
             return other is not null &&
                    id == other.id &&
@@ -128,12 +126,12 @@ namespace StudentsManagerData.Table
                    description == other.description;
         }
 
-        public static bool operator ==(Phone? left, Phone? right)
+        public static bool operator ==(Hobby? left, Hobby? right)
         {
-            return EqualityComparer<Phone>.Default.Equals(left, right);
+            return EqualityComparer<Hobby>.Default.Equals(left, right);
         }
 
-        public static bool operator !=(Phone? left, Phone? right)
+        public static bool operator !=(Hobby? left, Hobby? right)
         {
             return !(left == right);
         }

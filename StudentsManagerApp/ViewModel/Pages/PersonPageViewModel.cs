@@ -2,7 +2,7 @@
 using StudentsManagerApp.View.DialogWindows;
 using StudentsManagerApp.ViewModel.Dialogs;
 using StudentsManagerData;
-using StudentsManagerData.Table;
+using StudentsManagerData.Tables;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -70,7 +70,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             PersonWindow personWindow = new PersonWindow(viewModelDialog);
             if (personWindow.ShowDialog() == true)
             {
-                person.Copy(viewModelDialog.Person);
+                viewModelDialog.Person.Copy(person);
                 StudentsData.Edit(person);
                 StudentsData.SaveChanges();
             }

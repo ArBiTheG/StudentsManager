@@ -1,4 +1,4 @@
-﻿using StudentsManagerData.Table;
+﻿using StudentsManagerData.Tables;
 using StudentsManagerData;
 using System;
 using System.Collections.Generic;
@@ -70,7 +70,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             HobbyWindow hobbyWindow = new HobbyWindow(viewModelDialog);
             if (hobbyWindow.ShowDialog() == true)
             {
-                hobby.Copy(viewModelDialog.Hobby);
+                viewModelDialog.Hobby.Copy(hobby);
                 StudentsData.Edit(hobby);
                 StudentsData.SaveChanges();
             }

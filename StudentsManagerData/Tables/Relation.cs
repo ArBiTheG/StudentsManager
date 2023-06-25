@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentsManagerData.Table
+namespace StudentsManagerData.Tables
 {
     public class Relation: ICopyable<Relation?>, ICloneable<Relation?>, IEquatable<Relation?>, INotifyPropertyChanged
     {
@@ -117,11 +117,11 @@ namespace StudentsManagerData.Table
         public void Copy(Relation? relation)
         {
             if (relation == null) return;
-            ParentId = relation.parent_id;
-            Parent = relation.parent;
-            ChildId = relation.child_id;
-            Child = relation.child;
-            TypeRelation = relation.type_relation;
+            relation.ParentId = parent_id;
+            relation.Parent = parent;
+            relation.ChildId = child_id;
+            relation.Child = child;
+            relation.TypeRelation = type_relation;
         }
 
         public Relation Clone()

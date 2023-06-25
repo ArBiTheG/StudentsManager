@@ -2,7 +2,7 @@
 using StudentsManagerApp.View.DialogWindows;
 using StudentsManagerApp.ViewModel.Dialogs;
 using StudentsManagerData;
-using StudentsManagerData.Table;
+using StudentsManagerData.Tables;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -69,7 +69,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             EmailWindow emailWindow = new EmailWindow(viewModelDialog);
             if (emailWindow.ShowDialog() == true)
             {
-                email.Copy(viewModelDialog.Email);
+                viewModelDialog.Email.Copy(email);
                 StudentsData.Edit(email);
                 StudentsData.SaveChanges();
             }

@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentsManagerData.Table
+namespace StudentsManagerData.Tables
 {
     public class Student : ICopyable<Student?>, ICloneable<Student?>, IEquatable<Student?>, INotifyPropertyChanged
     {
@@ -192,15 +192,15 @@ namespace StudentsManagerData.Table
         public void Copy(Student? student)
         {
             if (student == null) return;
-            PersonId = student.person_id;
-            Person = student.person;
-            GroupId = student.group_id;
-            Group = student.group;
-            DateEntry = student.date_entry;
-            DateEscaped = student.date_escaped;
-            IsEscaped = student.is_escaped;
-            ReasonEscaped = student.reason_escaped;
-            About = student.about;
+            student.PersonId = person_id;
+            student.Person = person;
+            student.GroupId = group_id;
+            student.Group = group;
+            student.DateEntry = date_entry;
+            student.DateEscaped = date_escaped;
+            student.IsEscaped = is_escaped;
+            student.ReasonEscaped = reason_escaped;
+            student.About = about;
         }
         public Student Clone()
         {

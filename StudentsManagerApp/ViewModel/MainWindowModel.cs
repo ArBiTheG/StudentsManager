@@ -3,7 +3,7 @@ using StudentsManagerApp.View.Pages;
 using StudentsManagerApp.ViewModel.Module;
 using StudentsManagerApp.ViewModel.Pages;
 using StudentsManagerData;
-using StudentsManagerData.Table;
+using StudentsManagerData.Tables;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

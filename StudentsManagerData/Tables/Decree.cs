@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentsManagerData.Table
+namespace StudentsManagerData.Tables
 {
     public class Decree : ICopyable<Decree?>, ICloneable<Decree?>, IEquatable<Decree?>, INotifyPropertyChanged
     {
@@ -92,13 +92,13 @@ namespace StudentsManagerData.Table
             }
         }
 
-        public void Copy(Decree? entity)
+        public void Copy(Decree? decree)
         {
-            if (entity == null) return;
-            StudentId = entity.student_id;
-            Student = entity.student;
-            Description = entity.description;
-            TypeDecree = entity.type_decree;
+            if (decree == null) return;
+            decree.StudentId = student_id;
+            decree.Student = student;
+            decree.Description = description;
+            decree.TypeDecree = type_decree;
         }
         public Decree Clone()
         {

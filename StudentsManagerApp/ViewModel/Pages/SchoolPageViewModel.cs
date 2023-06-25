@@ -1,4 +1,4 @@
-﻿using StudentsManagerData.Table;
+﻿using StudentsManagerData.Tables;
 using StudentsManagerData;
 using System;
 using System.Collections.Generic;
@@ -62,7 +62,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             SchoolWindow schoolWindow = new SchoolWindow(viewModelDialog);
             if (schoolWindow.ShowDialog() == true)
             {
-                school.Copy(viewModelDialog.School);
+                viewModelDialog.School.Copy(school);
                 StudentsData.Edit(school);
                 StudentsData.SaveChanges();
             }

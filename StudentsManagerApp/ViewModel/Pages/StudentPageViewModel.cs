@@ -2,7 +2,7 @@
 using StudentsManagerApp.View.DialogWindows;
 using StudentsManagerApp.ViewModel.Dialogs;
 using StudentsManagerData;
-using StudentsManagerData.Table;
+using StudentsManagerData.Tables;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -67,7 +67,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             StudentWindow studentWindow = new StudentWindow(viewModelDialog);
             if (studentWindow.ShowDialog() == true)
             {
-                student.Copy(viewModelDialog.Student);
+                viewModelDialog.Student.Copy(student);
                 StudentsData.Edit(student);
                 StudentsData.SaveChanges();
             }

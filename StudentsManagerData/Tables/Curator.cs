@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace StudentsManagerData.Table
+namespace StudentsManagerData.Tables
 {
     public class Curator : ICopyable<Curator?>, ICloneable<Curator?>, IEquatable<Curator?>, INotifyPropertyChanged
     {
@@ -129,13 +129,13 @@ namespace StudentsManagerData.Table
             };
         }
 
-        public void Copy(Curator? entity)
+        public void Copy(Curator? curator)
         {
-            if (entity == null) return;
-            PersonId = entity.person_id;
-            Person = entity.person;
-            Post = entity.post;
-            Exp = entity.exp;
+            if (curator == null) return;
+            curator.PersonId = person_id;
+            curator.Person = person;
+            curator.Post = post;
+            curator.Exp = exp;
         }
 
         public bool Equals(Curator? other)

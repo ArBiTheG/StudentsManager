@@ -20,7 +20,7 @@ namespace StudentsManagerData.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
 
-            modelBuilder.Entity("StudentsManagerData.Table.Curator", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Curator", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,7 +43,7 @@ namespace StudentsManagerData.Migrations
                     b.ToTable("Curators");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Decree", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Decree", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -65,7 +65,7 @@ namespace StudentsManagerData.Migrations
                     b.ToTable("Decrees");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Email", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Email", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -88,7 +88,7 @@ namespace StudentsManagerData.Migrations
                     b.ToTable("Emails");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Group", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Group", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -131,7 +131,7 @@ namespace StudentsManagerData.Migrations
                     b.ToTable("Groups");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Hobby", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Hobby", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -154,7 +154,7 @@ namespace StudentsManagerData.Migrations
                     b.ToTable("Hobbies");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Person", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Person", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -230,7 +230,7 @@ namespace StudentsManagerData.Migrations
                     b.ToTable("Persons");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Phone", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Phone", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -253,7 +253,7 @@ namespace StudentsManagerData.Migrations
                     b.ToTable("Phones");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Relation", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Relation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -277,7 +277,7 @@ namespace StudentsManagerData.Migrations
                     b.ToTable("Relations");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.School", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.School", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -301,7 +301,7 @@ namespace StudentsManagerData.Migrations
                     b.ToTable("Schools");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Specialty", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Specialty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -342,7 +342,7 @@ namespace StudentsManagerData.Migrations
                     b.ToTable("Specialties");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Student", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -378,20 +378,20 @@ namespace StudentsManagerData.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Curator", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Curator", b =>
                 {
-                    b.HasOne("StudentsManagerData.Table.Person", "Person")
+                    b.HasOne("StudentsManagerData.Tables.Person", "Person")
                         .WithOne("Curator")
-                        .HasForeignKey("StudentsManagerData.Table.Curator", "PersonId")
+                        .HasForeignKey("StudentsManagerData.Tables.Curator", "PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Decree", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Decree", b =>
                 {
-                    b.HasOne("StudentsManagerData.Table.Student", "Student")
+                    b.HasOne("StudentsManagerData.Tables.Student", "Student")
                         .WithMany("Decrees")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -400,9 +400,9 @@ namespace StudentsManagerData.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Email", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Email", b =>
                 {
-                    b.HasOne("StudentsManagerData.Table.Person", "Person")
+                    b.HasOne("StudentsManagerData.Tables.Person", "Person")
                         .WithMany("Emails")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -411,15 +411,15 @@ namespace StudentsManagerData.Migrations
                     b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Group", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Group", b =>
                 {
-                    b.HasOne("StudentsManagerData.Table.Curator", "Curator")
+                    b.HasOne("StudentsManagerData.Tables.Curator", "Curator")
                         .WithMany()
                         .HasForeignKey("CuratorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StudentsManagerData.Table.Specialty", "Specialty")
+                    b.HasOne("StudentsManagerData.Tables.Specialty", "Specialty")
                         .WithMany("Groups")
                         .HasForeignKey("SpecialtyId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -430,9 +430,9 @@ namespace StudentsManagerData.Migrations
                     b.Navigation("Specialty");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Hobby", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Hobby", b =>
                 {
-                    b.HasOne("StudentsManagerData.Table.Person", "Person")
+                    b.HasOne("StudentsManagerData.Tables.Person", "Person")
                         .WithMany("Hobbies")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -441,18 +441,18 @@ namespace StudentsManagerData.Migrations
                     b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Person", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Person", b =>
                 {
-                    b.HasOne("StudentsManagerData.Table.School", "EducationSchool")
+                    b.HasOne("StudentsManagerData.Tables.School", "EducationSchool")
                         .WithMany("Persons")
                         .HasForeignKey("EducationSchoolId");
 
                     b.Navigation("EducationSchool");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Phone", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Phone", b =>
                 {
-                    b.HasOne("StudentsManagerData.Table.Person", "Person")
+                    b.HasOne("StudentsManagerData.Tables.Person", "Person")
                         .WithMany("Phones")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -461,15 +461,15 @@ namespace StudentsManagerData.Migrations
                     b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Relation", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Relation", b =>
                 {
-                    b.HasOne("StudentsManagerData.Table.Person", "Child")
+                    b.HasOne("StudentsManagerData.Tables.Person", "Child")
                         .WithMany("Childs")
                         .HasForeignKey("ChildId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StudentsManagerData.Table.Person", "Parent")
+                    b.HasOne("StudentsManagerData.Tables.Person", "Parent")
                         .WithMany("Parents")
                         .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -480,15 +480,15 @@ namespace StudentsManagerData.Migrations
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Student", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Student", b =>
                 {
-                    b.HasOne("StudentsManagerData.Table.Group", "Group")
+                    b.HasOne("StudentsManagerData.Tables.Group", "Group")
                         .WithMany("Students")
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StudentsManagerData.Table.Person", "Person")
+                    b.HasOne("StudentsManagerData.Tables.Person", "Person")
                         .WithMany("Students")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -499,12 +499,12 @@ namespace StudentsManagerData.Migrations
                     b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Group", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Group", b =>
                 {
                     b.Navigation("Students");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Person", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Person", b =>
                 {
                     b.Navigation("Childs");
 
@@ -521,17 +521,17 @@ namespace StudentsManagerData.Migrations
                     b.Navigation("Students");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.School", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.School", b =>
                 {
                     b.Navigation("Persons");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Specialty", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Specialty", b =>
                 {
                     b.Navigation("Groups");
                 });
 
-            modelBuilder.Entity("StudentsManagerData.Table.Student", b =>
+            modelBuilder.Entity("StudentsManagerData.Tables.Student", b =>
                 {
                     b.Navigation("Decrees");
                 });

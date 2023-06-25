@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentsManagerData.Table
+namespace StudentsManagerData.Tables
 {
     public class Group: ICopyable<Group?>,ICloneable<Group?>, IEquatable<Group?>, INotifyPropertyChanged
     {
@@ -214,13 +214,13 @@ namespace StudentsManagerData.Table
         public void Copy(Group? group)
         {
             if (group == null) return;
-            Name = group.name;
-            SpecialtyId = group.spec_id;
-            Specialty = group.specialty;
-            TypeTraining = group.type_training;
-            About = group.about;
-            DateCreated = group.date_created;
-            DateDeleted = group.date_deleted;
+            group.Name = name;
+            group.SpecialtyId = spec_id;
+            group.Specialty = specialty;
+            group.TypeTraining = type_training;
+            group.About = about;
+            group.DateCreated = date_created;
+            group.DateDeleted = date_deleted;
         }
         public Group Clone()
         {

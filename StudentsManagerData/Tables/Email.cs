@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentsManagerData.Table
+namespace StudentsManagerData.Tables
 {
     public class Email: ICopyable<Email?>, ICloneable<Email?>, IEquatable<Email?>, INotifyPropertyChanged
     {
@@ -120,10 +120,10 @@ namespace StudentsManagerData.Table
         public void Copy(Email? email)
         {
             if (email == null) return;
-            PersonId = email.person_id;
-            Person = email.person;
-            Name = email.name;
-            Description = email.description;
+            email.PersonId = person_id;
+            email.Person = person;
+            email.Name = name;
+            email.Description = description;
         }
 
         public bool Equals(Email? other)

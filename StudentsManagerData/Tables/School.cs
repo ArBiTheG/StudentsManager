@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace StudentsManagerData.Table
+namespace StudentsManagerData.Tables
 {
     public class School: ICopyable<School?>, ICloneable<School?>, IEquatable<School?>, INotifyPropertyChanged
     {
@@ -101,10 +101,10 @@ namespace StudentsManagerData.Table
         public void Copy(School? school)
         {
             if (school == null) return;
-            FullName = school.full_name;
-            ShortName = school.short_name;
-            Address = school.address;
-            About = school.about;
+            school.FullName = full_name;
+            school.ShortName = short_name;
+            school.Address = address;
+            school.About = about;
         }
         public School Clone()
         {

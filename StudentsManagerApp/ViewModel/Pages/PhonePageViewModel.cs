@@ -1,4 +1,4 @@
-﻿using StudentsManagerData.Table;
+﻿using StudentsManagerData.Tables;
 using StudentsManagerData;
 using System;
 using System.Collections.Generic;
@@ -65,7 +65,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             PhoneWindow phoneWindow = new PhoneWindow(viewModelDialog);
             if (phoneWindow.ShowDialog() == true)
             {
-                phone.Copy(viewModelDialog.Phone);
+                viewModelDialog.Phone.Copy(phone);
                 StudentsData.Edit(phone);
                 StudentsData.SaveChanges();
             }
