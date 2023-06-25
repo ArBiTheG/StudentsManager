@@ -1,9 +1,6 @@
 ﻿using StudentsManagerApp.ViewModel.Dialogs;
-using StudentsManagerData;
-using StudentsManagerData.Tables;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,14 +13,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace StudentsManagerApp.View.DialogWindows
+namespace StudentsManagerApp.View.Dialogs
 {
     /// <summary>
-    /// Логика взаимодействия для RelationWindow.xaml
+    /// Логика взаимодействия для StudentDialogWindow.xaml
     /// </summary>
-    public partial class RelationWindow : Window
+    public partial class StudentDialogWindow : Window
     {
-        public RelationWindow(RelationDialogViewModel viewModel)
+        public StudentDialogWindow(StudentDialogViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;

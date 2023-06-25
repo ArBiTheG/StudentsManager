@@ -1,9 +1,6 @@
 ﻿using StudentsManagerApp.ViewModel.Dialogs;
-using StudentsManagerData;
-using StudentsManagerData.Tables;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,14 +13,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace StudentsManagerApp.View.DialogWindows
+namespace StudentsManagerApp.View.Dialogs
 {
     /// <summary>
-    /// Логика взаимодействия для HobbyWindow.xaml
+    /// Логика взаимодействия для HobbyDialogWindow.xaml
     /// </summary>
-    public partial class HobbyWindow : Window
+    public partial class HobbyDialogWindow : Window
     {
-        public HobbyWindow(HobbyDialogViewModel viewModel)
+        public HobbyDialogWindow(HobbyDialogViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;

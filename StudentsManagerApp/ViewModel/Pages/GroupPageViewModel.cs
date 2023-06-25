@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.View.Dialogs;
 using System.Windows;
 using StudentsManagerApp.ViewModel.Dialogs;
 
@@ -44,7 +44,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             GroupDialogViewModel viewModelDialog = new GroupDialogViewModel(new Group(), StudentsData);
             viewModelDialog.LoadSpecialties();
 
-            GroupWindow groupWindow = new GroupWindow(viewModelDialog);
+            GroupDialogWindow groupWindow = new GroupDialogWindow(viewModelDialog);
             if (groupWindow.ShowDialog() == true)
             {
                 Group group = viewModelDialog.Group;
@@ -61,7 +61,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             GroupDialogViewModel viewModelDialog = new GroupDialogViewModel((Group)group.Clone(), StudentsData);
             viewModelDialog.LoadSpecialties();
 
-            GroupWindow groupWindow = new GroupWindow(viewModelDialog);
+            GroupDialogWindow groupWindow = new GroupDialogWindow(viewModelDialog);
 
             if (groupWindow.ShowDialog() == true)
             {

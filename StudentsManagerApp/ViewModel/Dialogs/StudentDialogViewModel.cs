@@ -1,5 +1,5 @@
 ﻿using StudentsManager;
-using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.View.Dialogs;
 using StudentsManagerData;
 using StudentsManagerData.Tables;
 using System;
@@ -43,7 +43,7 @@ namespace StudentsManagerApp.ViewModel.Dialogs
                 {
                     PersonDialogViewModel viewModelDialog = new PersonDialogViewModel(new Person(), StudentsData);
 
-                    PersonWindow personWindow = new PersonWindow(viewModelDialog);
+                    PersonDialogWindow personWindow = new PersonDialogWindow(viewModelDialog);
                     if (personWindow.ShowDialog() == true)
                     {
                         Person person = viewModelDialog.Person;
@@ -64,7 +64,7 @@ namespace StudentsManagerApp.ViewModel.Dialogs
                     GroupDialogViewModel viewModelDialog = new GroupDialogViewModel(new Group(), StudentsData);
                     viewModelDialog.LoadSpecialties();
 
-                    GroupWindow groupWindow = new GroupWindow(viewModelDialog);
+                    GroupDialogWindow groupWindow = new GroupDialogWindow(viewModelDialog);
                     if (groupWindow.ShowDialog() == true)
                     {
                         Group group = viewModelDialog.Group;

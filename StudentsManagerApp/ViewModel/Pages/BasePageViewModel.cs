@@ -1,5 +1,5 @@
 ﻿using StudentsManager;
-using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.View.Dialogs;
 using StudentsManagerData;
 using StudentsManagerData.Tables;
 using System;

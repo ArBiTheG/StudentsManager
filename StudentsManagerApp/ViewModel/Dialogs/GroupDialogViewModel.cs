@@ -1,5 +1,5 @@
 ﻿using StudentsManager;
-using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.View.Dialogs;
 using StudentsManagerData;
 using StudentsManagerData.Tables;
 using System;
@@ -37,7 +37,7 @@ namespace StudentsManagerApp.ViewModel.Dialogs
                 {
                     SpecialtyDialogViewModel viewModelDialog = new SpecialtyDialogViewModel(new Specialty(), StudentsData);
 
-                    SpecialtyWindow specialtyWindow = new SpecialtyWindow(viewModelDialog);
+                    SpecialtyDialogWindow specialtyWindow = new SpecialtyDialogWindow(viewModelDialog);
                     if (specialtyWindow.ShowDialog() == true)
                     {
                         Specialty specialty = viewModelDialog.Specialty;

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.View.Dialogs;
 using System.Windows;
 using StudentsManagerApp.ViewModel.Dialogs;
 
@@ -49,7 +49,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             HobbyDialogViewModel viewModelDialog = new HobbyDialogViewModel(new Hobby(), StudentsData);
 
-            HobbyWindow hobbyWindow = new HobbyWindow(viewModelDialog);
+            HobbyDialogWindow hobbyWindow = new HobbyDialogWindow(viewModelDialog);
             if (hobbyWindow.ShowDialog() == true)
             {
                 Hobby hobby = viewModelDialog.Hobby;
@@ -67,7 +67,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             HobbyDialogViewModel viewModelDialog = new HobbyDialogViewModel(hobby.Clone(), StudentsData);
 
-            HobbyWindow hobbyWindow = new HobbyWindow(viewModelDialog);
+            HobbyDialogWindow hobbyWindow = new HobbyDialogWindow(viewModelDialog);
             if (hobbyWindow.ShowDialog() == true)
             {
                 viewModelDialog.Hobby.Copy(hobby);

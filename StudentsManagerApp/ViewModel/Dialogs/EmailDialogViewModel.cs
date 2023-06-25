@@ -1,5 +1,5 @@
 ﻿using StudentsManager;
-using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.View.Dialogs;
 using StudentsManagerData;
 using StudentsManagerData.Tables;
 using System;
@@ -36,7 +36,7 @@ namespace StudentsManagerApp.ViewModel.Dialogs
 
                     PersonDialogViewModel viewModelDialog = new PersonDialogViewModel(new Person(), StudentsData);
 
-                    PersonWindow personWindow = new PersonWindow(viewModelDialog);
+                    PersonDialogWindow personWindow = new PersonDialogWindow(viewModelDialog);
                     if (personWindow.ShowDialog() == true)
                     {
                         Person person = viewModelDialog.Person;

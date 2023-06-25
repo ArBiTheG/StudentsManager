@@ -1,11 +1,11 @@
-﻿<Window x:Class="StudentsManagerApp.View.DialogWindows.RelationWindow"
+﻿<Window x:Class="StudentsManagerApp.View.Dialogs.StudentDialogWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:StudentsManagerApp.View.DialogWindows"
+        xmlns:local="clr-namespace:StudentsManagerApp.View.Dialogs"
         mc:Ignorable="d"
-        Title="RelationWindow" Height="450" Width="800">
+        Title="StudentDialogWindow" Height="450" Width="800">
     <Window.Resources>
         <Style TargetType="ScrollViewer">
             <Setter Property="Margin" Value="5" />
@@ -53,22 +53,31 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="128"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Обучающийся"/>
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Ответственный за обучающегося"/>
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Кем является для обучающегося"/>
-                <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding Relation.Child}" ItemsSource="{Binding Childs}" DisplayMemberPath="FullName">
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Абитуриент"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Группа"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Дата поступления"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Отчислен"/>
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Дата отчисления" IsEnabled="{Binding IsChecked, ElementName=checkBox}"/>
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Причина отчисления" IsEnabled="{Binding IsChecked, ElementName=checkBox}"/>
+                <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding Student.Person}" ItemsSource="{Binding Persons}" DisplayMemberPath="FullName">
                 </ComboBox>
-                <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding Relation.Parent}" ItemsSource="{Binding Parents}" DisplayMemberPath="FullName">
+                <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding Student.Group}" ItemsSource="{Binding Groups}" DisplayMemberPath="Name">
                 </ComboBox>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Relation.Who}" Grid.ColumnSpan="2"/>
-                <Button Grid.Row="0" Grid.Column="2" Command="{Binding AddChildCommand}">Создать</Button>
-                <Button Grid.Row="1" Grid.Column="2" Command="{Binding AddParentCommand}">Создать</Button>
+                <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Student.DateEntry}" Grid.ColumnSpan="2"/>
+                <CheckBox x:Name="checkBox" Grid.Row="3" Grid.Column="1" IsChecked="{Binding Student.IsEscaped}" Grid.ColumnSpan="2"/>
+                <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Student.DateEscaped}" IsEnabled="{Binding IsChecked, ElementName=checkBox}" Grid.ColumnSpan="2"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Student.ReasonEscaped}" IsEnabled="{Binding IsChecked, ElementName=checkBox}" Grid.ColumnSpan="2"/>
+                <Button Grid.Row="0" Grid.Column="2" Command="{Binding AddPersonCommand}">Создать</Button>
+                <Button Grid.Row="1" Grid.Column="2" Command="{Binding AddGroupCommand}">Создать</Button>
             </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal">

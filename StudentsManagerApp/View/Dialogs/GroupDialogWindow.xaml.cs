@@ -1,9 +1,6 @@
 ﻿using StudentsManagerApp.ViewModel.Dialogs;
-using StudentsManagerData;
-using StudentsManagerData.Tables;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,18 +13,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace StudentsManagerApp.View.DialogWindows
+namespace StudentsManagerApp.View.Dialogs
 {
     /// <summary>
-    /// Логика взаимодействия для StudentWindow.xaml
+    /// Логика взаимодействия для GroupDialogWindow.xaml
     /// </summary>
-    public partial class StudentWindow : Window
+    public partial class GroupDialogWindow : Window
     {
-         public StudentWindow(StudentDialogViewModel viewModel)
+        public GroupDialogWindow(GroupDialogViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;
         }
+
         void Accept_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.View.Dialogs;
 using StudentsManagerApp.ViewModel.Dialogs;
 
 namespace StudentsManagerApp.ViewModel.Pages
@@ -48,7 +48,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             viewModelDialog.LoadChilds();
             viewModelDialog.LoadParents();
 
-            RelationWindow relationWindow = new RelationWindow(viewModelDialog);
+            RelationDialogWindow relationWindow = new RelationDialogWindow(viewModelDialog);
             if (relationWindow.ShowDialog() == true)
             {
                 Relation relation = viewModelDialog.Relation;
@@ -66,7 +66,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             viewModelDialog.LoadChilds();
             viewModelDialog.LoadParents();
 
-            RelationWindow relationWindow = new RelationWindow(viewModelDialog);
+            RelationDialogWindow relationWindow = new RelationDialogWindow(viewModelDialog);
             if (relationWindow.ShowDialog() == true)
             {
                 viewModelDialog.Relation.Copy(relation);

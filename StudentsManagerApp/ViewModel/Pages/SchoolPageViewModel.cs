@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.View.Dialogs;
 using System.Windows;
 using StudentsManagerApp.ViewModel.Dialogs;
 using System.Windows.Media.Imaging;
@@ -41,7 +41,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             SchoolDialogViewModel viewModelDialog = new SchoolDialogViewModel(new School(), StudentsData);
 
-            SchoolWindow schoolWindow = new SchoolWindow(viewModelDialog);
+            SchoolDialogWindow schoolWindow = new SchoolDialogWindow(viewModelDialog);
             if (schoolWindow.ShowDialog() == true)
             {
                 School school = viewModelDialog.School;
@@ -59,7 +59,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             SchoolDialogViewModel viewModelDialog = new SchoolDialogViewModel(school.Clone(), StudentsData);
 
-            SchoolWindow schoolWindow = new SchoolWindow(viewModelDialog);
+            SchoolDialogWindow schoolWindow = new SchoolDialogWindow(viewModelDialog);
             if (schoolWindow.ShowDialog() == true)
             {
                 viewModelDialog.School.Copy(school);

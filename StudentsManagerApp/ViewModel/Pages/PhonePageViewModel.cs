@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.View.Dialogs;
 using System.Windows;
 using StudentsManagerApp.ViewModel.Dialogs;
 
@@ -46,7 +46,7 @@ namespace StudentsManagerApp.ViewModel.Pages
         {
             PhoneDialogViewModel viewModelDialog = new PhoneDialogViewModel(new Phone(), StudentsData);
 
-            PhoneWindow phoneWindow = new PhoneWindow(viewModelDialog);
+            PhoneDialogWindow phoneWindow = new PhoneDialogWindow(viewModelDialog);
             if (phoneWindow.ShowDialog() == true)
             {
                 Phone phone = viewModelDialog.Phone;
@@ -62,7 +62,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             PhoneDialogViewModel viewModelDialog = new PhoneDialogViewModel(phone.Clone(), StudentsData);
 
-            PhoneWindow phoneWindow = new PhoneWindow(viewModelDialog);
+            PhoneDialogWindow phoneWindow = new PhoneDialogWindow(viewModelDialog);
             if (phoneWindow.ShowDialog() == true)
             {
                 viewModelDialog.Phone.Copy(phone);

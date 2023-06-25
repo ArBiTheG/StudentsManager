@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.View.Dialogs;
 using StudentsManagerApp.ViewModel.Dialogs;
 using StudentsManagerData;
 using StudentsManagerData.Tables;
@@ -46,7 +46,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             viewModelDialog.LoadPersons();
             viewModelDialog.LoadGroups();
 
-            StudentWindow studentWindow = new StudentWindow(viewModelDialog);
+            StudentDialogWindow studentWindow = new StudentDialogWindow(viewModelDialog);
             if (studentWindow.ShowDialog() == true)
             {
                 Student student = viewModelDialog.Student;
@@ -64,7 +64,7 @@ namespace StudentsManagerApp.ViewModel.Pages
             viewModelDialog.LoadPersons();
             viewModelDialog.LoadGroups();
 
-            StudentWindow studentWindow = new StudentWindow(viewModelDialog);
+            StudentDialogWindow studentWindow = new StudentDialogWindow(viewModelDialog);
             if (studentWindow.ShowDialog() == true)
             {
                 viewModelDialog.Student.Copy(student);

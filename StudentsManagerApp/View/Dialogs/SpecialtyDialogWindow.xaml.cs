@@ -1,9 +1,6 @@
 ﻿using StudentsManagerApp.ViewModel.Dialogs;
-using StudentsManagerData;
-using StudentsManagerData.Tables;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,14 +13,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace StudentsManagerApp.View.DialogWindows
+namespace StudentsManagerApp.View.Dialogs
 {
     /// <summary>
-    /// Логика взаимодействия для EmailWindow.xaml
+    /// Логика взаимодействия для SpecialtyDialogWindow.xaml
     /// </summary>
-    public partial class EmailWindow : Window
+    public partial class SpecialtyDialogWindow : Window
     {
-        public EmailWindow(EmailDialogViewModel viewModel)
+        public SpecialtyDialogWindow(SpecialtyDialogViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;

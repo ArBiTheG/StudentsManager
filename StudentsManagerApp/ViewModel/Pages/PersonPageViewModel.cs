@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.View.Dialogs;
 using StudentsManagerApp.ViewModel.Dialogs;
 using StudentsManagerData;
 using StudentsManagerData.Tables;
@@ -49,7 +49,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             PersonDialogViewModel viewModelDialog = new PersonDialogViewModel(new Person(), StudentsData);
 
-            PersonWindow personWindow = new PersonWindow(viewModelDialog);
+            PersonDialogWindow personWindow = new PersonDialogWindow(viewModelDialog);
             if (personWindow.ShowDialog() == true)
             {
                 Person person = viewModelDialog.Person;
@@ -67,7 +67,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             PersonDialogViewModel viewModelDialog = new PersonDialogViewModel(person.Clone(), StudentsData);
 
-            PersonWindow personWindow = new PersonWindow(viewModelDialog);
+            PersonDialogWindow personWindow = new PersonDialogWindow(viewModelDialog);
             if (personWindow.ShowDialog() == true)
             {
                 viewModelDialog.Person.Copy(person);

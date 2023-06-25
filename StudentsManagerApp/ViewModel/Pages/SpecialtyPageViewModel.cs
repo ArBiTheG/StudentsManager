@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.View.Dialogs;
 using StudentsManagerApp.ViewModel.Dialogs;
 using StudentsManagerData;
 using StudentsManagerData.Tables;
@@ -44,7 +44,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             SpecialtyDialogViewModel viewModelDialog = new SpecialtyDialogViewModel(new Specialty(), StudentsData);
 
-            SpecialtyWindow specialtyWindow = new SpecialtyWindow(viewModelDialog);
+            SpecialtyDialogWindow specialtyWindow = new SpecialtyDialogWindow(viewModelDialog);
             if (specialtyWindow.ShowDialog() == true)
             {
                 Specialty specialty = viewModelDialog.Specialty;
@@ -62,7 +62,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             SpecialtyDialogViewModel viewModelDialog = new SpecialtyDialogViewModel(specialty.Clone(), StudentsData);
 
-            SpecialtyWindow specialtyWindow = new SpecialtyWindow(viewModelDialog);
+            SpecialtyDialogWindow specialtyWindow = new SpecialtyDialogWindow(viewModelDialog);
             if (specialtyWindow.ShowDialog() == true)
             {
                 viewModelDialog.Specialty.Copy(specialty);

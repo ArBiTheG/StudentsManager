@@ -1,11 +1,11 @@
-﻿<Window x:Class="StudentsManagerApp.View.DialogWindows.SchoolWindow"
+﻿<Window x:Class="StudentsManagerApp.View.Dialogs.SpecialtyDialogWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:StudentsManagerApp.View.DialogWindows"
+        xmlns:local="clr-namespace:StudentsManagerApp.View.Dialogs"
         mc:Ignorable="d"
-        Title="SchoolWindow" Height="450" Width="800">
+        Title="SpecialtyDialogWindow" Height="450" Width="800">
     <Window.Resources>
         <Style TargetType="ScrollViewer">
             <Setter Property="Margin" Value="5" />
@@ -54,19 +54,35 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="256"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Полное наименование школы"/>
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Сокращённое наименование"/>
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Адрес школы"/>
-                <TextBlock Grid.Row="3" Grid.Column="0" Text="Описание"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding School.FullName}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding School.ShortName}"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding School.Address}"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding School.About}"/>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Код специальности"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Наименование специальности"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Квалификация"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Длительность обучения (в месяцах)"/>
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Описание"/>
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Дата создания"/>
+                <TextBlock Grid.Row="6" Grid.Column="0" Text="Уничтожено"/>
+                <TextBlock Grid.Row="7" Grid.Column="0" Text="Дата уничтожения" IsEnabled="{Binding IsChecked, ElementName=checkBox}"/>
+                <TextBlock Grid.Row="8" Grid.Column="0" Text="Причина" IsEnabled="{Binding IsChecked, ElementName=checkBox}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Specialty.Code}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Specialty.Name}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Specialty.Skill}"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Specialty.Duration}"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Specialty.About}"/>
+                <DatePicker Grid.Row="5" Grid.Column="1" SelectedDate="{Binding Specialty.DateCreated}"/>
+                <CheckBox x:Name="checkBox" Grid.Row="6" Grid.Column="1" IsChecked="{Binding Specialty.IsDeleted}"/>
+                <DatePicker Grid.Row="7" Grid.Column="1" SelectedDate="{Binding Specialty.DateDeleted}" IsEnabled="{Binding IsChecked, ElementName=checkBox}"/>
+                <TextBox Grid.Row="8" Grid.Column="1" Style="{StaticResource Description}" Text="{Binding Specialty.ReasonDeleted}" IsEnabled="{Binding IsChecked, ElementName=checkBox}"/>
             </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Orientation="Horizontal">

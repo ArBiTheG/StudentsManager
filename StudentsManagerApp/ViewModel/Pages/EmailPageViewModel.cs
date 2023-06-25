@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StudentsManagerApp.View.DialogWindows;
+using StudentsManagerApp.View.Dialogs;
 using StudentsManagerApp.ViewModel.Dialogs;
 using StudentsManagerData;
 using StudentsManagerData.Tables;
@@ -48,7 +48,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             EmailDialogViewModel viewModelDialog = new EmailDialogViewModel(new Email(), StudentsData);
 
-            EmailWindow emailWindow = new EmailWindow(viewModelDialog);
+            EmailDialogWindow emailWindow = new EmailDialogWindow(viewModelDialog);
             if (emailWindow.ShowDialog() == true)
             {
                 Email email = viewModelDialog.Email;
@@ -66,7 +66,7 @@ namespace StudentsManagerApp.ViewModel.Pages
 
             EmailDialogViewModel viewModelDialog = new EmailDialogViewModel(email.Clone(), StudentsData);
 
-            EmailWindow emailWindow = new EmailWindow(viewModelDialog);
+            EmailDialogWindow emailWindow = new EmailDialogWindow(viewModelDialog);
             if (emailWindow.ShowDialog() == true)
             {
                 viewModelDialog.Email.Copy(email);
