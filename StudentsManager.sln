@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36401.2
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManager.Domain", "src\StudentsManagerLib\StudentsManager.Domain\StudentsManager.Domain.csproj", "{406EA906-3E72-5C2C-5B0E-9C17B4CACFDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManager.Application", "src\StudentsManagerLib\StudentsManager.Application\StudentsManager.Application.csproj", "{890E293D-CFFD-51A8-55AF-38077B2CD244}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManager.Infrastructure", "src\StudentsManagerLib\StudentsManager.Infrastructure\StudentsManager.Infrastructure.csproj", "{7C2E4030-1925-F7C3-CB66-AE385162EB80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManagerApp", "src\StudentsManagerApp\StudentsManagerApp\StudentsManagerApp.csproj", "{9B5150AB-2ADA-9394-802B-1B61D1B5C434}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManagerApp.Android", "src\StudentsManagerApp\StudentsManagerApp.Android\StudentsManagerApp.Android.csproj", "{1F6D1ACA-9F8A-4CDB-FD9C-78443E988EC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManagerApp.Browser", "src\StudentsManagerApp\StudentsManagerApp.Browser\StudentsManagerApp.Browser.csproj", "{E20676CD-4655-E2D6-4A1C-407E0753A67E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManagerApp.Desktop", "src\StudentsManagerApp\StudentsManagerApp.Desktop\StudentsManagerApp.Desktop.csproj", "{F181C598-5FCD-A309-410E-77B1F4FBC82A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManagerApp.iOS", "src\StudentsManagerApp\StudentsManagerApp.iOS\StudentsManagerApp.iOS.csproj", "{E4F30430-E127-11D3-A70A-15674D04E1D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManager.Tests", "src\StudentsManagerLib\StudentsManager.Tests\StudentsManager.Tests.csproj", "{7268559C-EDA4-DEA5-D670-43E69DFD0629}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{406EA906-3E72-5C2C-5B0E-9C17B4CACFDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{406EA906-3E72-5C2C-5B0E-9C17B4CACFDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{406EA906-3E72-5C2C-5B0E-9C17B4CACFDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{406EA906-3E72-5C2C-5B0E-9C17B4CACFDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{890E293D-CFFD-51A8-55AF-38077B2CD244}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{890E293D-CFFD-51A8-55AF-38077B2CD244}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{890E293D-CFFD-51A8-55AF-38077B2CD244}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{890E293D-CFFD-51A8-55AF-38077B2CD244}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C2E4030-1925-F7C3-CB66-AE385162EB80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C2E4030-1925-F7C3-CB66-AE385162EB80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C2E4030-1925-F7C3-CB66-AE385162EB80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C2E4030-1925-F7C3-CB66-AE385162EB80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B5150AB-2ADA-9394-802B-1B61D1B5C434}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B5150AB-2ADA-9394-802B-1B61D1B5C434}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B5150AB-2ADA-9394-802B-1B61D1B5C434}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B5150AB-2ADA-9394-802B-1B61D1B5C434}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F6D1ACA-9F8A-4CDB-FD9C-78443E988EC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F6D1ACA-9F8A-4CDB-FD9C-78443E988EC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F6D1ACA-9F8A-4CDB-FD9C-78443E988EC6}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{1F6D1ACA-9F8A-4CDB-FD9C-78443E988EC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F6D1ACA-9F8A-4CDB-FD9C-78443E988EC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F6D1ACA-9F8A-4CDB-FD9C-78443E988EC6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E20676CD-4655-E2D6-4A1C-407E0753A67E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E20676CD-4655-E2D6-4A1C-407E0753A67E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E20676CD-4655-E2D6-4A1C-407E0753A67E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E20676CD-4655-E2D6-4A1C-407E0753A67E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F181C598-5FCD-A309-410E-77B1F4FBC82A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F181C598-5FCD-A309-410E-77B1F4FBC82A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F181C598-5FCD-A309-410E-77B1F4FBC82A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F181C598-5FCD-A309-410E-77B1F4FBC82A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4F30430-E127-11D3-A70A-15674D04E1D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4F30430-E127-11D3-A70A-15674D04E1D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4F30430-E127-11D3-A70A-15674D04E1D8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E4F30430-E127-11D3-A70A-15674D04E1D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4F30430-E127-11D3-A70A-15674D04E1D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4F30430-E127-11D3-A70A-15674D04E1D8}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{7268559C-EDA4-DEA5-D670-43E69DFD0629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7268559C-EDA4-DEA5-D670-43E69DFD0629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7268559C-EDA4-DEA5-D670-43E69DFD0629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7268559C-EDA4-DEA5-D670-43E69DFD0629}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7268559C-EDA4-DEA5-D670-43E69DFD0629} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E372C66F-62D9-4D74-98AC-F4880C43403F}
+	EndGlobalSection
+EndGlobal
