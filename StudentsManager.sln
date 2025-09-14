@@ -20,6 +20,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManagerApp.iOS", "src\StudentsManagerApp\StudentsManagerApp.iOS\StudentsManagerApp.iOS.csproj", "{E4F30430-E127-11D3-A70A-15674D04E1D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManager.Tests", "src\StudentsManagerLib\StudentsManager.Tests\StudentsManager.Tests.csproj", "{7268559C-EDA4-DEA5-D670-43E69DFD0629}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7C2E4030-1925-F7C3-CB66-AE385162EB80} = {7C2E4030-1925-F7C3-CB66-AE385162EB80}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}"
 EndProject
