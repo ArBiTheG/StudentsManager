@@ -17,9 +17,9 @@ namespace StudentsManager.Infrastructure.DbContexts
             _contextTransaction = contextTransaction;
         }
 
-        public void Commit() => _contextTransaction.Commit();
+        public async Task CommitAsync() => await _contextTransaction.CommitAsync();
 
-        public void Rollback() => _contextTransaction.Rollback();
+        public async Task RollbackAsync() => await _contextTransaction.RollbackAsync();
 
         public void Dispose()
         {

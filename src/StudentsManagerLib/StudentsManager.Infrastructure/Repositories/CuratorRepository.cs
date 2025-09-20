@@ -13,27 +13,27 @@ namespace StudentsManager.Infrastructure.Repositories
             _context = context;
         }
 
-        public void Create(Curator entity)
+        public Task CreateAsync(Curator entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Curator entity)
+        public Task DeleteAsync(Curator entity)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Curator> GetAll()
+        public Task<IEnumerable<Curator>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Curator? GetById(int id)
+        public Task<Curator?> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Curator entity)
+        public Task UpdateAsync(Curator entity)
         {
             throw new NotImplementedException();
         }
