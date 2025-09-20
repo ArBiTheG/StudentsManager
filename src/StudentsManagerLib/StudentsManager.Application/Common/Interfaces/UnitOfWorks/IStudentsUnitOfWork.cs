@@ -10,10 +10,10 @@ namespace StudentsManager.Application.Common.Interfaces.UnitOfWorks
 {
     public interface IStudentsUnitOfWork: ITransactable
     {
-        ICuratorRepository CuratorRepository { get; }
-        IGroupRepository GroupRepository { get; }
-        IPersonRepository PersonRepository { get; }
-        ISpecialtyRepository SpecialtyRepository { get; }
-        IStudentRepository StudentRepository { get; }
+        ICuratorRepository Curators { get; }
+        IGroupRepository Groups { get; }
+        IPersonRepository Persons { get; }
+        ISpecialtyRepository Specialties { get; }
+        IStudentRepository Students { get; }
     }
 }

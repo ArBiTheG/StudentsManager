@@ -19,15 +19,15 @@ namespace StudentsManager.Infrastructure.UnitOfWorks
         {
             _context = context;
         }
-        public ICuratorRepository CuratorRepository => _curatorRepository ?? (_curatorRepository = new CuratorRepository(_context));
+        public ICuratorRepository Curators => _curatorRepository ?? (_curatorRepository = new CuratorRepository(_context));
 
-        public IGroupRepository GroupRepository => _groupRepository ?? (_groupRepository = new GroupRepository(_context));
+        public IGroupRepository Groups => _groupRepository ?? (_groupRepository = new GroupRepository(_context));
 
-        public IPersonRepository PersonRepository => _personRepository ?? (_personRepository = new PersonRepository(_context));
+        public IPersonRepository Persons => _personRepository ?? (_personRepository = new PersonRepository(_context));
 
-        public ISpecialtyRepository SpecialtyRepository => _specialtyRepository ?? (_specialtyRepository = new SpecialtyRepository(_context));
+        public ISpecialtyRepository Specialties => _specialtyRepository ?? (_specialtyRepository = new SpecialtyRepository(_context));
 
-        public IStudentRepository StudentRepository => _studentRepository ?? (_studentRepository = new StudentRepository(_context));
+        public IStudentRepository Students => _studentRepository ?? (_studentRepository = new StudentRepository(_context));
 
         public async Task<ITransaction> BeginTransactionAsync()
         {
