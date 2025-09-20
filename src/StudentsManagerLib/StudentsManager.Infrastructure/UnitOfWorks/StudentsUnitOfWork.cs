@@ -33,6 +33,12 @@ namespace StudentsManager.Infrastructure.UnitOfWorks
         {
             return new Transaction(await _context.Database.BeginTransactionAsync());
         }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
         public void Dispose()
         {
             _context?.Dispose();

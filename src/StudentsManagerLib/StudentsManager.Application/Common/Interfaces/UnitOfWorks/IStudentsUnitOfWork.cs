@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StudentsManager.Application.Common.Interfaces.UnitOfWorks
 {
-    public interface IStudentsUnitOfWork: ITransactable
+    public interface IStudentsUnitOfWork: ISaveableRepository, ITransactable
     {
         ICuratorRepository Curators { get; }
         IGroupRepository Groups { get; }

@@ -1,4 +1,5 @@
-﻿using StudentsManager.Application.Common.Interfaces.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentsManager.Application.Common.Interfaces.Repositories;
 using StudentsManager.Domain.Models;
 using StudentsManager.Infrastructure.DbContexts;
 
@@ -13,29 +14,31 @@ namespace StudentsManager.Infrastructure.Repositories
             _context = context;
         }
 
-        public Task CreateAsync(Person entity)
+        public async Task<IEnumerable<Person>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Persons.AsNoTracking().ToListAsync();
         }
 
-        public Task DeleteAsync(Person entity)
+        public async Task<Person?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Persons.FindAsync(id);
         }
 
-        public Task<IEnumerable<Person>> GetAllAsync()
+        public async Task CreateAsync(Person entity)
         {
-            throw new NotImplementedException();
+            await _context.Persons.AddAsync(entity);
         }
 
-        public Task<Person?> GetByIdAsync(int id)
+        public async Task UpdateAsync(Person entity)
         {
-            throw new NotImplementedException();
+            _context.Persons.Update(entity);
+            await Task.CompletedTask;
         }
 
-        public Task UpdateAsync(Person entity)
+        public async Task DeleteAsync(Person entity)
         {
-            throw new NotImplementedException();
+            _context.Persons.Remove(entity);
+            await Task.CompletedTask;
         }
     }
 }
