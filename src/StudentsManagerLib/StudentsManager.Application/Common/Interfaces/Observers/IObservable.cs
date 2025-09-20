@@ -26,6 +26,6 @@ namespace StudentsManager.Application.Common.Interfaces.Observers
         /// Уведомление всех зарегистрированных подписчиков о произошедшем событии или изменении.
         /// </summary>
         /// <param name="data">Данные, передаваемые подписчикам для обработки.</param>
-        void NotifySubscribers(T data);
+        Task NotifySubscribersAsync(T data);
     }
 }

@@ -16,6 +16,6 @@ namespace StudentsManager.Application.Common.Interfaces.Commands
         /// Выполняет обработку команды
         /// </summary>
         /// <param name="command">Объект команды</param>
-        void Handle(TCommand command);
+        Task HandleAsync(TCommand command);
     }
 }

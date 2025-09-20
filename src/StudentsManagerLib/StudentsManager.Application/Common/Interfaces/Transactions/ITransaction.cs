@@ -14,10 +14,10 @@ namespace StudentsManager.Application.Common.Interfaces.Transactions
         /// <summary>
         /// Зафиксировать изменения
         /// </summary>
-        void Commit();
+        Task CommitAsync();
         /// <summary>
         /// Отменить изменения
         /// </summary>
-        void Rollback();
+        Task RollbackAsync();
     }
 }

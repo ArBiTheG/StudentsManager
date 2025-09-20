@@ -12,27 +12,27 @@ namespace StudentsManager.Application.Common.Interfaces.Repositories
         /// Получить все сущности
         /// </summary>
         /// <returns>Список сущностей</returns>
-        IEnumerable<TEntity> GetAll();
+        Task<IEnumerable<TEntity>> GetAllAsync();
         /// <summary>
         /// Получает конкретную сущность
         /// </summary>
         /// <param name="id">Идентификатор сущности</param>
         /// <returns>Возращает сущность; если сущность не найдена возращает null</returns>
-        TEntity? GetById(int id);
+        Task<TEntity?> GetByIdAsync(int id);
         /// <summary>
         /// Создает сущность
         /// </summary>
         /// <param name="entity">Объект сущности</param>
-        void Create(TEntity entity);
+        Task CreateAsync(TEntity entity);
         /// <summary>
         /// Редактирует сущность
         /// </summary>
         /// <param name="entity">Объект сущности</param>
-        void Update(TEntity entity);
+        Task UpdateAsync(TEntity entity);
         /// <summary>
         /// Удаляет сущность
         /// </summary>
         /// <param name="entity">Объект сущности</param>
-        void Delete(TEntity entity);
+        Task DeleteAsync(TEntity entity);
     }
 }

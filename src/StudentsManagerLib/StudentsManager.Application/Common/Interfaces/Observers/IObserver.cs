@@ -16,6 +16,6 @@ namespace StudentsManager.Application.Common.Interfaces.Observers
         /// Обработчик уведомлений о событии или изменении данных.
         /// </summary>
         /// <param name="data">Полученные данные для обработки.</param>
-        void Update(T data);
+        Task UpdateAsync(T data);
     }
 }

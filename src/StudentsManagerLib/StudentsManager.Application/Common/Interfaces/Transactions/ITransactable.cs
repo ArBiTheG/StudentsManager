@@ -8,6 +8,6 @@ namespace StudentsManager.Application.Common.Interfaces.Transactions
 {
     public interface ITransactable
     {
-        ITransaction BeginTransaction();
+        Task<ITransaction> BeginTransactionAsync();
     }
 }
