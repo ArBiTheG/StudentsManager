@@ -4,6 +4,7 @@ namespace StudentsManager.Domain.Models
 {
     public class Group: BaseEntity
     {
+        public string Name { get; set; } = null!;
         public int SpecialtyId { get; set; }
         public Specialty Specialty { get; set; } = null!;
 
