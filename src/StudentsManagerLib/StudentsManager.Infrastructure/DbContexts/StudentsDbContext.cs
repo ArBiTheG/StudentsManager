@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentsManager.Domain.Models;
+using System.Reflection;
 
 namespace StudentsManager.Infrastructure.DbContexts
 {
@@ -16,5 +17,11 @@ namespace StudentsManager.Infrastructure.DbContexts
         public DbSet<Specialty> Specialties { get; set; } = null!;
         public DbSet<Student> Students { get; set; } = null!;
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
