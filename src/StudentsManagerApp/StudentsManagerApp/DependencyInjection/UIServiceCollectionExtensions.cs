@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using StudentsManagerApp.ViewModels;
 using StudentsManagerApp.Views;
 
@@ -6,7 +7,7 @@ namespace StudentsManagerApp.DependencyInjection;
 
 public static class UIServiceCollectionExtensions
 {
-    public static IServiceCollection AddUI(this IServiceCollection services)
+    public static IServiceCollection AddUI(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddSingleton<MainViewModel>();
         services.AddSingleton<MainView>();

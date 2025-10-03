@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StudentsManager.Application.DepedencyInjection;
 using StudentsManager.Infrastructure.DependencyInjection;
@@ -8,6 +9,7 @@ using StudentsManagerApp.DependencyInjection;
 using StudentsManagerApp.ViewModels;
 using StudentsManagerApp.Views;
 using System;
+using System.IO;
 
 namespace StudentsManagerApp;
 
@@ -20,13 +22,10 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        IServiceCollection services = new ServiceCollection()
-            .AddApplication()
-            .AddInfrastructure()
-            .AddServices()
-            .AddUI();
+        string[] commandLineArgs = Environment.GetCommandLineArgs();
 
-        IServiceProvider provider = services.BuildServiceProvider();
+        IConfiguration config = BuildConfiguration(commandLineArgs);
+        IServiceProvider provider = BuildServiceProvider(config);
 
         MainViewModel mainViewModel = provider.GetRequiredService<MainViewModel>();
 
@@ -44,5 +43,25 @@ public partial class App : Application
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    private IConfiguration BuildConfiguration(string[] commandLineArgs)
+    {
+        return new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddCommandLine(commandLineArgs)
+            .AddEnvironmentVariables()
+            .Build();
+    }
+
+    private IServiceProvider BuildServiceProvider(IConfiguration config)
+    {
+        return new ServiceCollection()
+            .AddApplication(config)
+            .AddInfrastructure(config)
+            .AddServices(config)
+            .AddUI(config)
+            .BuildServiceProvider();
     }
 }
