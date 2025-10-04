@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36401.2 d17.14
+VisualStudioVersion = 17.14.36401.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManagerApp", "StudentsManagerApp\StudentsManagerApp.csproj", "{7DD47FAD-3A64-CB3B-CE9C-D7F4D74E4BB6}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManagerApp.Desktop", "StudentsManagerApp.Desktop\StudentsManagerApp.Desktop.csproj", "{9CD3013A-917F-C943-23D6-DABAF616B206}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManagerApp.iOS", "StudentsManagerApp.iOS\StudentsManagerApp.iOS.csproj", "{EDA4A105-1D5F-235F-278F-6931220493D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManagerApp.Tests", "StudentsManagerApp.Tests\StudentsManagerApp.Tests.csproj", "{69B8D1FE-F193-42C1-81C7-943E1F3AE5EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{EDA4A105-1D5F-235F-278F-6931220493D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDA4A105-1D5F-235F-278F-6931220493D5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EDA4A105-1D5F-235F-278F-6931220493D5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{69B8D1FE-F193-42C1-81C7-943E1F3AE5EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69B8D1FE-F193-42C1-81C7-943E1F3AE5EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69B8D1FE-F193-42C1-81C7-943E1F3AE5EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69B8D1FE-F193-42C1-81C7-943E1F3AE5EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
